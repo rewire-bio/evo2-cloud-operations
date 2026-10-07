@@ -15,8 +15,10 @@ COPY requirements.txt /opt/evo2ops/requirements.txt
 # Other packages (safetensors, huggingface_hub, einops) come from, or are constrained by, the base image.
 RUN pip install --no-cache-dir -r /opt/evo2ops/requirements.txt
 
-# Fail the build if the pieces Evo 2 needs are missing from the base image.
-RUN python -c "import torch, flash_attn, evo2, vortex; print('torch', torch.__version__, 'flash_attn', flash_attn.__version__)" \
+# Fail the build if pieces Evo 2 needs are missing. Importing evo2 itself needs a GPU driver
+# (Triton initialises at import), so that import is tested on the GPU by workload W0.
+RUN python -c "import torch, flash_attn, transformer_engine; print('torch', torch.__version__, 'flash_attn', flash_attn.__version__)" \
+ && pip show evo2 vtx \
  && pip freeze > /opt/evo2ops/pip-freeze.txt
 
 COPY pod-start.sh /opt/evo2ops/pod-start.sh
