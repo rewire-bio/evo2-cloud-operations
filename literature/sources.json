@@ -1,4 +1,37 @@
 {
   "schema_version": 1,
-  "sources": []
+  "sources": [
+    {"id": "brixi2026", "title": "Genome modelling and design across all domains of life with Evo 2 (Brixi et al., Nature 2026)", "url": "https://www.nature.com/articles/s41586-026-10176-5", "retrieved_at": "2026-10-07"},
+    {"id": "brixi2025-preprint", "title": "Genome modeling and design across all domains of life with Evo 2 (bioRxiv preprint)", "url": "https://www.biorxiv.org/content/10.1101/2025.02.18.638918v1.full", "retrieved_at": "2026-10-07"},
+    {"id": "arc-repo", "title": "ArcInstitute/evo2 repository at commit 53f1959 (README, tests, notebooks)", "url": "https://github.com/ArcInstitute/evo2/tree/53f195997257c56c00e5ef8d33a54f5baad143a6", "retrieved_at": "2026-10-07"},
+    {"id": "hf-evo2-7b", "title": "arcinstitute/evo2_7b model card and files, revision bda0089", "url": "https://huggingface.co/arcinstitute/evo2_7b/tree/bda0089f92582d5baabf0f22d9fc85f3588f6b58", "retrieved_at": "2026-10-07"},
+    {"id": "hf-exon-classifier", "title": "schmojo/evo2-exon-classifier, revision 3ce7ccd", "url": "https://huggingface.co/schmojo/evo2-exon-classifier/tree/3ce7ccd4708aedce3d4ce58f21e30d894b75ad3c", "retrieved_at": "2026-10-07"},
+    {"id": "nim-prereq", "title": "Evo 2 NIM prerequisites and support matrix", "url": "https://docs.nvidia.com/nim/bionemo/evo2/latest/prerequisites.html", "retrieved_at": "2026-10-07"},
+    {"id": "ngc-nim", "title": "Evo 2 NIM container, NGC catalog", "url": "https://catalog.ngc.nvidia.com/orgs/nim/arc/containers/evo2/-", "retrieved_at": "2026-10-07"},
+    {"id": "aws-marketplace-nim", "title": "Evo2-NIM on AWS Marketplace (SageMaker)", "url": "https://aws.amazon.com/marketplace/pp/prodview-daikatl6hfzqe", "retrieved_at": "2026-10-07"},
+    {"id": "nvidia-api-trial", "title": "NVIDIA API Trial Terms of Service", "url": "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "retrieved_at": "2026-10-07"},
+    {"id": "bionemo-evo2", "title": "BioNeMo Evo 2 overview", "url": "https://docs.nvidia.com/bionemo-framework/2.5/user-guide/developer-guide/bionemo-evo2/bionemo-evo2-Overview/", "retrieved_at": "2026-10-07"},
+    {"id": "evo2-gcp", "title": "eitanyaffe/evo2_gcp, community Cloud Batch wrapper, commit 17db846", "url": "https://github.com/eitanyaffe/evo2_gcp/tree/17db846772a554c1b841f1390bbbf810978983f7", "retrieved_at": "2026-10-07"},
+    {"id": "evee2026", "title": "EVEE: Interpretable variant effect prediction from genomic foundation model embeddings (Pearce et al., bioRxiv 2026)", "url": "https://www.biorxiv.org/content/10.64898/2026.04.10.717844v2.full", "retrieved_at": "2026-10-07"},
+    {"id": "arc-issue-101", "title": "evo2 issue 101: GPUs other than H100", "url": "https://github.com/ArcInstitute/evo2/issues/101", "retrieved_at": "2026-10-07"},
+    {"id": "arc-issue-146", "title": "evo2 issue 146: out of memory for long sequence scoring", "url": "https://github.com/ArcInstitute/evo2/issues/146", "retrieved_at": "2026-10-07"},
+    {"id": "arc-issue-157", "title": "evo2 issue 157: unexpected loss on Blackwell", "url": "https://github.com/ArcInstitute/evo2/issues/157", "retrieved_at": "2026-10-07"},
+    {"id": "arc-issue-160", "title": "evo2 issue 160: embeddings at 50 kb cause OOM on L40S", "url": "https://github.com/ArcInstitute/evo2/issues/160", "retrieved_at": "2026-10-07"},
+    {"id": "arc-issue-167", "title": "evo2 issue 167: 40B on two H100s fails beyond about 80 kb", "url": "https://github.com/ArcInstitute/evo2/issues/167", "retrieved_at": "2026-10-07"},
+    {"id": "arc-issue-173", "title": "evo2 issue 173: disabling FP8 input projections", "url": "https://github.com/ArcInstitute/evo2/issues/173", "retrieved_at": "2026-10-07"},
+    {"id": "arc-issue-177", "title": "evo2 issue 177: 7B embeddings differ on H100 and L40S", "url": "https://github.com/ArcInstitute/evo2/issues/177", "retrieved_at": "2026-10-07"},
+    {"id": "arc-issue-178", "title": "evo2 issue 178: 7B embeddings on H100 vs L40S (open)", "url": "https://github.com/ArcInstitute/evo2/issues/178", "retrieved_at": "2026-10-07"},
+    {"id": "arc-issue-195", "title": "evo2 issue 195: container lacks libcuda.so", "url": "https://github.com/ArcInstitute/evo2/issues/195", "retrieved_at": "2026-10-07"},
+    {"id": "arc-issue-196", "title": "evo2 issue 196: stateful forward embeddings differ by chunk length", "url": "https://github.com/ArcInstitute/evo2/issues/196", "retrieved_at": "2026-10-07"},
+    {"id": "arc-issue-208", "title": "evo2 issue 208: 7B light install required Transformer Engine (fixed)", "url": "https://github.com/ArcInstitute/evo2/issues/208", "retrieved_at": "2026-10-07"},
+    {"id": "findlay2018", "title": "Accurate classification of BRCA1 variants with saturation genome editing (Findlay et al., Nature 2018)", "url": "https://www.nature.com/articles/s41586-018-0461-z", "retrieved_at": "2026-10-07"},
+    {"id": "aws-p5", "title": "Amazon EC2 P5 instances", "url": "https://aws.amazon.com/ec2/instance-types/p5/", "retrieved_at": "2026-10-07"},
+    {"id": "gcp-accelerator", "title": "Google Compute Engine accelerator-optimized machine family", "url": "https://docs.cloud.google.com/compute/docs/accelerator-optimized-machines", "retrieved_at": "2026-10-07"},
+    {"id": "runpod-pricing", "title": "RunPod pricing", "url": "https://www.runpod.io/pricing", "retrieved_at": "2026-10-07"},
+    {"id": "runpod-compliance", "title": "RunPod compliance and certifications", "url": "https://www.runpod.io/legal/compliance", "retrieved_at": "2026-10-07"},
+    {"id": "runpod-baa", "title": "RunPod independently verified as meeting HIPAA and GDPR standards (press release, 6 February 2026)", "url": "https://www.runpod.io/press/runpod-achieves-hipaa-and-gdpr-compliance", "retrieved_at": "2026-10-07"},
+    {"id": "modal-pricing", "title": "Modal pricing and plans", "url": "https://modal.com/pricing", "retrieved_at": "2026-10-07"},
+    {"id": "aws-hipaa", "title": "AWS HIPAA Eligible Services Reference", "url": "https://aws.amazon.com/compliance/hipaa-eligible-services-reference/", "retrieved_at": "2026-10-07"},
+    {"id": "gcp-hipaa", "title": "Google Cloud HIPAA compliance", "url": "https://docs.cloud.google.com/docs/security/compliance/hipaa", "retrieved_at": "2026-10-07"}
+  ]
 }

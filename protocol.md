@@ -37,8 +37,8 @@ NVIDIA's Evo 2 NIM support matrix lists for the 7B model.
 
 **Choice of GPU cloud.** RunPod Secure Cloud was chosen over Modal and Lambda because it runs an
 arbitrary container image (so the same image digest runs everywhere), bills per second, and
-publishes an ISO 27001 certificate, SOC 2 Type II report and HIPAA/GDPR programme. A BAA needs a
-negotiated agreement and committed spend. Modal offers a BAA only on Enterprise plans and needs its
+publishes an ISO 27001 certificate, SOC 2 Type II report and HIPAA/GDPR programme. It says a BAA
+can be executed; its commercial terms were not confirmed from a public source (amendment 1). Modal offers a BAA only on Enterprise plans and needs its
 own Python SDK, which would change the code path. Lambda's compliance terms could not be confirmed
 from a primary source. These terms are documented, not tested.
 

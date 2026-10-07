@@ -1,4 +1,4 @@
-# Amendment 1: phyloP baseline direction
+# Amendment 1: phyloP baseline direction, and one documentation correction
 
 Date: 7 October 2026. Made before any GPU run or Evo 2 result.
 
@@ -20,3 +20,10 @@ predicts LOF) is unchanged.
 Only the sign of one baseline score changes. No Evo 2 workload, platform, metric, tolerance or
 budget changes. The baseline values were computed before amendment because they need no GPU;
 no Evo 2 output existed at that point.
+
+## Documentation correction
+
+The platform rationale said a RunPod BAA "needs a negotiated agreement and committed spend". The
+spend condition came from a secondary summary and could not be confirmed from a public primary
+source. The text now says RunPod states a BAA can be executed and that its terms were not
+confirmed. The platform choice is unchanged.
