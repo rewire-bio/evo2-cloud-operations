@@ -12,6 +12,7 @@ RUN apt-get update \
  && mkdir -p /run/sshd
 
 COPY requirements.txt /opt/evo2ops/requirements.txt
+# Other packages (safetensors, huggingface_hub, einops) come from, or are constrained by, the base image.
 RUN pip install --no-cache-dir -r /opt/evo2ops/requirements.txt
 
 # Fail the build if the pieces Evo 2 needs are missing from the base image.
