@@ -1,0 +1,17 @@
+name: Offline checks
+# Runs the tests and data checks only. The cloud experiment is never run from CI,
+# because it launches paid GPU machines.
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.2"
+      - run: make test
+      - run: bash -n cloud/common.sh cloud/remote-run.sh cloud/aws/launch.sh cloud/gcp/launch.sh cloud/runpod/launch.sh

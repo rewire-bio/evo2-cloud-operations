@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "datasets": [
+    {
+      "path": "data/raw/41586_2018_461_MOESM3_ESM.xlsx",
+      "source": "https://raw.githubusercontent.com/ArcInstitute/evo2/53f195997257c56c00e5ef8d33a54f5baad143a6/notebooks/brca1/41586_2018_461_MOESM3_ESM.xlsx",
+      "sha256": "0100fc651b6ec6015f02a5813660afdcf9cf3969790992104e99e74f7348d0fd",
+      "license": "Findlay et al. 2018, Nature 562:217-222, Supplementary Table; redistributed in ArcInstitute/evo2 (Apache-2.0 repository). Not redistributed here.",
+      "provenance": "BRCA1 saturation genome editing functional scores and classes for 3,893 SNVs, with consequence, CADD and phyloP columns. Retrieved from Arc's repository at the pinned commit."
+    },
+    {
+      "path": "data/raw/GRCh37.p13_chr17.fna.gz",
+      "source": "https://raw.githubusercontent.com/ArcInstitute/evo2/53f195997257c56c00e5ef8d33a54f5baad143a6/notebooks/brca1/GRCh37.p13_chr17.fna.gz",
+      "sha256": "d50b4616790d7352c5025bcf9070a4de4f76bab41c6d2dcd504382c67c5534fb",
+      "license": "NCBI GRCh37.p13 reference assembly, public domain; copy distributed in ArcInstitute/evo2.",
+      "provenance": "Human chromosome 17, GRCh37.p13, as used by Arc's BRCA1 notebook."
+    },
+    {
+      "path": "data/raw/samplePositions.tsv",
+      "source": "https://raw.githubusercontent.com/ArcInstitute/evo2/53f195997257c56c00e5ef8d33a54f5baad143a6/notebooks/exon_classifier/samplePositions.tsv",
+      "sha256": "55b43c5b0ac039c61da6b87875a453aaf5dc4aa4c944935ae1378d3c0bdd6145",
+      "license": "ArcInstitute/evo2, Apache-2.0.",
+      "provenance": "122 labelled exon and non-exon positions with forward and reverse 8,192 bp context, from Arc's exon-classifier notebook."
+    },
+    {
+      "path": "data/raw/prompts.csv",
+      "source": "https://raw.githubusercontent.com/ArcInstitute/evo2/53f195997257c56c00e5ef8d33a54f5baad143a6/evo2/test/data/prompts.csv",
+      "sha256": "371015ef6e1c87bfa2cfe548e3025230f0fdd1a2b63af8a7e110b84341e0493c",
+      "license": "ArcInstitute/evo2, Apache-2.0.",
+      "provenance": "Four test sequences used by Arc's forward-pass correctness test."
+    }
+  ]
+}

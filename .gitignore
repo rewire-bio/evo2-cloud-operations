@@ -1,0 +1,17 @@
+.venv/
+.tools/
+__pycache__/
+*.pyc
+.research/
+results/
+paper/build/
+paper/generated/*.tex
+paper/figures/*.pdf
+paper/figures/*.svg
+blog-handoff/
+
+# Portable evidence must survive Git ignore rules for generated outputs.
+!evidence/archive/
+!evidence/archive/**
+data/raw/
+data/derived/

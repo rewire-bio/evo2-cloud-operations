@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "title": "Running Evo 2 on AWS, Google Cloud and a GPU cloud",
+  "question": "Can one pinned Evo 2 7B workload (sequence scoring, paired variant windows and embedding extraction) be run reproducibly on single-H100 instances on AWS, Google Cloud and a GPU cloud, and what are its measured memory, time and cost?",
+  "validation_fixture": false,
+  "experiment": {
+    "command": [
+      "uv",
+      "run",
+      "--frozen",
+      "python",
+      "scripts/experiment.py",
+      "--config",
+      "{config}",
+      "--output",
+      "{output}"
+    ],
+    "inputs": [
+      "src",
+      "scripts",
+      "cloud",
+      "container",
+      "configs",
+      "uv.lock",
+      "pyproject.toml",
+      ".python-version",
+      "Makefile",
+      "data/manifest.json"
+    ],
+    "outputs": [
+      "results.json",
+      "operations.json",
+      "agreement-details.json",
+      "provenance.json",
+      "launch-outcomes.json",
+      "prices.json",
+      "platforms"
+    ],
+    "results_file": "results.json"
+  },
+  "reproduction": {
+    "command": [
+      "make",
+      "reproduce"
+    ],
+    "results_file": "results/full/results.json",
+    "paper_file": "paper/build/main.pdf",
+    "abs_tolerance": 0.01,
+    "rel_tolerance": 0.0
+  },
+  "budgets": {
+    "experiment_seconds": 14400,
+    "reproduction_seconds": 16200,
+    "worker_seconds": 1800,
+    "max_worker_calls": 30,
+    "max_attempts": 2,
+    "max_storage_mb": 2000
+  },
+  "paper": {
+    "source": "paper/main.tex",
+    "pdf": "paper/build/main.pdf"
+  }
+}

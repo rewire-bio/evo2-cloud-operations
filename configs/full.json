@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "mode": "full",
+  "study_kind": "evo2_cloud_operations",
+  "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:PENDING_IMAGE_BUILD",
+  "reference_platform": "P1",
+  "max_hours": 3,
+  "max_attempts": 2,
+  "bootstrap": {"n": 2000, "seed": 7},
+  "platforms": [
+    {"id": "P1", "provider": "aws", "label": "AWS p5.4xlarge, H100 80 GB, on-demand",
+     "env": {"INSTANCE_TYPE": "p5.4xlarge", "AWS_REGION": "us-east-1"}},
+    {"id": "P2", "provider": "gcp", "label": "Google Cloud a3-highgpu-1g, H100 80 GB, Spot",
+     "env": {"MACHINE_TYPE": "a3-highgpu-1g", "PROVISIONING": "SPOT",
+             "GCP_ZONES": "us-central1-a us-central1-b us-central1-c us-east4-a us-east4-b us-east4-c us-east5-a us-west1-a"}},
+    {"id": "P3", "provider": "runpod", "label": "RunPod Secure Cloud, H100 80 GB, on-demand",
+     "env": {"GPU_TYPE_IDS": "[\"NVIDIA H100 80GB HBM3\", \"NVIDIA H100 PCIe\"]"}},
+    {"id": "P4", "provider": "aws", "label": "AWS g6e.2xlarge, L40S 48 GB, on-demand",
+     "env": {"INSTANCE_TYPE": "g6e.2xlarge", "AWS_REGION": "us-east-1"}}
+  ]
+}

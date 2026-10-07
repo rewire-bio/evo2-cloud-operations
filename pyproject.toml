@@ -1,0 +1,14 @@
+[project]
+name = "evo2-cloud-operations"
+version = "0.1.0"
+description = "Running Evo 2 reproducibly on AWS, Google Cloud and RunPod"
+requires-python = "==3.11.13"
+dependencies = [
+    "numpy==2.3.3",
+    "openpyxl==3.1.5",
+    "pandas==2.3.3",
+    "matplotlib==3.10.6",
+]
+
+[tool.uv]
+package = false
