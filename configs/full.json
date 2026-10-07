@@ -2,7 +2,7 @@
   "schema_version": 1,
   "mode": "full",
   "study_kind": "evo2_cloud_operations",
-  "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:PENDING_IMAGE_BUILD",
+  "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
   "reference_platform": "P1",
   "max_hours": 3,
   "max_attempts": 2,
