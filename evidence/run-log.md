@@ -35,3 +35,7 @@ Chronological record of every launch, including failures. Times are UTC.
   libnvidia-container-tools at 1.19.1. Attempt 3 ran about 20 minutes before failing; attempt 4
   about 1 minute. VMs and firewall rules deleted by the launcher. remote-run.sh now installs the
   toolkit at the version already on the image, and adds NVIDIA's apt source only if absent.
+- 12:52 to 13:47. P2 attempt 5 (a3-highgpu-1g Spot, us-central1-a, image
+  common-cu129-ubuntu-2204-nvidia-580-v20261001) completed W0 to W4. Docker install took 457 s and
+  the image pull 587 s. VM and firewall rule deleted by the launcher; confirmed by listing.
+  Spot list price at run time: USD 6.24/h plus USD 0.05/h disk (Cloud Billing Catalog API).
