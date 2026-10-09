@@ -55,6 +55,8 @@ def build_bundle(bundle: Path, allow_dirty: bool) -> dict:
         shutil.copy2(ROOT / source, bundle / "data" / name)
     return {
         "git_revision": git("rev-parse", "HEAD"),
+        # The tarball embeds the commit time, so compare phases by the git tree of src/ instead.
+        "src_tree": git("rev-parse", "HEAD:src"),
         "code_sha256": sha256(bundle / "code.tar.gz"),
         "inputs_sha256": {name: sha256(bundle / "data" / name) for name in BUNDLE_DATA},
     }
@@ -108,7 +110,7 @@ def main() -> None:
                            "image": config["image"], "config_sha256": sha256(args.config)})
         record = args.output / "provenance.json"
         phases = json.loads(record.read_text()) if record.exists() else []
-        if phases and (phases[0]["code_sha256"], phases[0]["image"]) != (provenance["code_sha256"], provenance["image"]):
+        if phases and (phases[0].get("src_tree"), phases[0]["image"]) != (provenance["src_tree"], provenance["image"]):
             raise SystemExit("Code or image differs from the first phase; start a new output directory.")
         record.write_text(json.dumps(phases + [provenance], indent=2) + "\n")
         with ThreadPoolExecutor(len(platforms)) as pool:
