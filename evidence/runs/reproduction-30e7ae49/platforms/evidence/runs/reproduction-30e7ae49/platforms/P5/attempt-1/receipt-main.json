@@ -1,0 +1,89 @@
+{
+  "environment": {
+    "code_sha256": "e6b3cadaf37bcf687e952688e9bde0916c75d5e6c89665b9e3a559c6a6896bf1",
+    "cudnn": 90900,
+    "gpu_name": "NVIDIA L40S",
+    "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+    "kernel": "6.17.0-29-generic",
+    "nvidia_smi": "NVIDIA L40S, 580.159.03, 46068 MiB, 8.9",
+    "pip_freeze_sha256": "5d773336e550c5c34ade046fe8374cb03e3faa7021345433221fc901ee961ac2",
+    "platform_id": "P5",
+    "python": "3.12.3",
+    "torch": "2.7.0a0+79aa17489c.nv25.04",
+    "torch_cuda": "12.9",
+    "transformer_engine_installed": true
+  },
+  "finished_utc": "2026-10-09T21:39:15.337548+00:00",
+  "results": {
+    "w0": {
+      "expected_loss": 0.3476563,
+      "mean_accuracy": 0.8626015186309814,
+      "mean_loss": 0.34765625,
+      "passed": true,
+      "per_sequence_accuracy": [
+        0.9348324537277222,
+        0.8615166544914246,
+        0.8012664914131165,
+        0.8527904748916626
+      ],
+      "per_sequence_loss": [
+        0.181640625,
+        0.353515625,
+        0.5,
+        0.35546875
+      ]
+    },
+    "w1": {
+      "peak_memory_allocated_bytes": 18021556224,
+      "reference_windows": 1326,
+      "scoring_seconds": 5747.217,
+      "sequences_per_second": 0.9081,
+      "sequences_scored": 5219,
+      "variants": 3893
+    },
+    "w2": {
+      "embedding_seconds": 266.563,
+      "peak_memory_allocated_bytes": 17920973312,
+      "positions": 122,
+      "sequence_length": 8192
+    },
+    "w3": [
+      {
+        "length": 8192,
+        "peak_memory_allocated_bytes": 18021523456,
+        "seconds": 1.11,
+        "status": "ok"
+      },
+      {
+        "length": 32768,
+        "peak_memory_allocated_bytes": 32544907264,
+        "seconds": 5.143,
+        "status": "ok"
+      },
+      {
+        "length": 131072,
+        "message": "CUDA out of memory. Tried to allocate 4.00 GiB. GPU 0 has a total capacity of 44.39 GiB of which 1.80 GiB is free. Including non-PyTorch memory, this process has 42.59 GiB memory in use. Of the allocated memory 31.32 GiB is allocated by PyTorch, and 10.76 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+        "peak_memory_allocated_bytes": 37920546816,
+        "status": "out_of_memory"
+      }
+    ]
+  },
+  "started_utc": "2026-10-09T19:56:42.802687+00:00",
+  "status": "completed",
+  "timings_s": {
+    "evo2_7b_base_download_and_verify_s": 62.124,
+    "evo2_7b_base_load_s": 1.984,
+    "evo2_7b_download_and_verify_s": 51.54,
+    "evo2_7b_load_s": 2.509,
+    "w0_s": 5.424,
+    "w1_s": 5747.901,
+    "w2_s": 266.576,
+    "w3_s": 7.566
+  },
+  "workloads": [
+    "w0",
+    "w1",
+    "w3",
+    "w2"
+  ]
+}

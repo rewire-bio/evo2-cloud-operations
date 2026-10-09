@@ -1,0 +1,4 @@
+uname=Linux e7fb4359afa1 6.17.0-29-generic #29~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Mon May 11 10:30:58 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+NVIDIA L40S, 580.159.03, 46068 MiB
+overlay         200G   41M  200G   1% /
+Mem:            1007          66         287           0         660         940

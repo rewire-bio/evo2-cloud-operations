@@ -1,0 +1,116 @@
+{
+  "recorded_run": "b75c67aa959b424c88fd49bcce4d16b5",
+  "w1_auroc": {
+    "P2": {
+      "all": 0.8749886211168324,
+      "coding": 0.8400207455216017,
+      "noncoding": 0.9527635841589769
+    },
+    "P3": {
+      "all": 0.8749886211168324,
+      "coding": 0.8400207455216017,
+      "noncoding": 0.9527635841589769
+    },
+    "P5": {
+      "all": 0.877089261896375,
+      "coding": 0.8428624742837072,
+      "noncoding": 0.9533987551592886
+    }
+  },
+  "agreement_vs_P2": {
+    "P3": {
+      "max_abs_difference": 0.0,
+      "median_abs_difference": 0.0,
+      "spearman": 1.0,
+      "rank_moves_over_1pct": 0,
+      "lof_only_spearman": 1.0,
+      "lof_only_rank_moves_over_1pct": 0,
+      "top_k_overlap_most_damaging": {
+        "50": 50,
+        "100": 100,
+        "200": 200
+      }
+    },
+    "P5": {
+      "max_abs_difference": 0.0013126134872437,
+      "median_abs_difference": 0.00011736154556274414,
+      "spearman": 0.9829038105050308,
+      "rank_moves_over_1pct": 2627,
+      "lof_only_spearman": 0.9975266078953815,
+      "lof_only_rank_moves_over_1pct": 420,
+      "top_k_overlap_most_damaging": {
+        "50": 48,
+        "100": 98,
+        "200": 195
+      }
+    }
+  },
+  "across_runs": {
+    "phased-20261009": {
+      "P2": 0.0,
+      "P3": 0.0,
+      "P5": 0.0
+    },
+    "rejected-698234c1": {
+      "P2": 0.0,
+      "P3": 0.0,
+      "P5": 0.0
+    },
+    "reproduction-30e7ae49": {
+      "P2": 0.0,
+      "P3": 0.0,
+      "P5": 0.0
+    }
+  },
+  "costs": {
+    "P2": {
+      "attempts": {
+        "attempt-1": {
+          "billed_seconds": 2734.0,
+          "usd": 4.78
+        }
+      },
+      "usd_total": 4.78
+    },
+    "P3": {
+      "attempts": {
+        "attempt-1": {
+          "billed_seconds": 2526.0,
+          "usd": 2.82
+        }
+      },
+      "usd_total": 2.82
+    },
+    "P5": {
+      "attempts": {
+        "attempt-1": {
+          "billed_seconds": 2634.0,
+          "usd": 0.82
+        },
+        "attempt-2": {
+          "billed_seconds": 9531.0,
+          "usd": 2.96
+        }
+      },
+      "usd_total": 3.78
+    },
+    "recorded_run_usd_total": 11.38
+  },
+  "docker_s": {
+    "recorded": {
+      "docker_install_s": 21,
+      "docker_pull_s": 491
+    },
+    "phased": {
+      "docker_install_s": 457,
+      "docker_pull_s": 587
+    }
+  },
+  "l40s_minus_h100_auroc": {
+    "point": 0.0021006407795426396,
+    "ci95": [
+      0.00016552942217298584,
+      0.00419186756307269
+    ]
+  }
+}

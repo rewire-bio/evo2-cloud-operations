@@ -1,0 +1,21 @@
+[
+  {
+    "git_revision": "e93491ac66490ae30d052d2862eea0e37d27f011",
+    "src_tree": "75e771013baed2f3479b54ec0da1a3c76ce630b7",
+    "code_sha256": "17214923004db712de56eafa218b1b7b94105053de322ae27117d918e576b3fc",
+    "inputs_sha256": {
+      "prompts.csv": "371015ef6e1c87bfa2cfe548e3025230f0fdd1a2b63af8a7e110b84341e0493c",
+      "GRCh37.p13_chr17.fna.gz": "d50b4616790d7352c5025bcf9070a4de4f76bab41c6d2dcd504382c67c5534fb",
+      "samplePositions.tsv": "55b43c5b0ac039c61da6b87875a453aaf5dc4aa4c944935ae1378d3c0bdd6145",
+      "brca1_variants.tsv": "92b190ab90a1da2ad94596344a464b3ef852fc398feea3e79631cda106da5d3c"
+    },
+    "phase": "20261009T161559Z",
+    "platforms": [
+      "P2",
+      "P3",
+      "P5"
+    ],
+    "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+    "config_sha256": "dca1322f058cd3ce1240c85e9c749fbc3a9eb6894f8f61ff863e9e9772d713b2"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "provider": "runpod",
+  "instance_type": "NVIDIA H100 80GB HBM3",
+  "gpu": {
+    "count": 1,
+    "id": "NVIDIA H100 80GB HBM3",
+    "memory": 251,
+    "vcpuCount": 26
+  },
+  "region": "US-MO-1",
+  "zone": "US-MO-1",
+  "instance_id": "8afbmcr20s1le5",
+  "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+  "purchase_option": "on-demand",
+  "cost_per_hr": 3.99,
+  "disk_gb": 200,
+  "host_cuda": "13.0"
+}

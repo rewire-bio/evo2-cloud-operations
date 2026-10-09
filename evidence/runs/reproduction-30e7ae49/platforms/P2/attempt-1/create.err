@@ -1,0 +1,5 @@
+Created [https://www.googleapis.com/compute/v1/projects/rewire-it/zones/us-central1-c/instances/evo2ops-p2-20261009195129].
+WARNING: Some requests generated warnings:
+ - Disk size: '200 GB' is larger than image size: '50 GB'. You might need to resize the root repartition manually if the operating system does not support automatic resizing. See https://cloud.google.com/compute/docs/disks/add-persistent-disk#resize_pd for details.
+ - You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert
+

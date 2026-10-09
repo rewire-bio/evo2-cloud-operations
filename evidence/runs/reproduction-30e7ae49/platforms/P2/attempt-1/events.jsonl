@@ -1,0 +1,7 @@
+{"event": "launch_requested", "utc": "2026-10-09T19:51:36Z"}
+{"event": "running", "utc": "2026-10-09T19:52:36Z"}
+{"event": "ssh_ready", "utc": "2026-10-09T19:53:11Z"}
+{"event": "gpu_ready", "utc": "2026-10-09T19:53:13Z"}
+{"event": "workload_start", "utc": "2026-10-09T19:53:26Z"}
+{"event": "workload_end", "utc": "2026-10-09T20:36:04Z"}
+{"event": "terminated", "utc": "2026-10-09T20:36:43Z"}

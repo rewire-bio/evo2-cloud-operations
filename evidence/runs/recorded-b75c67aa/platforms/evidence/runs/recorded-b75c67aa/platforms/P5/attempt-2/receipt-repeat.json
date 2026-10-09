@@ -1,0 +1,37 @@
+{
+  "environment": {
+    "code_sha256": "17214923004db712de56eafa218b1b7b94105053de322ae27117d918e576b3fc",
+    "cudnn": 90900,
+    "gpu_name": "NVIDIA L40S",
+    "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+    "kernel": "6.17.0-29-generic",
+    "nvidia_smi": "NVIDIA L40S, 580.159.03, 46068 MiB, 8.9",
+    "pip_freeze_sha256": "5d773336e550c5c34ade046fe8374cb03e3faa7021345433221fc901ee961ac2",
+    "platform_id": "P5",
+    "python": "3.12.3",
+    "torch": "2.7.0a0+79aa17489c.nv25.04",
+    "torch_cuda": "12.9",
+    "transformer_engine_installed": true
+  },
+  "finished_utc": "2026-10-09T19:38:34.851459+00:00",
+  "results": {
+    "w4": {
+      "peak_memory_allocated_bytes": 18021556224,
+      "reference_windows": 67,
+      "scoring_seconds": 426.446,
+      "sequences_per_second": 0.6261,
+      "sequences_scored": 267,
+      "variants": 200
+    }
+  },
+  "started_utc": "2026-10-09T19:31:09.334428+00:00",
+  "status": "completed",
+  "timings_s": {
+    "evo2_7b_download_and_verify_s": 10.811,
+    "evo2_7b_load_s": 4.112,
+    "w4_s": 427.078
+  },
+  "workloads": [
+    "w4"
+  ]
+}

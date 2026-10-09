@@ -1,0 +1,52 @@
+{
+  "environment": {
+    "code_sha256": "17214923004db712de56eafa218b1b7b94105053de322ae27117d918e576b3fc",
+    "cudnn": 90900,
+    "gpu_name": "NVIDIA L40S",
+    "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+    "kernel": "6.17.0-29-generic",
+    "nvidia_smi": "NVIDIA L40S, 580.159.03, 46068 MiB, 8.9",
+    "pip_freeze_sha256": "5d773336e550c5c34ade046fe8374cb03e3faa7021345433221fc901ee961ac2",
+    "platform_id": "P5",
+    "python": "3.12.3",
+    "torch": "2.7.0a0+79aa17489c.nv25.04",
+    "torch_cuda": "12.9",
+    "transformer_engine_installed": true
+  },
+  "error": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/std.py\", line 1191, in __iter__\n    self.update(n - last_print_n)\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/std.py\", line 1242, in update\n    self.refresh(lock_args=self.lock_args)\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/std.py\", line 1347, in refresh\n    self.display()\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/std.py\", line 1495, in display\n    self.sp(self.__str__() if msg is None else msg)\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/std.py\", line 459, in print_status\n    fp_write('\\r' + s + (' ' * max(last_len[0] - len_s, 0)))\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/std.py\", line 452, in fp_write\n    fp.write(str(s))\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/utils.py\", line 196, in inner\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\nBrokenPipeError: [Errno 32] Broken pipe\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.12/dist-packages/evo2/models.py\", line 140, in score_sequences\n    scores = scoring_func(seqs)\n             ^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/evo2/scoring.py\", line 113, in score_sequences\n    for i in tqdm(range(0, len(seqs), batch_size)):\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/std.py\", line 1196, in __iter__\n    self.close()\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/std.py\", line 1302, in close\n    self.display(pos=0)\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/std.py\", line 1495, in display\n    self.sp(self.__str__() if msg is None else msg)\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/std.py\", line 459, in print_status\n    fp_write('\\r' + s + (' ' * max(last_len[0] - len_s, 0)))\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/std.py\", line 452, in fp_write\n    fp.write(str(s))\n  File \"/usr/local/lib/python3.12/dist-packages/tqdm/utils.py\", line 196, in inner\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\nBrokenPipeError: [Errno 32] Broken pipe\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/work/code/src/evo2ops/run.py\", line 72, in main\n    receipt[\"results\"][\"w1\"] = W.w1_brca1(\n                               ^^^^^^^^^^^\n  File \"/work/code/src/evo2ops/workloads.py\", line 113, in w1_brca1\n    var_scores, var_seconds = _score_all(model, var_seqs, \"variant windows\")\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/work/code/src/evo2ops/workloads.py\", line 90, in _score_all\n    scores.extend(model.score_sequences([seq], batch_size=1, reduce_method=\"mean\"))\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/evo2/models.py\", line 142, in score_sequences\n    raise RuntimeError(f\"Error during sequence scoring: {str(e)}\") from e\nRuntimeError: Error during sequence scoring: [Errno 32] Broken pipe\n",
+  "finished_utc": "2026-10-09T16:59:45.890745+00:00",
+  "results": {
+    "w0": {
+      "expected_loss": 0.3476563,
+      "mean_accuracy": 0.8626015186309814,
+      "mean_loss": 0.34765625,
+      "passed": true,
+      "per_sequence_accuracy": [
+        0.9348324537277222,
+        0.8615166544914246,
+        0.8012664914131165,
+        0.8527904748916626
+      ],
+      "per_sequence_loss": [
+        0.181640625,
+        0.353515625,
+        0.5,
+        0.35546875
+      ]
+    }
+  },
+  "started_utc": "2026-10-09T16:20:43.544651+00:00",
+  "status": "failed",
+  "timings_s": {
+    "evo2_7b_download_and_verify_s": 52.38,
+    "evo2_7b_load_s": 4.675,
+    "w0_s": 5.443,
+    "w1_s": 2275.81
+  },
+  "workloads": [
+    "w0",
+    "w1",
+    "w3",
+    "w2"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "environment": {
+    "code_sha256": "e6b3cadaf37bcf687e952688e9bde0916c75d5e6c89665b9e3a559c6a6896bf1",
+    "cudnn": 90900,
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+    "kernel": "6.8.0-106-generic",
+    "nvidia_smi": "NVIDIA H100 80GB HBM3, 580.126.09, 81559 MiB, 9.0",
+    "pip_freeze_sha256": "5d773336e550c5c34ade046fe8374cb03e3faa7021345433221fc901ee961ac2",
+    "platform_id": "P3",
+    "python": "3.12.3",
+    "torch": "2.7.0a0+79aa17489c.nv25.04",
+    "torch_cuda": "12.9",
+    "transformer_engine_installed": true
+  },
+  "finished_utc": "2026-10-09T20:30:14.446929+00:00",
+  "results": {
+    "w0": {
+      "expected_loss": 0.3476563,
+      "mean_accuracy": 0.8636132031679153,
+      "mean_loss": 0.34765625,
+      "passed": true,
+      "per_sequence_accuracy": [
+        0.9359032511711121,
+        0.8632175326347351,
+        0.801753580570221,
+        0.8535784482955933
+      ],
+      "per_sequence_loss": [
+        0.181640625,
+        0.353515625,
+        0.5,
+        0.35546875
+      ]
+    },
+    "w1": {
+      "peak_memory_allocated_bytes": 18075951104,
+      "reference_windows": 1326,
+      "scoring_seconds": 1785.372,
+      "sequences_per_second": 2.9232,
+      "sequences_scored": 5219,
+      "variants": 3893
+    },
+    "w2": {
+      "embedding_seconds": 82.466,
+      "peak_memory_allocated_bytes": 17975368192,
+      "positions": 122,
+      "sequence_length": 8192
+    },
+    "w3": [
+      {
+        "length": 8192,
+        "peak_memory_allocated_bytes": 18075918336,
+        "seconds": 0.344,
+        "status": "ok"
+      },
+      {
+        "length": 32768,
+        "peak_memory_allocated_bytes": 32598466560,
+        "seconds": 2.021,
+        "status": "ok"
+      },
+      {
+        "length": 131072,
+        "message": "CUDA out of memory. Tried to allocate 32.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 22.48 GiB is free. Process 2094512 has 56.69 GiB memory in use. Of the allocated memory 52.37 GiB is allocated by PyTorch, and 3.64 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+        "peak_memory_allocated_bytes": 56228257792,
+        "status": "out_of_memory"
+      }
+    ]
+  },
+  "started_utc": "2026-10-09T19:57:41.493472+00:00",
+  "status": "completed",
+  "timings_s": {
+    "evo2_7b_base_download_and_verify_s": 37.778,
+    "evo2_7b_base_load_s": 3.704,
+    "evo2_7b_download_and_verify_s": 25.165,
+    "evo2_7b_load_s": 4.183,
+    "w0_s": 3.222,
+    "w1_s": 1786.231,
+    "w2_s": 82.477,
+    "w3_s": 3.05
+  },
+  "workloads": [
+    "w0",
+    "w1",
+    "w3",
+    "w2"
+  ]
+}

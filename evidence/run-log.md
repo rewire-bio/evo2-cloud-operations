@@ -70,3 +70,12 @@ Chronological record of every launch, including failures. Times are UTC.
   run log, paper and README were then finalised in one commit before the reproduction restarted.
 - Known launcher weakness: workloads run in the foreground of the SSH session, so a dropped
   connection kills them. Running them detached on the machine would remove this failure mode.
+- 19:51 to 21:45. Reproduction 30e7ae49 (harness status: completed) from a clean checkout of
+  64de22d on fresh machines: P2 us-central1-c, P3 AP-IN-1 (Runpod again chose India), P5 US-MO-1
+  at 0.91 windows per second. Every platform completed W0 to W4 on its first attempt.
+  results.json was identical to the recorded run, and per-variant scores and exon probabilities
+  were bit-identical on every platform (evidence/checks/verification.json).
+- Methods review (worker f0eb685d): verdict fail on reporting issues; text, claims and
+  documentation corrected afterwards without changing scientific inputs (reviews/, amendment 4).
+- Total cloud spend for the study: USD 21.56 on Runpod (billing API, 9 October) and about USD 27
+  on Google Cloud (4.3 billed VM hours at USD 6.29/h Spot list price).

@@ -1,0 +1,22 @@
+[
+  {
+    "phase": "20261009T161559Z",
+    "outcomes": [
+      {
+        "id": "P2",
+        "attempts": 1,
+        "status": "completed"
+      },
+      {
+        "id": "P3",
+        "attempts": 1,
+        "status": "completed"
+      },
+      {
+        "id": "P5",
+        "attempts": 2,
+        "status": "completed"
+      }
+    ]
+  }
+]

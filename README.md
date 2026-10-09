@@ -4,12 +4,16 @@ A reproducible study and tutorial for clinical informaticians. One pinned Evo 2 
 image runs the same workloads on several clouds and GPUs, and records what each run cost, how
 much GPU memory it needed, and whether the outputs agree across hardware.
 
-**Status:** recorded run complete on Google Cloud (H100), Runpod (H100) and Runpod (L40S); independent
-reproduction in progress. AWS is deferred (amendment 2) and its launcher is untested.
+**Status:** complete. Recorded run b75c67aa on Google Cloud (H100), Runpod (H100) and Runpod (L40S);
+independent clean reproduction on fresh machines matched it. The methods review failed the first
+manuscript on reporting issues, which were then fixed in text only ([response](reviews/methods-response.md)).
+Because the text changed after the reproduction started, the harness's manuscript-bound
+verification stamp was not re-run (amendment 4). AWS is deferred (amendment 2) and untested.
 
 **Main findings.** Two H100s on different clouds gave bit-identical Evo 2 7B scores for 3,893 BRCA1
-variants; an L40S gave different per-variant scores (Spearman 0.983, median difference 1.2e-4)
-with almost the same AUROC. A single forward pass ran out of memory at 131 kb on both GPUs.
+variants, and every platform reproduced its own scores exactly across four runs on fresh machines.
+An L40S gave different per-variant scores (Spearman 0.983, median difference 1.2e-4) while AUROC
+changed by only 0.002. One forward pass fitted at 32 kb and ran out of memory at 131 kb on both GPUs (lengths in between untested).
 Scoring cost USD 0.45 to 0.80 per 1,000 variants at October 2026 list prices; the L40S's cost
 per variant depended on how fast the host it landed on was.
 
@@ -117,3 +121,5 @@ tests/            offline tests
 
 Study code: to be set at publication. Evo 2 code and weights: Apache-2.0 (Arc Institute). Input
 data are fetched at run time from Arc's repository at a pinned commit and are not redistributed.
+
+Findlay et al. BRCA1 function scores are free for nonprofit use only; see [data/LICENSES.md](data/LICENSES.md).

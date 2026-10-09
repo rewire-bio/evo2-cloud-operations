@@ -1,0 +1,23 @@
+{
+  "retrieved_utc": "2026-10-09T21:44:40.462326+00:00",
+  "P2": {
+    "instance_usd_per_hour": 6.2426,
+    "storage_usd_per_hour": 0.0466,
+    "source": "Cloud Billing Catalog API, Spot, us-central1: 26 vCPU x Spot Preemptible A3 Instance Core running in Americas, 234 GiB x Spot Preemptible A3 Instance Ram running in Americas, 1 x Nvidia H100 80GB GPU attached to Spot Preemptible VMs running in Americas",
+    "skus": [
+      "EEE5-1DA5-D9CF",
+      "F619-87C3-D3BA",
+      "7A6D-F74C-B0A3"
+    ]
+  },
+  "P3": {
+    "instance_usd_per_hour": 3.99,
+    "storage_usd_per_hour": 0.0274,
+    "source": "RunPod pod costPerHr returned by the REST API at launch"
+  },
+  "P5": {
+    "instance_usd_per_hour": 1.09,
+    "storage_usd_per_hour": 0.0274,
+    "source": "RunPod pod costPerHr returned by the REST API at launch"
+  }
+}

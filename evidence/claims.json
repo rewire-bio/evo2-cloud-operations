@@ -21,7 +21,7 @@
     },
     {
       "id": "w0-runpod-l40s",
-      "text": "The correctness test gave the same mean loss on the Runpod L40S, so it passed despite the L40S's different variant scores.",
+      "text": "The correctness test gave the same mean loss on the Runpod L40S (token accuracy 0.8626 against 0.8636 on the H100s), so the bfloat16-resolution gate passed despite the L40S's different variant scores.",
       "kind": "measurement",
       "status": "supported",
       "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
@@ -120,7 +120,7 @@
     },
     {
       "id": "auroc-l40s-all",
-      "text": "On the L40S the same AUROC was 0.877.",
+      "text": "On the L40S the same AUROC was 0.877, higher by 0.002 (95% interval 0.0002 to 0.004 in an independent paired bootstrap, evidence/checks/verification.json).",
       "kind": "measurement",
       "status": "supported",
       "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
@@ -129,7 +129,7 @@
     },
     {
       "id": "auroc-cadd-all",
-      "text": "CADD gave AUROC 0.804 on all 3,893 SNVs.",
+      "text": "CADD v1.3, as supplied in the Findlay et al. table, gave AUROC 0.804 on all 3,893 SNVs.",
       "kind": "measurement",
       "status": "supported",
       "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
@@ -138,7 +138,7 @@
     },
     {
       "id": "diff-cadd-all",
-      "text": "Evo 2 exceeded CADD by 0.071 AUROC on all SNVs (paired grouped bootstrap).",
+      "text": "Evo 2 exceeded CADD v1.3 by 0.071 AUROC on all SNVs (paired grouped bootstrap).",
       "kind": "measurement",
       "status": "supported",
       "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
@@ -165,7 +165,7 @@
     },
     {
       "id": "auroc-cadd-noncoding",
-      "text": "CADD AUROC on noncoding SNVs was 0.875.",
+      "text": "CADD v1.3 AUROC on noncoding SNVs was 0.875.",
       "kind": "measurement",
       "status": "supported",
       "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
@@ -174,7 +174,7 @@
     },
     {
       "id": "diff-cadd-noncoding-ci-low",
-      "text": "The lower 95% bound of Evo 2's advantage over CADD on noncoding SNVs was 0.044.",
+      "text": "The lower 95% bound of Evo 2's advantage over CADD v1.3 on noncoding SNVs was 0.044.",
       "kind": "measurement",
       "status": "supported",
       "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
@@ -183,7 +183,7 @@
     },
     {
       "id": "diff-cadd-coding",
-      "text": "On coding SNVs the Evo 2 minus CADD AUROC difference was -0.001.",
+      "text": "On coding SNVs the Evo 2 minus CADD v1.3 AUROC difference was -0.001.",
       "kind": "measurement",
       "status": "supported",
       "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
@@ -201,7 +201,7 @@
     },
     {
       "id": "diff-cadd-coding-ci-high",
-      "text": "The upper 95% bound of that coding difference was 0.023, so the two were level on coding SNVs.",
+      "text": "The upper 95% bound of that coding difference was 0.023, so no difference was detected on coding SNVs; this does not establish equality.",
       "kind": "measurement",
       "status": "supported",
       "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
@@ -228,7 +228,7 @@
     },
     {
       "id": "exon-auroc",
-      "text": "The pinned exon classifier on Evo 2 7B base embeddings gave AUROC 0.945 on 122 positions.",
+      "text": "The pinned exon classifier on Evo 2 7B base embeddings gave AUROC 0.945 on 122 positions. The classifier's training data may include these positions, so this is a pipeline check, not an evaluation.",
       "kind": "measurement",
       "status": "supported",
       "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
@@ -285,7 +285,7 @@
     },
     {
       "id": "interp-gpu-model",
-      "text": "With the same image, inputs and GPU model, Evo 2 7B outputs were identical across providers and processes; changing the GPU model changed per-variant scores by an amount comparable to the scores while leaving aggregate discrimination almost unchanged. A validated pipeline should therefore fix its GPU model or revalidate when it changes.",
+      "text": "With the same image, inputs and GPU model, Evo 2 7B outputs were identical across providers and processes; changing the GPU model changed per-variant scores by about the typical (median) score while changing aggregate discrimination by only 0.002 AUROC. A validated pipeline should therefore fix its GPU model or revalidate when it changes.",
       "kind": "interpretation",
       "status": "supported",
       "based_on": [
@@ -300,11 +300,11 @@
         "w0-runpod-l40s",
         "lit-l40s-report"
       ],
-      "limitations": "Two GPU models and three platforms; one container image. The cause (for example FP8 kernels) was not isolated. Agreement was measured on one gene's variants and 122 exon positions."
+      "limitations": "Two GPU models and three platforms; one container image; FP8 input projections were active. The cause (for example FP8 kernels) was not isolated. Agreement was measured on one gene's variants and 122 exon positions. The most damaging variants were more stable than near-zero scores."
     },
     {
       "id": "interp-noncoding",
-      "text": "Evo 2 7B's advantage over CADD on this BRCA1 set came from noncoding variants; on coding variants the two were level.",
+      "text": "Evo 2 7B's advantage over CADD v1.3 on this BRCA1 set was concentrated in noncoding variants; on coding variants no difference was detected.",
       "kind": "interpretation",
       "status": "supported",
       "based_on": [
@@ -315,7 +315,7 @@
         "diff-cadd-coding-ci-low",
         "diff-cadd-coding-ci-high"
       ],
-      "limitations": "One gene, one assay, uncalibrated scores; CADD values taken from the Findlay et al. table. Not a clinical validation."
+      "limitations": "One gene, one assay, uncalibrated scores. CADD v1.3 predates CADD's splicing features, which target the noncoding and splice-region variants where Evo 2 led; current CADD was not compared. Subset AUROCs do not decompose the overall AUROC. Not a clinical validation."
     }
   ]
 }

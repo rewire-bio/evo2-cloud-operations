@@ -37,13 +37,14 @@ the correctness test (loss \PTwoLoss). The two H100s, from different providers, 
 bit-identical variant scores and classifier probabilities. The L40S produced different scores:
 median absolute difference \PFiveMedianDiff{} against the H100, Spearman correlation \PFiveSpearman,
 and \PFiveRankMoves{} of 3,893 variants moved by more than 1\% of the list in rank, while the AUROC
-for loss-of-function variants was almost unchanged (\PFiveAurocAll{} against \PTwoAurocAll).
-Every machine reproduced its own scores exactly. A single forward pass ran out of memory at
-131 kb on both the 48 GB and the 80 GB GPU. Scoring cost USD \PThreePerThousand{} (Runpod H100),
+for loss-of-function variants changed only slightly (\PFiveAurocAll{} against \PTwoAurocAll).
+Every machine reproduced its own scores exactly. One forward pass fitted at 32,768 bp and ran out of memory
+at 131,072 bp on both the 48 GB and the 80 GB GPU; lengths in between were not tested. Scoring cost USD \PThreePerThousand{} (Runpod H100),
 \PFivePerThousand{} (Runpod L40S, which varied with the host) and \PTwoPerThousand{} (Google
 Cloud H100 Spot) per 1,000 variants at list prices. Zero-shot Evo 2 scores separated BRCA1 loss-of-function variants better
-than CADD overall (AUROC \AurocEvoAll{} against \AurocCaddAll), entirely through noncoding
-variants. These are operational measurements, not a clinical validation.
+than the CADD v1.3 scores supplied with the BRCA1 table (AUROC \AurocEvoAll{} against
+\AurocCaddAll); the difference was concentrated in noncoding variants, and on coding variants no
+difference was detected. These are operational measurements, not a clinical validation.
 \end{abstract}
 
 \section{Introduction}
@@ -58,10 +59,12 @@ hardware cannot be locked down by an assay validation, and a context that does n
 usable context.
 
 This study runs one fixed workload on several platforms with the same container image, and records
-correctness, agreement, memory, time and cost. It also reproduces two of Arc's published workflows
-(BRCA1 zero-shot scoring and exon classification) with the 7B checkpoints, against labels and
-simple baselines. The design, platforms and budget were approved in a written protocol before any
-GPU run, with three dated amendments.
+correctness, agreement, memory, time and cost. It also re-implements two of Arc's published notebook
+workflows (BRCA1 zero-shot scoring, which Arc demonstrates with the 1B checkpoint, and exon
+classification) with the 7B checkpoints, against labels and simple baselines; no published 7B
+reference value was compared. The design, platforms and budget were approved in a written
+protocol before any GPU run, with four dated amendments (amendment 4 records deviations from the
+original run plan, acknowledged by the study owner).
 
 \section{Methods}
 \subsection{Platforms}
@@ -75,7 +78,9 @@ constrain it.
 \subsection{Software and model pins}
 The container is built from \code{nvcr.io/nvidia/pytorch:25.04-py3} (the base of Arc's Dockerfile),
 pinned by digest, with \code{evo2==0.6.0} and \code{vtx==1.1.0}. It contains PyTorch
-2.7.0 (NVIDIA build), flash-attn 2.7.3 and Transformer Engine; its full package list is recorded.
+2.7.0 (NVIDIA build), flash-attn 2.7.3 and Transformer Engine (\code{container/pip-freeze-22970720.txt}).
+Because Transformer Engine is present, the 7B checkpoints ran with their configured FP8 input
+projections (\code{use\_fp8\_input\_projections: True}) on every platform, not in pure bfloat16.
 The image is referenced by digest on every platform. Weights were downloaded from Hugging Face at
 pinned revisions and checked against SHA-256 hashes before loading, because Arc's loader uses
 \code{torch.load}, which can execute code. The exon classifier (\code{schmojo/evo2-exon-classifier})
@@ -88,7 +93,8 @@ used the same revision.
 All inputs are public and were fetched from Arc's repository at a pinned commit, with SHA-256
 checks: GRCh37 chromosome 17; the Findlay et al.\ BRCA1 saturation genome editing table
 \cite{findlay2018} (3,893 SNVs: 2,821 functional, 249 intermediate, 823 loss of function, with
-consequence, CADD and mammalian phyloP columns); 122 labelled exon and non-exon positions; and
+consequence, CADD v1.3 and mammalian phyloP columns, as annotated by Findlay et al.); its function
+scores are freely available for nonprofit use, and this study is a nonprofit use; 122 labelled exon and non-exon positions; and
 Arc's four forward-pass test sequences. No patient data were used.
 
 \subsection{Workloads}
@@ -105,7 +111,7 @@ sequences of 8,192, 32,768, 131,072 and 262,144 bp and stops at the first out-of
 \subsection{Metrics}
 Discrimination is the AUROC for loss-of-function against functional or intermediate variants,
 using the negated W1 score, with 95\% intervals from 2,000 bootstrap resamples of positions
-(the three SNVs at a position are kept together). Baselines from the same table need no GPU: CADD,
+(the three SNVs at a position are kept together). Baselines from the same table need no GPU: CADD v1.3,
 mammalian phyloP (amendment 1 corrected its sign before any Evo 2 output existed) and a consequence
 rule (nonsense and canonical splice, then splice region, then missense, then other). Paired
 differences use the same resamples. Agreement between platforms is the maximum and median absolute
@@ -117,15 +123,24 @@ the list price retrieved by API at run time, plus disk.
 
 \section{Results}
 \subsection{Correctness and agreement}
-All three platforms passed W0 with mean loss \PTwoLoss. Each platform reproduced its own W4 scores
+All three platforms passed W0 with mean loss \PTwoLoss. The gate has bfloat16 resolution:
+per-sequence losses were identical on all GPUs, but token accuracy differed on the L40S
+(0.8626 against 0.8636 in the recorded run), so W0 cannot detect differences of the size seen in W1. Each platform reproduced its own W4 scores
 exactly. The Runpod H100 matched the Google Cloud H100 exactly on all 3,893 variant scores and all
 122 classifier probabilities (maximum absolute difference \PThreeMaxDiff). The L40S did not
 (Figure~\ref{fig:agreement}): its scores differed from the reference by a median of
 \PFiveMedianDiff{} and at most \PFiveMaxDiff, with Spearman correlation \PFiveSpearman; \PFiveRankMoves{}
 variants moved by more than 39 rank places, and classifier probabilities differed by up to
 \PFiveExonDiff. For scale, the BRCA1 variant scores themselves are of order $10^{-4}$ to $10^{-2}$.
-Two earlier runs of all three platforms on fresh machines, on the same day, gave BRCA1 scores
-bit-identical to the recorded run on every platform (run log).
+Two earlier runs and the independent clean reproduction, each on fresh machines on the same day,
+gave BRCA1 scores and exon probabilities bit-identical to the recorded run on every platform, including L40S hosts in different data
+centres with different drivers and kernels (\code{evidence/checks/verification.json}). One of
+those runs, 698234c1, was rejected by the harness because the coordinator changed analysis code
+while it ran; its outputs are used here only for this comparison. Among loss-of-function variants
+alone, the L40S and H100 rankings correlated more strongly (Spearman 0.998), and 48 of the 50
+lowest-scoring variants were shared. The L40S AUROC was higher by 0.002 (95\% interval 0.0002 to
+0.004, paired grouped bootstrap), a small but detectable difference
+(\code{evidence/checks/verification.json}).
 
 \begin{figure}[htbp]
 \centering
@@ -137,35 +152,42 @@ inputs and code. Left: Runpod H100 (identical). Right: Runpod L40S. Dashed line:
 
 \subsection{BRCA1 discrimination and baselines}
 Zero-shot Evo 2 7B scores gave AUROC \AurocEvoAll{} [\AurocEvoAllLo, \AurocEvoAllHi] for all SNVs,
-against \AurocCaddAll{} for CADD, \AurocPhylopAll{} for phyloP and \AurocRuleAll{} for the
-consequence rule (Figure~\ref{fig:auroc}). The difference from CADD, \DiffCaddAll{}
-[\DiffCaddAllLo, \DiffCaddAllHi] in CADD's disfavour, came from noncoding variants
-(Evo 2 \AurocEvoNoncoding{} against CADD \AurocCaddNoncoding; difference \DiffCaddNoncoding{}
-[\DiffCaddNoncodingLo, \DiffCaddNoncodingHi]). On coding variants the two were level (Evo 2
-\AurocEvoCoding, CADD \AurocCaddCoding; difference \DiffCaddCoding{} [\DiffCaddCodingLo,
-\DiffCaddCodingHi]). The exon classifier gave AUROC \PTwoAurocExon{} on 122 positions; its training
+against \AurocCaddAll{} for CADD v1.3, \AurocPhylopAll{} for phyloP and \AurocRuleAll{} for the
+consequence rule (Figure~\ref{fig:auroc}). Evo 2 exceeded CADD v1.3 by \DiffCaddAll{}
+[\DiffCaddAllLo, \DiffCaddAllHi]. Within subsets, the difference was concentrated in noncoding
+variants (Evo 2 \AurocEvoNoncoding{} against CADD \AurocCaddNoncoding; difference
+\DiffCaddNoncoding{} [\DiffCaddNoncodingLo, \DiffCaddNoncodingHi]); on coding variants no
+difference was detected (Evo 2 \AurocEvoCoding, CADD \AurocCaddCoding; difference
+\DiffCaddCoding{} [\DiffCaddCodingLo, \DiffCaddCodingHi]), which does not establish that they are
+equal. AUROCs for subsets do not add up to the overall AUROC, which also compares variants across
+subsets. The CADD scores are version 1.3, as supplied in the Findlay et al.\ table; later CADD
+releases added splicing predictors, which would be expected to help most on exactly the noncoding
+and splice-region variants where Evo 2 led, and were not compared. Intervals resample positions;
+neighbouring positions share almost all of their 8 kb window, so the intervals may be too narrow. The exon classifier gave AUROC \PTwoAurocExon{} on 122 positions; its training
 data may include these positions, so this is a pipeline check rather than an evaluation.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{fig-auroc.png}
 \caption{AUROC for BRCA1 loss-of-function variants with 95\% grouped bootstrap intervals,
-reference platform. Baseline scores come from the Findlay et al.\ table.}
+reference platform. Baseline scores (CADD v1.3, mammalian phyloP) come from the Findlay et al.\ table.}
 \label{fig:auroc}
 \end{figure}
 
 \subsection{Memory}
 Scoring 8,192 bp windows needed \PTwoPeakGib{} GiB allocated by PyTorch on every platform. A single
 32,768 bp forward pass needed \PTwoThirtyTwoGib{} GiB. At 131,072 bp the forward pass ran out of
-memory on both the 80 GB H100 and the 48 GB L40S (Figure~\ref{fig:memory}). The checkpoint's 1 Mb
-context is therefore not reachable in one forward pass on a single GPU with Arc's inference code;
-Arc points to multi-GPU frameworks for long sequences \cite{arc160}.
+memory on both the 80 GB H100 and the 48 GB L40S (Figure~\ref{fig:memory}); lengths between
+32,768 and 131,072 bp were not tested. With this code path (one full forward pass returning all
+logits), the checkpoint's 1 Mb context was not reachable on either GPU; Arc points to multi-GPU
+frameworks or slower forced prompting for long sequences \cite{arc160}.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\linewidth]{fig-memory.png}
 \caption{Peak GPU memory for one forward pass against sequence length. Crosses mark the memory in
-use when the next allocation failed.}
+use when the next allocation failed. Dotted lines show nominal capacity (80 and 48 GB); PyTorch
+reported 79.2 and 44.4 GiB usable.}
 \label{fig:memory}
 \end{figure}
 
@@ -187,14 +209,21 @@ Platform & GPU & Location & Purchase & USD/h & Windows/s & USD/1k var. & Minutes
 \end{table}
 
 The two H100s scored at \PTwoRate{} and \PThreeRate{} windows per second and the L40S at
-\PFiveRate{} (Table~\ref{tab:ops}). L40S throughput depended on the host: an L40S used earlier the
-same day scored 0.93 windows per second (run log). Its cost per variant therefore ranged from below
+\PFiveRate{} (Table~\ref{tab:ops}). L40S throughput depended on the host: L40S pods in Runpod's
+US-TX-4 data centre scored 0.92 to 0.93 windows per second in the phased and rejected runs, against
+about 0.6 on the US-MO-1 hosts used in the recorded run (run log). Its cost per variant therefore ranged from below
 to above that of the Runpod H100, depending on the host it was given. The Google Cloud Spot H100
 cost more per variant than the Runpod on-demand H100, because its hourly price was higher at the
-same throughput. Fixed setup costs were large relative to this short workload: pulling the 12 GB
-compressed image took \PTwoDockerPull{} s on Google Cloud, and Google's current Deep Learning VM
-image required installing Docker and the NVIDIA container toolkit first (\PTwoDockerInstall{} s).
-The recorded run cost USD \TotalRunCost{} in total.
+same throughput; Spot capacity can also be reclaimed mid-run, which did not happen here. Setup took
+a large share of this short workload: pulling the 12 GB compressed image (12.11 GB of base layers,
+per the registry manifest) took 491 s on Google Cloud in the recorded run, and Google's current
+Deep Learning VM image needed Docker and the NVIDIA container toolkit installed first (21 s in the
+recorded run, 457 s in the phased run). The completed attempts in Table~\ref{tab:ops} cost USD
+\TotalRunCost; including the failed L40S attempt (USD 0.82), the recorded run cost USD 11.38
+(\code{evidence/checks/verification.json}). The whole study, including phased, rejected and
+reproduction runs, cost about USD 49 in cloud compute: USD 21.56 on Runpod (from its billing API)
+and about USD 27 on Google Cloud (billed VM time at the Spot list price); Google Cloud billing was
+not reconciled line by line.
 
 \subsection{Operational events}
 The run log records every attempt. Earlier, phased runs on the same three platforms found and
@@ -203,25 +232,31 @@ v2; a Runpod account without credit was refused with HTTP 402; Google's CUDA 12.
 image ships without Docker; and it holds the NVIDIA container toolkit at an older version, so the
 current package cannot be installed alongside it. Runpod placed one H100 pod in India and the L40S
 in Texas, because no data centre was specified.
-In the recorded run, the first Google Cloud attempt of the day had lost GPU access for new processes
-inside the running container, probably because a systemd reload on the host revoked the
-container's device permissions; attaching the GPU through CDI and pausing automatic updates
-resolved it. One L40S attempt failed when the SSH session from the coordinating laptop dropped,
-because the workload ran in the foreground of that session. L40S throughput varied by host:
-0.93 windows per second on the first host and \PFiveRate{} on the host used in the recorded run.
+In the rejected run 698234c1, both Google Cloud attempts lost GPU access for new processes inside
+the running container after the main workloads had finished, probably because a systemd reload on
+the host revoked the container's device permissions. For the recorded run, the launcher attached
+the GPU through CDI and paused automatic updates, and every workload completed. In the recorded
+run, the first L40S attempt failed when the SSH session from the coordinating laptop dropped,
+because the workload ran in the foreground of that session; the second attempt completed. The run
+plan itself deviated from the approved protocol (more attempts in the phased runs, and several
+runs rather than one); amendment 4 lists the deviations.
 
 \section{Discussion}
 \paragraph{Hardware is part of the method.} With the same image, inputs and GPU model, Evo 2 7B
 outputs reproduced exactly across two providers and across processes. Changing the GPU model
-changed individual scores by about as much as the scores themselves, reordering most of a ranked
-list, while leaving aggregate discrimination intact. The 7B checkpoint uses FP8 input projections
+changed individual scores by about as much as the typical (median) score, reordering most of a
+ranked list dominated by near-zero scores, while aggregate discrimination changed by only 0.002 in
+AUROC. Reference-window log-likelihoods themselves shifted by about $10^{-4}$, which is enough to
+flip the sign of small scores. The most damaging variants were more stable: 48 of the 50
+lowest-scoring variants were shared between the GPUs. The 7B checkpoint uses FP8 input projections
 when Transformer Engine is present, and FP8 and bf16 kernels differ between GPU generations, which
 is a plausible cause; we did not isolate it. In practice a validated pipeline must fix the GPU model
 or revalidate when it changes, and Arc's correctness test is not sufficient on its own: the L40S
 passed it.
 
-\paragraph{Context capacity is not memory fit.} Window lengths beyond about 32 kb need multi-GPU
-inference. Pipelines that rely on long context, such as EVEE's 65 kb windows over four million
+\paragraph{Context capacity is not memory fit.} On both GPUs tested, a single forward pass fitted at
+32 kb and failed at 131 kb; extrapolating the measured memory linearly suggests that about 65 kb
+might fit on an 80 GB H100 but not on a 48 GB L40S, which was not tested. Pipelines that rely on long context, such as EVEE's 65 kb windows over four million
 variants (about 20,000 H100-hours) \cite{evee2026}, are a different operational class from the
 8 kb scoring measured here.
 
@@ -240,7 +275,12 @@ health information and production use \cite{nvidiatrial}.
 hosts with the same GPU model. List prices change.
 \item Three platforms, two GPU models. AWS was not run. Blackwell GPUs, where a user reports wrong
 losses \cite{arc157}, were not tested.
-\item Only the 7B checkpoints. The 40B model needs two H100s or one H200 \cite{nimprereq}.
+\item Only the 7B checkpoints, run with FP8 input projections. The 40B model needs two H100s or one
+H200 \cite{nimprereq}.
+\item The CADD baseline is v1.3, from the BRCA1 table; current CADD releases with splicing
+features were not compared.
+\item The BRCA1 and exon workflows are re-implementations of Arc's notebooks with the 7B
+checkpoints; no published 7B reference value was compared.
 \item The BRCA1 comparison is one gene from one assay; the exon task may overlap the classifier's
 training data. Neither says anything about clinical validity, calibration or ancestry.
 \item The cause of the L40S differences was not isolated (for example, by disabling FP8).

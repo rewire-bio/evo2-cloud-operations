@@ -1,0 +1,286 @@
+{
+  "platforms": {
+    "P1": {
+      "attempts": 0,
+      "status": "unavailable"
+    },
+    "P2": {
+      "attempt": "attempt-1",
+      "cost": {
+        "billed_seconds": 2734,
+        "instance_usd_per_hour": 6.2426,
+        "price_source": "Cloud Billing Catalog API, Spot, us-central1: 26 vCPU x Spot Preemptible A3 Instance Core running in Americas, 234 GiB x Spot Preemptible A3 Instance Ram running in Americas, 1 x Nvidia H100 80GB GPU attached to Spot Preemptible VMs running in Americas",
+        "storage_usd_per_hour": 0.0466,
+        "usd": 4.78
+      },
+      "docker_pull_s": 491,
+      "environment": {
+        "code_sha256": "17214923004db712de56eafa218b1b7b94105053de322ae27117d918e576b3fc",
+        "cudnn": 90900,
+        "gpu_name": "NVIDIA H100 80GB HBM3",
+        "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+        "kernel": "6.8.0-1069-gcp",
+        "nvidia_smi": "NVIDIA H100 80GB HBM3, 580.178.04, 81559 MiB, 9.0",
+        "pip_freeze_sha256": "5d773336e550c5c34ade046fe8374cb03e3faa7021345433221fc901ee961ac2",
+        "platform_id": "P2",
+        "python": "3.12.3",
+        "torch": "2.7.0a0+79aa17489c.nv25.04",
+        "torch_cuda": "12.9",
+        "transformer_engine_installed": true
+      },
+      "events_utc": {
+        "gpu_ready": "2026-10-09T16:17:06Z",
+        "launch_requested": "2026-10-09T16:16:06Z",
+        "running": "2026-10-09T16:16:29Z",
+        "ssh_ready": "2026-10-09T16:17:04Z",
+        "terminated": "2026-10-09T17:02:03Z",
+        "workload_end": "2026-10-09T17:01:25Z",
+        "workload_start": "2026-10-09T16:17:20Z"
+      },
+      "gpu": "NVIDIA H100 80GB HBM3",
+      "instance": {
+        "disk_gb": 200,
+        "image": "https://www.googleapis.com/compute/v1/projects/deeplearning-platform-release/global/images/common-cu129-ubuntu-2204-nvidia-580-v20261001",
+        "instance_id": "evo2ops-p2-20261009161559",
+        "instance_type": "a3-highgpu-1g",
+        "provider": "gcp",
+        "purchase_option": "spot",
+        "region": "us-central1",
+        "zone": "us-central1-a"
+      },
+      "nvidia_smi_peak_memory_mib": 62161.0,
+      "status": "completed",
+      "timings_s": {
+        "evo2_7b_base_download_and_verify_s": 55.999,
+        "evo2_7b_base_load_s": 2.689,
+        "evo2_7b_download_and_verify_s": 59.942,
+        "evo2_7b_load_s": 3.049,
+        "repeat_evo2_7b_download_and_verify_s": 10.512,
+        "repeat_evo2_7b_load_s": 2.88,
+        "repeat_w4_s": 92.515,
+        "w0_s": 2.985,
+        "w1_s": 1782.141,
+        "w2_s": 82.382,
+        "w3_s": 2.834
+      },
+      "w1_peak_memory_gib": 16.83,
+      "w1_sequences_per_second": 2.9297,
+      "w2_peak_memory_gib": 16.74,
+      "w3_memory_probe": [
+        {
+          "length": 8192,
+          "peak_memory_allocated_bytes": 18075918336,
+          "peak_memory_gib": 16.83,
+          "seconds": 0.343,
+          "status": "ok"
+        },
+        {
+          "length": 32768,
+          "peak_memory_allocated_bytes": 32598466560,
+          "peak_memory_gib": 30.36,
+          "seconds": 1.875,
+          "status": "ok"
+        },
+        {
+          "length": 131072,
+          "message": "CUDA out of memory. Tried to allocate 32.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 22.48 GiB is free. Including non-PyTorch memory, this process has 56.69 GiB memory in use. Of the allocated memory 52.37 GiB is allocated by PyTorch, and 3.64 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+          "peak_memory_allocated_bytes": 56228257792,
+          "peak_memory_gib": 52.37,
+          "status": "out_of_memory"
+        }
+      ]
+    },
+    "P3": {
+      "attempt": "attempt-1",
+      "cost": {
+        "billed_seconds": 2526,
+        "instance_usd_per_hour": 3.99,
+        "price_source": "RunPod pod costPerHr returned by the REST API at launch",
+        "storage_usd_per_hour": 0.0274,
+        "usd": 2.82
+      },
+      "docker_pull_s": null,
+      "environment": {
+        "code_sha256": "17214923004db712de56eafa218b1b7b94105053de322ae27117d918e576b3fc",
+        "cudnn": 90900,
+        "gpu_name": "NVIDIA H100 80GB HBM3",
+        "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+        "kernel": "6.8.0-90-generic",
+        "nvidia_smi": "NVIDIA H100 80GB HBM3, 580.126.09, 81559 MiB, 9.0",
+        "pip_freeze_sha256": "5d773336e550c5c34ade046fe8374cb03e3faa7021345433221fc901ee961ac2",
+        "platform_id": "P3",
+        "python": "3.12.3",
+        "torch": "2.7.0a0+79aa17489c.nv25.04",
+        "torch_cuda": "12.9",
+        "transformer_engine_installed": true
+      },
+      "events_utc": {
+        "launch_requested": "2026-10-09T16:15:59Z",
+        "pod_created": "2026-10-09T16:16:00Z",
+        "running": "2026-10-09T16:22:14Z",
+        "ssh_ready": "2026-10-09T16:22:16Z",
+        "terminated": "2026-10-09T16:58:06Z",
+        "workload_end": "2026-10-09T16:57:56Z",
+        "workload_start": "2026-10-09T16:22:40Z"
+      },
+      "gpu": "NVIDIA H100 80GB HBM3",
+      "instance": {
+        "cost_per_hr": 3.99,
+        "disk_gb": 200,
+        "gpu": {
+          "count": 1,
+          "id": "NVIDIA H100 80GB HBM3",
+          "memory": 251,
+          "vcpuCount": 26
+        },
+        "host_cuda": "13.0",
+        "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+        "instance_id": "8afbmcr20s1le5",
+        "instance_type": "NVIDIA H100 80GB HBM3",
+        "provider": "runpod",
+        "purchase_option": "on-demand",
+        "region": "US-MO-1",
+        "zone": "US-MO-1"
+      },
+      "nvidia_smi_peak_memory_mib": 58055.0,
+      "status": "completed",
+      "timings_s": {
+        "evo2_7b_base_download_and_verify_s": 53.098,
+        "evo2_7b_base_load_s": 2.573,
+        "evo2_7b_download_and_verify_s": 50.321,
+        "evo2_7b_load_s": 3.373,
+        "repeat_evo2_7b_download_and_verify_s": 9.666,
+        "repeat_evo2_7b_load_s": 2.958,
+        "repeat_w4_s": 92.88,
+        "w0_s": 2.801,
+        "w1_s": 1795.638,
+        "w2_s": 82.831,
+        "w3_s": 2.787
+      },
+      "w1_peak_memory_gib": 16.83,
+      "w1_sequences_per_second": 2.9075,
+      "w2_peak_memory_gib": 16.74,
+      "w3_memory_probe": [
+        {
+          "length": 8192,
+          "peak_memory_allocated_bytes": 18075918336,
+          "peak_memory_gib": 16.83,
+          "seconds": 0.346,
+          "status": "ok"
+        },
+        {
+          "length": 32768,
+          "peak_memory_allocated_bytes": 32598466560,
+          "peak_memory_gib": 30.36,
+          "seconds": 1.827,
+          "status": "ok"
+        },
+        {
+          "length": 131072,
+          "message": "CUDA out of memory. Tried to allocate 32.00 GiB. GPU 0 has a total capacity of 79.18 GiB of which 22.48 GiB is free. Including non-PyTorch memory, this process has 56.69 GiB memory in use. Of the allocated memory 52.37 GiB is allocated by PyTorch, and 3.64 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+          "peak_memory_allocated_bytes": 56228257792,
+          "peak_memory_gib": 52.37,
+          "status": "out_of_memory"
+        }
+      ]
+    },
+    "P4": {
+      "attempts": 0,
+      "status": "unavailable"
+    },
+    "P5": {
+      "attempt": "attempt-2",
+      "cost": {
+        "billed_seconds": 9531,
+        "instance_usd_per_hour": 1.09,
+        "price_source": "RunPod pod costPerHr returned by the REST API at launch",
+        "storage_usd_per_hour": 0.0274,
+        "usd": 2.96
+      },
+      "docker_pull_s": null,
+      "environment": {
+        "code_sha256": "17214923004db712de56eafa218b1b7b94105053de322ae27117d918e576b3fc",
+        "cudnn": 90900,
+        "gpu_name": "NVIDIA L40S",
+        "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+        "kernel": "6.17.0-29-generic",
+        "nvidia_smi": "NVIDIA L40S, 580.159.03, 46068 MiB, 8.9",
+        "pip_freeze_sha256": "5d773336e550c5c34ade046fe8374cb03e3faa7021345433221fc901ee961ac2",
+        "platform_id": "P5",
+        "python": "3.12.3",
+        "torch": "2.7.0a0+79aa17489c.nv25.04",
+        "torch_cuda": "12.9",
+        "transformer_engine_installed": true
+      },
+      "events_utc": {
+        "launch_requested": "2026-10-09T16:59:54Z",
+        "pod_created": "2026-10-09T16:59:55Z",
+        "running": "2026-10-09T17:00:12Z",
+        "ssh_ready": "2026-10-09T17:00:13Z",
+        "terminated": "2026-10-09T19:38:46Z",
+        "workload_end": "2026-10-09T19:38:36Z",
+        "workload_start": "2026-10-09T17:00:36Z"
+      },
+      "gpu": "NVIDIA L40S",
+      "instance": {
+        "cost_per_hr": 1.09,
+        "disk_gb": 200,
+        "gpu": {
+          "count": 1,
+          "id": "NVIDIA L40S",
+          "memory": 125,
+          "vcpuCount": 16
+        },
+        "host_cuda": "13.0",
+        "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+        "instance_id": "jjyu2zwnhornoh",
+        "instance_type": "NVIDIA L40S",
+        "provider": "runpod",
+        "purchase_option": "on-demand",
+        "region": "US-MO-1",
+        "zone": "US-MO-1"
+      },
+      "nvidia_smi_peak_memory_mib": 43113.0,
+      "status": "completed",
+      "timings_s": {
+        "evo2_7b_base_download_and_verify_s": 49.36,
+        "evo2_7b_base_load_s": 4.078,
+        "evo2_7b_download_and_verify_s": 50.014,
+        "evo2_7b_load_s": 4.58,
+        "repeat_evo2_7b_download_and_verify_s": 10.811,
+        "repeat_evo2_7b_load_s": 4.112,
+        "repeat_w4_s": 427.078,
+        "w0_s": 5.532,
+        "w1_s": 8533.271,
+        "w2_s": 363.24,
+        "w3_s": 10.55
+      },
+      "w1_peak_memory_gib": 16.78,
+      "w1_sequences_per_second": 0.6117,
+      "w2_peak_memory_gib": 16.69,
+      "w3_memory_probe": [
+        {
+          "length": 8192,
+          "peak_memory_allocated_bytes": 18021523456,
+          "peak_memory_gib": 16.78,
+          "seconds": 1.606,
+          "status": "ok"
+        },
+        {
+          "length": 32768,
+          "peak_memory_allocated_bytes": 32544907264,
+          "peak_memory_gib": 30.31,
+          "seconds": 7.388,
+          "status": "ok"
+        },
+        {
+          "length": 131072,
+          "message": "CUDA out of memory. Tried to allocate 4.00 GiB. GPU 0 has a total capacity of 44.39 GiB of which 1.80 GiB is free. Including non-PyTorch memory, this process has 42.59 GiB memory in use. Of the allocated memory 31.32 GiB is allocated by PyTorch, and 10.76 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+          "peak_memory_allocated_bytes": 37920546816,
+          "peak_memory_gib": 35.32,
+          "status": "out_of_memory"
+        }
+      ]
+    }
+  }
+}

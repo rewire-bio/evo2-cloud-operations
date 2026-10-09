@@ -1,0 +1,4 @@
+uname=Linux 5c218ccb258f 6.8.0-90-generic #91-Ubuntu SMP PREEMPT_DYNAMIC Tue Nov 18 14:14:30 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+NVIDIA H100 80GB HBM3, 580.126.09, 81559 MiB
+overlay         200G   41M  200G   1% /
+Mem:            2015         125         484           0        1423        1890

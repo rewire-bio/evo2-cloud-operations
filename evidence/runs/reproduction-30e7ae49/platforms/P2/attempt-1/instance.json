@@ -1,0 +1,2 @@
+{"provider": "gcp", "instance_type": "a3-highgpu-1g", "region": "us-central1", "zone": "us-central1-c",
+ "instance_id": "evo2ops-p2-20261009195129", "image": "https://www.googleapis.com/compute/v1/projects/deeplearning-platform-release/global/images/common-cu129-ubuntu-2204-nvidia-580-v20261001", "purchase_option": "spot", "disk_gb": 200}

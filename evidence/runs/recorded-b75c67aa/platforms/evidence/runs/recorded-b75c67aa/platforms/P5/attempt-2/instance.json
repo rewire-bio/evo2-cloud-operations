@@ -1,0 +1,18 @@
+{
+  "provider": "runpod",
+  "instance_type": "NVIDIA L40S",
+  "gpu": {
+    "count": 1,
+    "id": "NVIDIA L40S",
+    "memory": 125,
+    "vcpuCount": 16
+  },
+  "region": "US-MO-1",
+  "zone": "US-MO-1",
+  "instance_id": "jjyu2zwnhornoh",
+  "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+  "purchase_option": "on-demand",
+  "cost_per_hr": 1.09,
+  "disk_gb": 200,
+  "host_cuda": "13.0"
+}
