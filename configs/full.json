@@ -28,7 +28,7 @@
       "env": {
         "MACHINE_TYPE": "a3-highgpu-1g",
         "PROVISIONING": "SPOT",
-        "GCP_ZONES": "us-central1-a us-central1-b us-central1-c us-east4-a us-east4-b us-east4-c us-east5-a us-west1-a"
+        "GCP_ZONES": "us-central1-a us-central1-b us-central1-c"
       }
     },
     {

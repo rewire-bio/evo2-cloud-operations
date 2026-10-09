@@ -41,7 +41,7 @@ gc compute firewall-rules create "$FIREWALL" --network default --direction INGRE
 
 # 2. Launch on a Deep Learning VM image (NVIDIA driver, Docker, NVIDIA container toolkit).
 #    The A3 machine type includes its GPU. --max-run-duration deletes the VM after MAX_HOURS.
-IMAGE_FAMILY=${IMAGE_FAMILY:-common-cu128-ubuntu-2204-nvidia-570}
+IMAGE_FAMILY=${IMAGE_FAMILY:-common-cu129-ubuntu-2204-nvidia-580}
 mark launch_requested
 for candidate in $GCP_ZONES; do
   if gc compute instances create "$NAME" --zone "$candidate" \
