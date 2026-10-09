@@ -52,9 +52,9 @@
     {
       "id": "P5",
       "provider": "runpod",
-      "label": "Runpod Secure Cloud, L40S 48 GB, on-demand",
+      "label": "Runpod Secure Cloud, 48 GB Ada GPU (L40S, L40 or RTX 6000 Ada), on-demand",
       "env": {
-        "GPU_TYPE_IDS": "[\"NVIDIA L40S\"]"
+        "GPU_TYPE_IDS": "[\"NVIDIA L40S\", \"NVIDIA L40\", \"NVIDIA RTX 6000 Ada Generation\"]"
       }
     }
   ],

@@ -1,6 +1,6 @@
 # Running Evo 2 on AWS, Google Cloud and a GPU cloud
 
-Status: approved by Tim Richardson on 7 October 2026; amendments 1 and 2 approved on 9 October 2026
+Status: approved by Tim Richardson on 7 October 2026; amendments 1 to 3 approved on 9 October 2026
 
 ## Research question
 
