@@ -40,8 +40,8 @@ and \PFiveRankMoves{} of 3,893 variants moved by more than 1\% of the list in ra
 for loss-of-function variants was almost unchanged (\PFiveAurocAll{} against \PTwoAurocAll).
 Every machine reproduced its own scores exactly. A single forward pass ran out of memory at
 131 kb on both the 48 GB and the 80 GB GPU. Scoring cost USD \PThreePerThousand{} (Runpod H100),
-\PFivePerThousand{} (Runpod L40S) and \PTwoPerThousand{} (Google Cloud H100 Spot) per 1,000
-variants at list prices. Zero-shot Evo 2 scores separated BRCA1 loss-of-function variants better
+\PFivePerThousand{} (Runpod L40S, which varied with the host) and \PTwoPerThousand{} (Google
+Cloud H100 Spot) per 1,000 variants at list prices. Zero-shot Evo 2 scores separated BRCA1 loss-of-function variants better
 than CADD overall (AUROC \AurocEvoAll{} against \AurocCaddAll), entirely through noncoding
 variants. These are operational measurements, not a clinical validation.
 \end{abstract}
@@ -124,6 +124,8 @@ exactly. The Runpod H100 matched the Google Cloud H100 exactly on all 3,893 vari
 \PFiveMedianDiff{} and at most \PFiveMaxDiff, with Spearman correlation \PFiveSpearman; \PFiveRankMoves{}
 variants moved by more than 39 rank places, and classifier probabilities differed by up to
 \PFiveExonDiff. For scale, the BRCA1 variant scores themselves are of order $10^{-4}$ to $10^{-2}$.
+Two earlier runs of all three platforms on fresh machines, on the same day, gave BRCA1 scores
+bit-identical to the recorded run on every platform (run log).
 
 \begin{figure}[htbp]
 \centering
@@ -184,10 +186,12 @@ Platform & GPU & Location & Purchase & USD/h & Windows/s & USD/1k var. & Minutes
 \end{tabular}
 \end{table}
 
-The two H100s scored at \PTwoRate{} and \PThreeRate{} windows per second; the L40S at \PFiveRate,
-about a third as fast (Table~\ref{tab:ops}). At list prices the L40S was the cheapest per variant
-and the Google Cloud Spot H100 the most expensive, because its hourly price exceeded Runpod's
-on-demand H100. Fixed setup costs were large relative to this short workload: pulling the 12 GB
+The two H100s scored at \PTwoRate{} and \PThreeRate{} windows per second and the L40S at
+\PFiveRate{} (Table~\ref{tab:ops}). L40S throughput depended on the host: an L40S used earlier the
+same day scored 0.93 windows per second (run log). Its cost per variant therefore ranged from below
+to above that of the Runpod H100, depending on the host it was given. The Google Cloud Spot H100
+cost more per variant than the Runpod on-demand H100, because its hourly price was higher at the
+same throughput. Fixed setup costs were large relative to this short workload: pulling the 12 GB
 compressed image took \PTwoDockerPull{} s on Google Cloud, and Google's current Deep Learning VM
 image required installing Docker and the NVIDIA container toolkit first (\PTwoDockerInstall{} s).
 The recorded run cost USD \TotalRunCost{} in total.
@@ -199,6 +203,12 @@ v2; a Runpod account without credit was refused with HTTP 402; Google's CUDA 12.
 image ships without Docker; and it holds the NVIDIA container toolkit at an older version, so the
 current package cannot be installed alongside it. Runpod placed one H100 pod in India and the L40S
 in Texas, because no data centre was specified.
+In the recorded run, the first Google Cloud attempt of the day had lost GPU access for new processes
+inside the running container, probably because a systemd reload on the host revoked the
+container's device permissions; attaching the GPU through CDI and pausing automatic updates
+resolved it. One L40S attempt failed when the SSH session from the coordinating laptop dropped,
+because the workload ran in the foreground of that session. L40S throughput varied by host:
+0.93 windows per second on the first host and \PFiveRate{} on the host used in the recorded run.
 
 \section{Discussion}
 \paragraph{Hardware is part of the method.} With the same image, inputs and GPU model, Evo 2 7B
@@ -215,8 +225,9 @@ inference. Pipelines that rely on long context, such as EVEE's 65 kb windows ove
 variants (about 20,000 H100-hours) \cite{evee2026}, are a different operational class from the
 8 kb scoring measured here.
 
-\paragraph{Price and residency.} A cheaper 48 GB GPU is adequate for 8 kb scoring and cheapest per
-variant if throughput is not critical. Spot pricing is not automatically cheaper than a GPU cloud's
+\paragraph{Price and residency.} A cheaper 48 GB GPU is adequate for 8 kb scoring, but on a GPU cloud
+its cost per variant depends on the host it lands on, so measure throughput before committing to
+a large job. Spot pricing is not automatically cheaper than a GPU cloud's
 on-demand price. GPU clouds choose a location unless told otherwise; with identifiable data the
 location must be pinned, and covered by a business associate agreement where HIPAA applies. EC2,
 EBS and Compute Engine are covered by their providers' BAAs \cite{awshipaa,gcphipaa}; Runpod states
@@ -225,7 +236,8 @@ health information and production use \cite{nvidiatrial}.
 
 \section{Limitations}
 \begin{itemize}
-\item One run per platform; timings are receipts, not benchmarks. List prices change.
+\item Few runs per platform; timings are receipts, not benchmarks, and throughput varied between
+hosts with the same GPU model. List prices change.
 \item Three platforms, two GPU models. AWS was not run. Blackwell GPUs, where a user reports wrong
 losses \cite{arc157}, were not tested.
 \item Only the 7B checkpoints. The 40B model needs two H100s or one H200 \cite{nimprereq}.

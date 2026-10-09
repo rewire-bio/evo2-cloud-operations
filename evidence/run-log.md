@@ -56,3 +56,17 @@ Chronological record of every launch, including failures. Times are UTC.
   run is not used as the recorded result.
 - Fix for the next run: remote-run.sh pauses apt timers and attaches the GPU through CDI
   (`--device nvidia.com/gpu=all`) when available. No study files will be edited during runs.
+- 16:15 to 19:44. Recorded run b75c67aa (harness status: completed). P2 attempt 1 completed W0 to
+  W4, including W4, with the GPU attached through CDI. P3 attempt 1 completed W0 to W4. P5 attempt
+  1 failed at 16:59 when the SSH session from the coordinator's laptop dropped ("Broken pipe" from
+  the workload's progress output); P5 attempt 2 completed W0 to W4 on a slower L40S host
+  (0.61 windows per second, against 0.93 on the host used earlier the same day).
+- All three platforms' BRCA1 scores in the recorded run were bit-identical to the phased run and
+  to the rejected run 698234c1, for every variant (maximum absolute difference 0.0 per platform).
+- 19:39. A first reproduction attempt was stopped at 19:45 by the coordinator, before any
+  workload output, because evidence/claims.json was still empty and the harness binds a
+  reproduction to every tracked file. All pods and VMs were deleted by their launchers; one
+  orphaned firewall rule (evo2ops-p2-20261009193951-ssh) was deleted manually. The claims file,
+  run log, paper and README were then finalised in one commit before the reproduction restarted.
+- Known launcher weakness: workloads run in the foreground of the SSH session, so a dropped
+  connection kills them. Running them detached on the machine would remove this failure mode.

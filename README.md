@@ -4,8 +4,14 @@ A reproducible study and tutorial for clinical informaticians. One pinned Evo 2 
 image runs the same workloads on several clouds and GPUs, and records what each run cost, how
 much GPU memory it needed, and whether the outputs agree across hardware.
 
-**Status: in progress.** Runpod H100 and L40S runs are recorded. Google Cloud is pending GPU
-quota. AWS is deferred (amendment 2) and its launcher is untested. The paper is not written yet.
+**Status:** recorded run complete on Google Cloud (H100), Runpod (H100) and Runpod (L40S); independent
+reproduction in progress. AWS is deferred (amendment 2) and its launcher is untested.
+
+**Main findings.** Two H100s on different clouds gave bit-identical Evo 2 7B scores for 3,893 BRCA1
+variants; an L40S gave different per-variant scores (Spearman 0.983, median difference 1.2e-4)
+with almost the same AUROC. A single forward pass ran out of memory at 131 kb on both GPUs.
+Scoring cost USD 0.45 to 0.80 per 1,000 variants at October 2026 list prices; the L40S's cost
+per variant depended on how fast the host it landed on was.
 
 - [Protocol](protocol.md) and [amendments](protocol/amendments/)
 - [Literature and source review](literature/review.md)
@@ -43,6 +49,10 @@ Disk: allow at least 100 GB. The image is about 25 GB unpacked and the two 7B ch
 
 Context length is not memory fit. On an 80 GB H100, a single forward pass at 131 kb ran out of
 memory (see W3 in the results). Long-window scoring needs multi-GPU frameworks such as BioNeMo.
+
+Always set the location. Runpod chooses a data centre when none is given (`dataCenterIds` in the
+API); in this study it placed pods in India and Texas. On Google Cloud and AWS the zone or region
+is always explicit.
 
 ## Before you start
 
@@ -83,6 +93,8 @@ and `operations.json` are rebuilt after every run.
   code. `fetch_verified` refuses a file whose hash does not match.
 - **Avoid remote code.** Arc's exon notebook loads the classifier with `trust_remote_code`. This
   study rebuilds the two-layer network locally and loads only the pinned safetensors weights.
+- **Fix the GPU model.** Same GPU model gave identical scores across providers; a different model
+  changed individual scores. Validate per GPU model, and revalidate when it changes.
 - **Run a correctness test on every new machine.** W0 reproduces Arc's expected loss; a wrong
   driver, GPU generation or FP8 setting shows up here first (see Arc issue 157 on Blackwell).
 - **Keep patient data off hosted APIs.** NVIDIA's hosted Evo 2 API terms prohibit protected

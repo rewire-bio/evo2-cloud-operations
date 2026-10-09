@@ -1,4 +1,321 @@
 {
   "schema_version": 1,
-  "claims": []
+  "claims": [
+    {
+      "id": "w0-gcp-h100",
+      "text": "Arc's forward-pass correctness test passed on the Google Cloud H100 with mean loss 0.34765625 (expected 0.3476563 within 0.001).",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "platforms.P2.w0_mean_loss",
+      "value": 0.34765625
+    },
+    {
+      "id": "w0-runpod-h100",
+      "text": "The correctness test gave the same mean loss on the Runpod H100.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "platforms.P3.w0_mean_loss",
+      "value": 0.34765625
+    },
+    {
+      "id": "w0-runpod-l40s",
+      "text": "The correctness test gave the same mean loss on the Runpod L40S, so it passed despite the L40S's different variant scores.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "platforms.P5.w0_mean_loss",
+      "value": 0.34765625
+    },
+    {
+      "id": "h100-cross-provider-max-diff",
+      "text": "The largest per-variant BRCA1 score difference between the Runpod H100 and the Google Cloud H100 was zero.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "agreement_with_reference.P3.w1_max_abs_difference",
+      "value": 0.0
+    },
+    {
+      "id": "h100-cross-provider-exon-diff",
+      "text": "The largest exon-classifier probability difference between the two H100s was zero.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "agreement_with_reference.P3.w2_max_abs_difference",
+      "value": 0.0
+    },
+    {
+      "id": "l40s-median-diff",
+      "text": "The median absolute per-variant BRCA1 score difference between the L40S and the reference H100 was about 1.2e-4.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "agreement_with_reference.P5.w1_median_abs_difference",
+      "value": 0.00011736154556274414
+    },
+    {
+      "id": "l40s-max-diff",
+      "text": "The largest per-variant BRCA1 score difference between the L40S and the reference H100 was about 1.3e-3.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "agreement_with_reference.P5.w1_max_abs_difference",
+      "value": 0.0013126134872437
+    },
+    {
+      "id": "l40s-spearman",
+      "text": "The Spearman correlation of BRCA1 scores between the L40S and the reference H100 was 0.983.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "agreement_with_reference.P5.w1_spearman",
+      "value": 0.9829038105050308
+    },
+    {
+      "id": "l40s-exon-diff",
+      "text": "Exon-classifier probabilities differed by up to 0.020 between the L40S and the reference H100.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "agreement_with_reference.P5.w2_max_abs_difference",
+      "value": 0.020125597715377808
+    },
+    {
+      "id": "repeat-gcp",
+      "text": "Rescoring 200 variants in a new process on the Google Cloud H100 reproduced the first scores exactly.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "same_platform_repeat.P2.max_abs_difference",
+      "value": 0.0
+    },
+    {
+      "id": "repeat-runpod-h100",
+      "text": "The same-machine repeat on the Runpod H100 reproduced the first scores exactly.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "same_platform_repeat.P3.max_abs_difference",
+      "value": 0.0
+    },
+    {
+      "id": "repeat-runpod-l40s",
+      "text": "The same-machine repeat on the Runpod L40S reproduced the first scores exactly.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "same_platform_repeat.P5.max_abs_difference",
+      "value": 0.0
+    },
+    {
+      "id": "auroc-evo2-all",
+      "text": "Zero-shot Evo 2 7B scores gave AUROC 0.875 for BRCA1 loss-of-function against functional or intermediate SNVs (reference H100).",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.all.evo2_7b.auroc",
+      "value": 0.8749886211168324
+    },
+    {
+      "id": "auroc-l40s-all",
+      "text": "On the L40S the same AUROC was 0.877.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "platforms.P5.w1_auroc.all",
+      "value": 0.877089261896375
+    },
+    {
+      "id": "auroc-cadd-all",
+      "text": "CADD gave AUROC 0.804 on all 3,893 SNVs.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.all.cadd.auroc",
+      "value": 0.8041183641321771
+    },
+    {
+      "id": "diff-cadd-all",
+      "text": "Evo 2 exceeded CADD by 0.071 AUROC on all SNVs (paired grouped bootstrap).",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.all.cadd.difference_vs_evo2_7b",
+      "value": 0.07087025698465532
+    },
+    {
+      "id": "diff-cadd-all-ci-low",
+      "text": "The lower 95% bound of that difference was 0.050.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.all.cadd.difference_vs_evo2_7b_ci95.0",
+      "value": 0.04969997520366601
+    },
+    {
+      "id": "auroc-evo2-noncoding",
+      "text": "Evo 2 AUROC on noncoding SNVs was 0.953.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.noncoding.evo2_7b.auroc",
+      "value": 0.9527635841589769
+    },
+    {
+      "id": "auroc-cadd-noncoding",
+      "text": "CADD AUROC on noncoding SNVs was 0.875.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.noncoding.cadd.auroc",
+      "value": 0.8753600876488756
+    },
+    {
+      "id": "diff-cadd-noncoding-ci-low",
+      "text": "The lower 95% bound of Evo 2's advantage over CADD on noncoding SNVs was 0.044.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.noncoding.cadd.difference_vs_evo2_7b_ci95.0",
+      "value": 0.044390899851530836
+    },
+    {
+      "id": "diff-cadd-coding",
+      "text": "On coding SNVs the Evo 2 minus CADD AUROC difference was -0.001.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.coding.cadd.difference_vs_evo2_7b",
+      "value": -0.000813434567715432
+    },
+    {
+      "id": "diff-cadd-coding-ci-low",
+      "text": "The lower 95% bound of the Evo 2 minus CADD AUROC difference on coding SNVs was -0.026.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.coding.cadd.difference_vs_evo2_7b_ci95.0",
+      "value": -0.026332745001072234
+    },
+    {
+      "id": "diff-cadd-coding-ci-high",
+      "text": "The upper 95% bound of that coding difference was 0.023, so the two were level on coding SNVs.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.coding.cadd.difference_vs_evo2_7b_ci95.1",
+      "value": 0.02339182922432688
+    },
+    {
+      "id": "auroc-phylop-all",
+      "text": "Mammalian phyloP gave AUROC 0.781 on all SNVs.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.all.phylop.auroc",
+      "value": 0.780800756745204
+    },
+    {
+      "id": "auroc-rule-all",
+      "text": "The consequence rule gave AUROC 0.769 on all SNVs.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "brca1_evo2_vs_baselines.all.consequence_rule.auroc",
+      "value": 0.76883907686584
+    },
+    {
+      "id": "exon-auroc",
+      "text": "The pinned exon classifier on Evo 2 7B base embeddings gave AUROC 0.945 on 122 positions.",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "b75c67aa959b424c88fd49bcce4d16b5",
+      "result_pointer": "platforms.P2.w2_exon_auroc",
+      "value": 0.944907282988444
+    },
+    {
+      "id": "lit-hosted-api",
+      "text": "NVIDIA's API Trial Terms of Service prohibit submitting protected health information and limit use to trial, non-production purposes.",
+      "kind": "literature",
+      "status": "supported",
+      "source_ids": [
+        "nvidia-api-trial"
+      ]
+    },
+    {
+      "id": "lit-hardware",
+      "text": "Evo 2 7B runs in bfloat16 on one GPU; the 40B checkpoint needs two H100s or one H200.",
+      "kind": "literature",
+      "status": "supported",
+      "source_ids": [
+        "arc-repo",
+        "nim-prereq"
+      ]
+    },
+    {
+      "id": "lit-l40s-report",
+      "text": "Users report that Evo 2 7B embeddings differ between H100 and L40S GPUs, without a published explanation.",
+      "kind": "literature",
+      "status": "supported",
+      "source_ids": [
+        "arc-issue-177",
+        "arc-issue-178"
+      ]
+    },
+    {
+      "id": "lit-evee-scale",
+      "text": "EVEE extracted Evo 2 embeddings with 65 kb windows for 4.25 million variants using about 20,000 H100-hours.",
+      "kind": "literature",
+      "status": "supported",
+      "source_ids": [
+        "evee2026"
+      ]
+    },
+    {
+      "id": "lit-baa",
+      "text": "AWS EC2 and EBS are HIPAA-eligible and Google Cloud's BAA covers Compute Engine; both require a signed BAA before processing PHI.",
+      "kind": "literature",
+      "status": "supported",
+      "source_ids": [
+        "aws-hipaa",
+        "gcp-hipaa"
+      ]
+    },
+    {
+      "id": "interp-gpu-model",
+      "text": "With the same image, inputs and GPU model, Evo 2 7B outputs were identical across providers and processes; changing the GPU model changed per-variant scores by an amount comparable to the scores while leaving aggregate discrimination almost unchanged. A validated pipeline should therefore fix its GPU model or revalidate when it changes.",
+      "kind": "interpretation",
+      "status": "supported",
+      "based_on": [
+        "h100-cross-provider-max-diff",
+        "repeat-gcp",
+        "repeat-runpod-h100",
+        "repeat-runpod-l40s",
+        "l40s-median-diff",
+        "l40s-spearman",
+        "auroc-evo2-all",
+        "auroc-l40s-all",
+        "w0-runpod-l40s",
+        "lit-l40s-report"
+      ],
+      "limitations": "Two GPU models and three platforms; one container image. The cause (for example FP8 kernels) was not isolated. Agreement was measured on one gene's variants and 122 exon positions."
+    },
+    {
+      "id": "interp-noncoding",
+      "text": "Evo 2 7B's advantage over CADD on this BRCA1 set came from noncoding variants; on coding variants the two were level.",
+      "kind": "interpretation",
+      "status": "supported",
+      "based_on": [
+        "auroc-evo2-noncoding",
+        "auroc-cadd-noncoding",
+        "diff-cadd-noncoding-ci-low",
+        "diff-cadd-coding",
+        "diff-cadd-coding-ci-low",
+        "diff-cadd-coding-ci-high"
+      ],
+      "limitations": "One gene, one assay, uncalibrated scores; CADD values taken from the Findlay et al. table. Not a clinical validation."
+    }
+  ]
 }
