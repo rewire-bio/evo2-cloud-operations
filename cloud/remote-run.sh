@@ -51,7 +51,16 @@ if [[ $mode == docker ]]; then
   start=$SECONDS
   sudo docker pull "$image" > /work/out/docker-pull.log 2>&1
   echo "{\"docker_install_s\": $install_s, \"docker_pull_s\": $((SECONDS - start))}" > /work/out/host-timings.json
-  sudo docker run --rm --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 \
+  # Pause automatic updates for the run: a systemd daemon-reload on the host can revoke a running
+  # container's access to the GPU device files, so a new process inside it no longer sees the GPU.
+  sudo systemctl stop apt-daily.timer apt-daily-upgrade.timer unattended-upgrades.service 2>/dev/null || true
+  # Attach the GPU through CDI where available; NVIDIA documents this as the fix for that problem.
+  gpu_args=(--gpus all)
+  if sudo nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml > /work/out/cdi.log 2>&1; then
+    gpu_args=(--device nvidia.com/gpu=all)
+  fi
+  echo "gpu_args=${gpu_args[*]}" >> /work/out/host.txt
+  sudo docker run --rm "${gpu_args[@]}" --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 \
     -v /work:/work -e PLATFORM_ID="$platform_id" -e IMAGE_REF="$image" -e CODE_SHA256="$code_sha" \
     "$image" bash -c "$run_workloads" 2>&1 | tee /work/out/workloads.log
   sudo chown -R "$(id -u):$(id -g)" /work/out

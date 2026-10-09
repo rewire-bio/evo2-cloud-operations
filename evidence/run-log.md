@@ -46,3 +46,13 @@ Chronological record of every launch, including failures. Times are UTC.
   amendment 3 approval were operational only (Google Cloud zones limited to us-central1, where
   the H100 Spot quota was granted). Tim Richardson approved a clean run of P2, P3 and P5 from one
   revision followed by an independent reproduction (reply: "Yes please").
+- 14:19 to 16:14. Recorded run 698234c1 (harness). P3 and P5 completed W0 to W4. P2 attempts 1 and
+  2 completed W0 to W3 but W4 failed in both: the new process saw "No CUDA GPUs are available"
+  while the first process had used the GPU normally. Probable cause (not confirmed; VMs deleted):
+  a systemd daemon-reload on the host revoking the container's GPU device access, a documented
+  NVIDIA container toolkit issue. The harness then rejected the run, correctly, with "Experiment
+  modified its scientific inputs": the coordinator had committed changes to scripts/ (analysis
+  and paper build) while the run was in progress. The run's outputs are kept in .research; the
+  run is not used as the recorded result.
+- Fix for the next run: remote-run.sh pauses apt timers and attaches the GPU through CDI
+  (`--device nvidia.com/gpu=all`) when available. No study files will be edited during runs.
