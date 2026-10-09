@@ -19,3 +19,9 @@ Chronological record of every launch, including failures. Times are UTC.
 - 10:21. P5 attempts 1 and 2 refused with HTTP 400: "There are no longer any instances available
   with the requested specifications". No pod created. Secure Cloud L40S stock showed as
   unavailable on all host CUDA versions immediately afterwards. P5 is unavailable for this phase.
+- 10:22 to 12:15. P5 attempt 3 (pod eq8fyz8grfp4kt, L40S, Secure Cloud, USD 1.09/h) completed
+  W0 to W4. An L40S was available at relaunch, so the amendment 3 fallbacks were not used. Pod
+  deleted by the launcher at 12:15:08; confirmed absent via the Runpod API.
+- 12:15. P2 attempt 1 launched: a3-highgpu-1g Spot, us-central1-a, Deep Learning VM family
+  common-cu129-ubuntu-2204-nvidia-580 (the cu128/570 family named in the first launcher version
+  no longer exists). H100 Spot quota of 1 in us-central1 was requested and granted the same day.
