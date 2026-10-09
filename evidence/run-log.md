@@ -30,3 +30,8 @@ Chronological record of every launch, including failures. Times are UTC.
   driver without Docker. Both VMs and firewall rules were deleted by the launcher (confirmed by
   listing). remote-run.sh now installs docker.io and the NVIDIA container toolkit when missing
   and records the install time. Billed time for the two attempts: under 2 minutes each.
+- 12:21 to 12:44. P2 attempts 3 and 4 installed docker.io (29.1.3) but failed installing
+  nvidia-container-toolkit 1.20.1: the image holds nvidia-container-toolkit-base and
+  libnvidia-container-tools at 1.19.1. Attempt 3 ran about 20 minutes before failing; attempt 4
+  about 1 minute. VMs and firewall rules deleted by the launcher. remote-run.sh now installs the
+  toolkit at the version already on the image, and adds NVIDIA's apt source only if absent.

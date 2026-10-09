@@ -26,13 +26,22 @@ if [[ $mode == docker ]]; then
     {
       sudo apt-get update -q
       sudo apt-get install -y -q docker.io curl gnupg
-      curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey \
-        | sudo gpg --batch --yes --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
-      curl -fsSL https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list \
-        | sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' \
-        | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+      if ! grep -rqs libnvidia-container /etc/apt/sources.list /etc/apt/sources.list.d/; then
+        curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey \
+          | sudo gpg --batch --yes --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+        curl -fsSL https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list \
+          | sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' \
+          | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+      fi
       sudo apt-get update -q
-      sudo apt-get install -y -q nvidia-container-toolkit
+      # Google's image holds part of the toolkit at an older version; match it instead of upgrading.
+      base=$(dpkg-query -W -f='${Version}' nvidia-container-toolkit-base 2>/dev/null || true)
+      if [[ -n $base ]]; then
+        sudo apt-get install -y -q --allow-change-held-packages "nvidia-container-toolkit=$base" \
+          "libnvidia-container-tools=$base" "libnvidia-container1=$base"
+      else
+        sudo apt-get install -y -q nvidia-container-toolkit
+      fi
       sudo nvidia-ctk runtime configure --runtime=docker
       sudo systemctl restart docker
       docker --version; nvidia-ctk --version
