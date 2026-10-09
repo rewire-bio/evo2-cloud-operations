@@ -14,7 +14,8 @@ BUNDLE = "https://relay.fullyjustified.net/default_bundle_v33.tar"
 
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
-    required = ["paper/generated/metrics.tex", "paper/generated/table.tex", "paper/figures/convergence.pdf"]
+    required = ["paper/generated/macros.tex", "paper/generated/operations-table.tex", "paper/figures/fig-agreement.png",
+                "paper/figures/fig-auroc.png", "paper/figures/fig-memory.png"]
     for name in required:
         if not (root / name).is_file():
             raise SystemExit(f"Missing generated input {name}; run make analysis first")

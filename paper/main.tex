@@ -1,6 +1,245 @@
 \documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.4cm]{geometry}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\graphicspath{{figures/}}
+\input{generated/macros.tex}
+\newcommand{\code}[1]{\texttt{#1}}
+\makeatletter\let\inputtab\@@input\makeatother % expandable input for table bodies
+
+\title{Running Evo 2 7B on Google Cloud and Runpod:\\
+cost, GPU memory and cross-hardware agreement of variant scores}
+\author{Study repository \code{rewire-bio/evo2-cloud-operations}}
+\date{October 2026}
+
 \begin{document}
-\title{Running Evo 2 on AWS, Google Cloud and RunPod}
 \maketitle
-Manuscript in preparation. It will be written from the recorded cloud runs.
+
+\begin{abstract}
+\noindent Clinical informatics teams evaluating the Evo 2 DNA language model need to know what it
+costs to run, what hardware it needs, and whether its outputs are stable when the hardware changes.
+We ran one pinned Evo 2 7B container image, unchanged, on three single-GPU platforms: a Google Cloud
+\code{a3-highgpu-1g} Spot VM (H100 80 GB), a Runpod Secure Cloud H100 80 GB pod and a Runpod L40S
+48 GB pod. Each platform ran Arc Institute's forward-pass correctness test, zero-shot scoring of
+3,893 BRCA1 single-nucleotide variants with 8,192 bp windows, embedding extraction for an exon
+classifier, a memory probe over sequence length and a same-machine repeat. All platforms passed
+the correctness test (loss \PTwoLoss). The two H100s, from different providers, produced
+bit-identical variant scores and classifier probabilities. The L40S produced different scores:
+median absolute difference \PFiveMedianDiff{} against the H100, Spearman correlation \PFiveSpearman,
+and \PFiveRankMoves{} of 3,893 variants moved by more than 1\% of the list in rank, while the AUROC
+for loss-of-function variants was almost unchanged (\PFiveAurocAll{} against \PTwoAurocAll).
+Every machine reproduced its own scores exactly. A single forward pass ran out of memory at
+131 kb on both the 48 GB and the 80 GB GPU. Scoring cost USD \PThreePerThousand{} (Runpod H100),
+\PFivePerThousand{} (Runpod L40S) and \PTwoPerThousand{} (Google Cloud H100 Spot) per 1,000
+variants at list prices. Zero-shot Evo 2 scores separated BRCA1 loss-of-function variants better
+than CADD overall (AUROC \AurocEvoAll{} against \AurocCaddAll), entirely through noncoding
+variants. These are operational measurements, not a clinical validation.
+\end{abstract}
+
+\section{Introduction}
+Evo 2 is an open DNA language model with 7B and 40B parameter checkpoints and a context of up to
+1 Mb \cite{brixi2026}. Its authors report strong zero-shot variant-effect results, particularly for
+noncoding and splice variants, and publish inference code, weights and notebooks \cite{arcrepo}.
+They do not describe how to provision it on commercial clouds, what it costs, or how its outputs
+behave across GPU types. Users have reported that 7B embeddings differ between H100 and L40S GPUs
+\cite{arc177} and that long sequences exhaust GPU memory well short of the advertised context
+\cite{arc160}. For a clinical team these are not curiosities: a score that changes with the
+hardware cannot be locked down by an assay validation, and a context that does not fit is not a
+usable context.
+
+This study runs one fixed workload on several platforms with the same container image, and records
+correctness, agreement, memory, time and cost. It also reproduces two of Arc's published workflows
+(BRCA1 zero-shot scoring and exon classification) with the 7B checkpoints, against labels and
+simple baselines. The design, platforms and budget were approved in a written protocol before any
+GPU run, with three dated amendments.
+
+\section{Methods}
+\subsection{Platforms}
+Table~\ref{tab:ops} lists the platforms. All are single-GPU machines. Google Cloud's
+\code{a3-highgpu-1g} is sold only as Spot or Flex-start; we used Spot. Runpod pods ran in Secure
+Cloud, on demand. The Google Cloud H100 is the reference platform for agreement comparisons. AWS
+\code{p5.4xlarge} and \code{g6e.2xlarge} launchers are included in the repository but were not run
+(no account was available; amendment 2). Runpod chose the data centre for each pod; we did not
+constrain it.
+
+\subsection{Software and model pins}
+The container is built from \code{nvcr.io/nvidia/pytorch:25.04-py3} (the base of Arc's Dockerfile),
+pinned by digest, with \code{evo2==0.6.0} and \code{vtx==1.1.0}. It contains PyTorch
+2.7.0 (NVIDIA build), flash-attn 2.7.3 and Transformer Engine; its full package list is recorded.
+The image is referenced by digest on every platform. Weights were downloaded from Hugging Face at
+pinned revisions and checked against SHA-256 hashes before loading, because Arc's loader uses
+\code{torch.load}, which can execute code. The exon classifier (\code{schmojo/evo2-exon-classifier})
+is a two-layer network; instead of loading it with \code{trust\_remote\_code} as Arc's notebook
+does, we rebuilt the network locally and loaded only the pinned \code{safetensors} weights. Study
+code was copied to each machine from a committed revision; all three platforms in the recorded run
+used the same revision.
+
+\subsection{Data}
+All inputs are public and were fetched from Arc's repository at a pinned commit, with SHA-256
+checks: GRCh37 chromosome 17; the Findlay et al.\ BRCA1 saturation genome editing table
+\cite{findlay2018} (3,893 SNVs: 2,821 functional, 249 intermediate, 823 loss of function, with
+consequence, CADD and mammalian phyloP columns); 122 labelled exon and non-exon positions; and
+Arc's four forward-pass test sequences. No patient data were used.
+
+\subsection{Workloads}
+\textbf{W0} reimplements Arc's forward-pass test with \code{evo2\_7b}; a platform passes if the mean
+loss is within 0.001 of Arc's expected 0.3477. \textbf{W1} scores 8,192 bp windows centred on each
+BRCA1 SNV, as in Arc's notebook: the score is the variant window's mean log-likelihood minus the
+reference window's (batch size 1). The 3,893 variants share 1,326 reference windows, so 5,219
+sequences are scored. \textbf{W2} extracts final-token embeddings from layer \code{blocks.26} of
+\code{evo2\_7b\_base} for forward and reverse 8,192 bp sequences at 122 positions and scores them
+with the pinned classifier. \textbf{W3} runs one forward pass of \code{evo2\_7b} on synthetic
+sequences of 8,192, 32,768, 131,072 and 262,144 bp and stops at the first out-of-memory error.
+\textbf{W4} rescores the first 200 BRCA1 variants in a new process on the same machine.
+
+\subsection{Metrics}
+Discrimination is the AUROC for loss-of-function against functional or intermediate variants,
+using the negated W1 score, with 95\% intervals from 2,000 bootstrap resamples of positions
+(the three SNVs at a position are kept together). Baselines from the same table need no GPU: CADD,
+mammalian phyloP (amendment 1 corrected its sign before any Evo 2 output existed) and a consequence
+rule (nonsense and canonical splice, then splice region, then missense, then other). Paired
+differences use the same resamples. Agreement between platforms is the maximum and median absolute
+difference in per-variant scores, the Spearman correlation, and the number of variants whose rank
+moves by more than 1\% of the list (39 places). Peak memory is
+\code{torch.cuda.max\_memory\_allocated}, with \code{nvidia-smi} sampled every 500 ms. Cost is
+billed time (from pod creation on Runpod, from \code{RUNNING} on Google Cloud, to deletion) times
+the list price retrieved by API at run time, plus disk.
+
+\section{Results}
+\subsection{Correctness and agreement}
+All three platforms passed W0 with mean loss \PTwoLoss. Each platform reproduced its own W4 scores
+exactly. The Runpod H100 matched the Google Cloud H100 exactly on all 3,893 variant scores and all
+122 classifier probabilities (maximum absolute difference \PThreeMaxDiff). The L40S did not
+(Figure~\ref{fig:agreement}): its scores differed from the reference by a median of
+\PFiveMedianDiff{} and at most \PFiveMaxDiff, with Spearman correlation \PFiveSpearman; \PFiveRankMoves{}
+variants moved by more than 39 rank places, and classifier probabilities differed by up to
+\PFiveExonDiff. For scale, the BRCA1 variant scores themselves are of order $10^{-4}$ to $10^{-2}$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig-agreement.png}
+\caption{Per-variant BRCA1 scores on each platform against the Google Cloud H100. Same image,
+inputs and code. Left: Runpod H100 (identical). Right: Runpod L40S. Dashed line: identity.}
+\label{fig:agreement}
+\end{figure}
+
+\subsection{BRCA1 discrimination and baselines}
+Zero-shot Evo 2 7B scores gave AUROC \AurocEvoAll{} [\AurocEvoAllLo, \AurocEvoAllHi] for all SNVs,
+against \AurocCaddAll{} for CADD, \AurocPhylopAll{} for phyloP and \AurocRuleAll{} for the
+consequence rule (Figure~\ref{fig:auroc}). The difference from CADD, \DiffCaddAll{}
+[\DiffCaddAllLo, \DiffCaddAllHi] in CADD's disfavour, came from noncoding variants
+(Evo 2 \AurocEvoNoncoding{} against CADD \AurocCaddNoncoding; difference \DiffCaddNoncoding{}
+[\DiffCaddNoncodingLo, \DiffCaddNoncodingHi]). On coding variants the two were level (Evo 2
+\AurocEvoCoding, CADD \AurocCaddCoding; difference \DiffCaddCoding{} [\DiffCaddCodingLo,
+\DiffCaddCodingHi]). The exon classifier gave AUROC \PTwoAurocExon{} on 122 positions; its training
+data may include these positions, so this is a pipeline check rather than an evaluation.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{fig-auroc.png}
+\caption{AUROC for BRCA1 loss-of-function variants with 95\% grouped bootstrap intervals,
+reference platform. Baseline scores come from the Findlay et al.\ table.}
+\label{fig:auroc}
+\end{figure}
+
+\subsection{Memory}
+Scoring 8,192 bp windows needed \PTwoPeakGib{} GiB allocated by PyTorch on every platform. A single
+32,768 bp forward pass needed \PTwoThirtyTwoGib{} GiB. At 131,072 bp the forward pass ran out of
+memory on both the 80 GB H100 and the 48 GB L40S (Figure~\ref{fig:memory}). The checkpoint's 1 Mb
+context is therefore not reachable in one forward pass on a single GPU with Arc's inference code;
+Arc points to multi-GPU frameworks for long sequences \cite{arc160}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\linewidth]{fig-memory.png}
+\caption{Peak GPU memory for one forward pass against sequence length. Crosses mark the memory in
+use when the next allocation failed.}
+\label{fig:memory}
+\end{figure}
+
+\subsection{Throughput and cost}
+\begin{table}[htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Platforms and measured operations for the recorded run. USD per 1,000 variants assumes
+the BRCA1 pattern of 5,219 scored windows per 3,893 variants and list prices at run time.}
+\label{tab:ops}
+\begin{tabular}{@{}l l l l r r r r r@{}}
+\toprule
+Platform & GPU & Location & Purchase & USD/h & Windows/s & USD/1k var. & Minutes & USD \\
+\midrule
+\inputtab{generated/operations-table.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+The two H100s scored at \PTwoRate{} and \PThreeRate{} windows per second; the L40S at \PFiveRate,
+about a third as fast (Table~\ref{tab:ops}). At list prices the L40S was the cheapest per variant
+and the Google Cloud Spot H100 the most expensive, because its hourly price exceeded Runpod's
+on-demand H100. Fixed setup costs were large relative to this short workload: pulling the 12 GB
+compressed image took \PTwoDockerPull{} s on Google Cloud, and Google's current Deep Learning VM
+image required installing Docker and the NVIDIA container toolkit first (\PTwoDockerInstall{} s).
+The recorded run cost USD \TotalRunCost{} in total.
+
+\subsection{Operational events}
+The run log records every attempt. Earlier, phased runs on the same three platforms found and
+fixed four launcher problems before the recorded run: Runpod's REST API v1 had been superseded by
+v2; a Runpod account without credit was refused with HTTP 402; Google's CUDA 12.9 Deep Learning VM
+image ships without Docker; and it holds the NVIDIA container toolkit at an older version, so the
+current package cannot be installed alongside it. Runpod placed one H100 pod in India and the L40S
+in Texas, because no data centre was specified.
+
+\section{Discussion}
+\paragraph{Hardware is part of the method.} With the same image, inputs and GPU model, Evo 2 7B
+outputs reproduced exactly across two providers and across processes. Changing the GPU model
+changed individual scores by about as much as the scores themselves, reordering most of a ranked
+list, while leaving aggregate discrimination intact. The 7B checkpoint uses FP8 input projections
+when Transformer Engine is present, and FP8 and bf16 kernels differ between GPU generations, which
+is a plausible cause; we did not isolate it. In practice a validated pipeline must fix the GPU model
+or revalidate when it changes, and Arc's correctness test is not sufficient on its own: the L40S
+passed it.
+
+\paragraph{Context capacity is not memory fit.} Window lengths beyond about 32 kb need multi-GPU
+inference. Pipelines that rely on long context, such as EVEE's 65 kb windows over four million
+variants (about 20,000 H100-hours) \cite{evee2026}, are a different operational class from the
+8 kb scoring measured here.
+
+\paragraph{Price and residency.} A cheaper 48 GB GPU is adequate for 8 kb scoring and cheapest per
+variant if throughput is not critical. Spot pricing is not automatically cheaper than a GPU cloud's
+on-demand price. GPU clouds choose a location unless told otherwise; with identifiable data the
+location must be pinned, and covered by a business associate agreement where HIPAA applies. EC2,
+EBS and Compute Engine are covered by their providers' BAAs \cite{awshipaa,gcphipaa}; Runpod states
+HIPAA and GDPR programmes \cite{runpodcompliance}. NVIDIA's hosted Evo 2 API prohibits protected
+health information and production use \cite{nvidiatrial}.
+
+\section{Limitations}
+\begin{itemize}
+\item One run per platform; timings are receipts, not benchmarks. List prices change.
+\item Three platforms, two GPU models. AWS was not run. Blackwell GPUs, where a user reports wrong
+losses \cite{arc157}, were not tested.
+\item Only the 7B checkpoints. The 40B model needs two H100s or one H200 \cite{nimprereq}.
+\item The BRCA1 comparison is one gene from one assay; the exon task may overlap the classifier's
+training data. Neither says anything about clinical validity, calibration or ancestry.
+\item The cause of the L40S differences was not isolated (for example, by disabling FP8).
+\item Compliance terms were taken from provider pages, not audited.
+\end{itemize}
+
+\section{Availability}
+Code, protocol, amendments, run log, results and this manuscript:
+\url{https://github.com/rewire-bio/evo2-cloud-operations}. Container image:
+\code{ghcr.io/rewire-bio/evo2-cloud-operations} (digest in \code{configs/full.json}).
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
 \end{document}
