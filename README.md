@@ -17,7 +17,10 @@ changed by only 0.002. One forward pass fitted at 32 kb and ran out of memory at
 Scoring cost USD 0.45 to 0.80 per 1,000 variants at October 2026 list prices; the L40S's cost
 per variant depended on how fast the host it landed on was.
 
+- [Paper (PDF)](paper/evo2-cloud-operations.pdf)
 - [Protocol](protocol.md) and [amendments](protocol/amendments/)
+- [Methods review](reviews/methods.md) and [response](reviews/methods-response.md)
+- Run evidence: [recorded run](evidence/runs/recorded-b75c67aa/), [reproduction](evidence/runs/reproduction-30e7ae49/), [independent checks](evidence/checks/verification.json)
 - [Literature and source review](literature/review.md)
 - [Run log](evidence/run-log.md), including every failed attempt
 
