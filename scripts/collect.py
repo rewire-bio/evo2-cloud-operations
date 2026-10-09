@@ -126,7 +126,8 @@ def assemble(config: dict, output: Path, root: Path) -> None:
             "cost": platform_costs(instance, ev, prices, pid),
         }
 
-    reference_id = config["reference_platform"] if config["reference_platform"] in attempts else next(iter(attempts), None)
+    reference_id = next((p for p in (config["reference_platform"], config.get("reference_fallback")) if p in attempts),
+                        next(iter(attempts), None))
     results["reference_platform"] = reference_id
     if reference_id:
         ref = attempts[reference_id]

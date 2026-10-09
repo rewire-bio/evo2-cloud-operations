@@ -9,6 +9,7 @@ the environment (AWS_PROFILE, GCP_PROJECT, RUNPOD_API_KEY), never from the repos
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import hashlib
 import json
 import os
@@ -63,7 +64,8 @@ def launch(platform: dict, image: str, bundle: Path, output: Path, code_sha: str
     """Run one platform, retrying once on failure. Every attempt's directory is kept."""
     script = ROOT / "cloud" / platform["provider"] / "launch.sh"
     for attempt in range(1, attempts + 1):
-        out = output / "platforms" / platform["id"] / f"attempt-{attempt}"
+        existing = len(list((output / "platforms" / platform["id"]).glob("attempt-*")))
+        out = output / "platforms" / platform["id"] / f"attempt-{existing + 1}"
         out.mkdir(parents=True, exist_ok=False)
         env = {**os.environ, "PLATFORM_ID": platform["id"], "IMAGE_REF": image, "BUNDLE": str(bundle),
                "OUT": str(out), "CODE_SHA256": code_sha, "MAX_HOURS": str(max_hours)}
@@ -92,19 +94,30 @@ def main() -> None:
     subprocess.run([sys.executable, str(ROOT / "scripts/prepare_inputs.py")], check=True)
 
     if not args.collect_only:
-        platforms = config["platforms"]
+        platforms = [p for p in config["platforms"] if not p.get("deferred")]
         if args.platforms:
             wanted = set(args.platforms.split(","))
             platforms = [p for p in platforms if p["id"] in wanted]
+        # Platforms may run in separate phases (for example while quota is pending). Each phase gets
+        # its own bundle and provenance record; all phases must use the same code and image.
         args.output.mkdir(parents=True, exist_ok=True)
-        provenance = build_bundle(args.output / "bundle", args.allow_dirty)
-        provenance.update({"image": config["image"], "config_sha256": sha256(args.config)})
-        (args.output / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n")
+        phase = dt.datetime.now(dt.UTC).strftime("%Y%m%dT%H%M%SZ")
+        bundle = args.output / f"bundle-{phase}"
+        provenance = build_bundle(bundle, args.allow_dirty)
+        provenance.update({"phase": phase, "platforms": [p["id"] for p in platforms],
+                           "image": config["image"], "config_sha256": sha256(args.config)})
+        record = args.output / "provenance.json"
+        phases = json.loads(record.read_text()) if record.exists() else []
+        if phases and (phases[0]["code_sha256"], phases[0]["image"]) != (provenance["code_sha256"], provenance["image"]):
+            raise SystemExit("Code or image differs from the first phase; start a new output directory.")
+        record.write_text(json.dumps(phases + [provenance], indent=2) + "\n")
         with ThreadPoolExecutor(len(platforms)) as pool:
             outcomes = list(pool.map(lambda p: launch(
-                p, config["image"], args.output / "bundle", args.output, provenance["code_sha256"],
+                p, config["image"], bundle, args.output, provenance["code_sha256"],
                 config["max_hours"], config["max_attempts"]), platforms))
-        (args.output / "launch-outcomes.json").write_text(json.dumps(outcomes, indent=2) + "\n")
+        log = args.output / "launch-outcomes.json"
+        previous = json.loads(log.read_text()) if log.exists() else []
+        log.write_text(json.dumps(previous + [{"phase": phase, "outcomes": outcomes}], indent=2) + "\n")
         price_cmd = [sys.executable, str(ROOT / "scripts/prices.py"), "--output", str(args.output)]
         if os.environ.get("GCP_PROJECT"):
             price_cmd += ["--gcp-project", os.environ["GCP_PROJECT"]]

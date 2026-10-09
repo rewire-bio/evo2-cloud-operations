@@ -3,19 +3,60 @@
   "mode": "full",
   "study_kind": "evo2_cloud_operations",
   "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
-  "reference_platform": "P1",
+  "reference_platform": "P2",
   "max_hours": 3,
   "max_attempts": 2,
-  "bootstrap": {"n": 2000, "seed": 7},
+  "bootstrap": {
+    "n": 2000,
+    "seed": 7
+  },
   "platforms": [
-    {"id": "P1", "provider": "aws", "label": "AWS p5.4xlarge, H100 80 GB, on-demand",
-     "env": {"INSTANCE_TYPE": "p5.4xlarge", "AWS_REGION": "us-east-1"}},
-    {"id": "P2", "provider": "gcp", "label": "Google Cloud a3-highgpu-1g, H100 80 GB, Spot",
-     "env": {"MACHINE_TYPE": "a3-highgpu-1g", "PROVISIONING": "SPOT",
-             "GCP_ZONES": "us-central1-a us-central1-b us-central1-c us-east4-a us-east4-b us-east4-c us-east5-a us-west1-a"}},
-    {"id": "P3", "provider": "runpod", "label": "RunPod Secure Cloud, H100 80 GB, on-demand",
-     "env": {"GPU_TYPE_IDS": "[\"NVIDIA H100 80GB HBM3\", \"NVIDIA H100 PCIe\"]"}},
-    {"id": "P4", "provider": "aws", "label": "AWS g6e.2xlarge, L40S 48 GB, on-demand",
-     "env": {"INSTANCE_TYPE": "g6e.2xlarge", "AWS_REGION": "us-east-1"}}
-  ]
+    {
+      "id": "P1",
+      "provider": "aws",
+      "label": "AWS p5.4xlarge, H100 80 GB, on-demand",
+      "env": {
+        "INSTANCE_TYPE": "p5.4xlarge",
+        "AWS_REGION": "us-east-1"
+      },
+      "deferred": "amendment 2: no AWS account yet"
+    },
+    {
+      "id": "P2",
+      "provider": "gcp",
+      "label": "Google Cloud a3-highgpu-1g, H100 80 GB, Spot",
+      "env": {
+        "MACHINE_TYPE": "a3-highgpu-1g",
+        "PROVISIONING": "SPOT",
+        "GCP_ZONES": "us-central1-a us-central1-b us-central1-c us-east4-a us-east4-b us-east4-c us-east5-a us-west1-a"
+      }
+    },
+    {
+      "id": "P3",
+      "provider": "runpod",
+      "label": "RunPod Secure Cloud, H100 80 GB, on-demand",
+      "env": {
+        "GPU_TYPE_IDS": "[\"NVIDIA H100 80GB HBM3\"]"
+      }
+    },
+    {
+      "id": "P4",
+      "provider": "aws",
+      "label": "AWS g6e.2xlarge, L40S 48 GB, on-demand",
+      "env": {
+        "INSTANCE_TYPE": "g6e.2xlarge",
+        "AWS_REGION": "us-east-1"
+      },
+      "deferred": "amendment 2: no AWS account yet"
+    },
+    {
+      "id": "P5",
+      "provider": "runpod",
+      "label": "Runpod Secure Cloud, L40S 48 GB, on-demand",
+      "env": {
+        "GPU_TYPE_IDS": "[\"NVIDIA L40S\"]"
+      }
+    }
+  ],
+  "reference_fallback": "P3"
 }
