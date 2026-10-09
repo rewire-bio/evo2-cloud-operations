@@ -61,9 +61,11 @@ def w2_probabilities(attempt: Path) -> pd.DataFrame:
 
 
 def platform_costs(instance: dict, ev: dict, prices: dict, platform_id: str) -> dict:
-    if "running" not in ev or "terminated" not in ev:
+    # Runpod bills from pod creation (including the image pull); EC2 and GCE from RUNNING.
+    start = ev.get("pod_created") or ev.get("running")
+    if start is None or "terminated" not in ev:
         return {"billed_seconds": None, "usd": None}
-    seconds = (utc(ev["terminated"]) - utc(ev["running"])).total_seconds()
+    seconds = (utc(ev["terminated"]) - utc(start)).total_seconds()
     price = prices.get(platform_id, {})
     hourly = price.get("instance_usd_per_hour")
     storage = price.get("storage_usd_per_hour", 0.0)
