@@ -15,3 +15,5 @@ blog-handoff/
 !evidence/archive/**
 data/raw/
 data/derived/
+paper/figures/*.png
+paper/generated/*.csv

@@ -39,3 +39,10 @@ Chronological record of every launch, including failures. Times are UTC.
   common-cu129-ubuntu-2204-nvidia-580-v20261001) completed W0 to W4. Docker install took 457 s and
   the image pull 587 s. VM and firewall rule deleted by the launcher; confirmed by listing.
   Spot list price at run time: USD 6.24/h plus USD 0.05/h disk (Cloud Billing Catalog API).
+
+## 2026-10-09, clean recorded run
+
+- Phased results moved to `results/phased-20261009/` and kept. Configuration changes since the
+  amendment 3 approval were operational only (Google Cloud zones limited to us-central1, where
+  the H100 Spot quota was granted). Tim Richardson approved a clean run of P2, P3 and P5 from one
+  revision followed by an independent reproduction (reply: "Yes please").
