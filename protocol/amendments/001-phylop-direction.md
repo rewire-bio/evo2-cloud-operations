@@ -27,3 +27,7 @@ The platform rationale said a RunPod BAA "needs a negotiated agreement and commi
 spend condition came from a secondary summary and could not be confirmed from a public primary
 source. The text now says RunPod states a BAA can be executed and that its terms were not
 confirmed. The platform choice is unchanged.
+
+## Approval
+
+Approved by Tim Richardson on 9 October 2026.
