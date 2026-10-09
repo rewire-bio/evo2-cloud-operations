@@ -14,3 +14,8 @@ Chronological record of every launch, including failures. Times are UTC.
 - 09:27. P3 attempts 3 and 4 (v2 launcher) reached the API and were refused with HTTP 402,
   "Your account balance is too low to rent a pod". No pod was created; no compute was billed.
 - 09:29 and 09:31. P3 attempts 5 to 8 refused with HTTP 402 (balance too low). No pod created.
+- 09:32 to 10:20. P3 attempt 9 (pod 6oa79ihlpmq4dl, H100 80GB HBM3, Secure Cloud, USD 3.99/h)
+  completed W0 to W4. Pod deleted by the launcher at 10:20:04; confirmed absent via the Runpod API.
+- 10:21. P5 attempts 1 and 2 refused with HTTP 400: "There are no longer any instances available
+  with the requested specifications". No pod created. Secure Cloud L40S stock showed as
+  unavailable on all host CUDA versions immediately afterwards. P5 is unavailable for this phase.
