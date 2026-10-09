@@ -25,3 +25,8 @@ Chronological record of every launch, including failures. Times are UTC.
 - 12:15. P2 attempt 1 launched: a3-highgpu-1g Spot, us-central1-a, Deep Learning VM family
   common-cu129-ubuntu-2204-nvidia-580 (the cu128/570 family named in the first launcher version
   no longer exists). H100 Spot quota of 1 in us-central1 was requested and granted the same day.
+- 12:15 and 12:17. P2 attempts 1 and 2 got Spot capacity in us-central1-a but stopped within a
+  minute: "Docker is not installed on this image". The CUDA 12.9 Deep Learning VM ships the NVIDIA
+  driver without Docker. Both VMs and firewall rules were deleted by the launcher (confirmed by
+  listing). remote-run.sh now installs docker.io and the NVIDIA container toolkit when missing
+  and records the install time. Billed time for the two attempts: under 2 minutes each.
