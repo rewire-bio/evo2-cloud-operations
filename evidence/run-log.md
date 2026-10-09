@@ -11,3 +11,5 @@ Chronological record of every launch, including failures. Times are UTC.
 - Known limitation of image `sha256:22970720`: the in-pod self-delete backstop in
   `container/pod-start.sh` calls the v1 endpoint and may not work. The launcher deletes the pod
   on exit, and pods were also checked through the Runpod console API after each run.
+- 09:27. P3 attempts 3 and 4 (v2 launcher) reached the API and were refused with HTTP 402,
+  "Your account balance is too low to rent a pod". No pod was created; no compute was billed.
