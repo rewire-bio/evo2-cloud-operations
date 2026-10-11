@@ -1,0 +1,33 @@
+{
+  "started_utc": "2026-10-11T08:24:44.729848+00:00",
+  "batch_size": 1,
+  "gpu_name": "NVIDIA L40S",
+  "status": "completed",
+  "applied": {
+    "variant": "fp32",
+    "use_fp8_input_projections": false,
+    "use_flash_attn": false,
+    "parameter_dtypes": [
+      "torch.float32"
+    ],
+    "tf32_matmul_allowed": false
+  },
+  "load_s": 18.47,
+  "w0": {
+    "mean_loss": 0.34714416041970253,
+    "mean_accuracy": 0.863637700676918,
+    "passed": true,
+    "per_sequence_loss": [
+      0.18146522343158722,
+      0.3516545295715332,
+      0.5000553131103516,
+      0.35540157556533813
+    ]
+  },
+  "variants": 487,
+  "windows": 974,
+  "scoring_s": 3597.929,
+  "windows_per_s": 0.2707,
+  "peak_memory_gib": 29.55,
+  "finished_utc": "2026-10-11T09:25:15.658158+00:00"
+}

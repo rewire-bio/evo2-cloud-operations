@@ -1,0 +1,343 @@
+{
+  "configurations": {
+    "FA/default-b1": {
+      "status": "completed",
+      "gpu_name": "NVIDIA L40",
+      "applied": {
+        "variant": "default",
+        "use_fp8_input_projections": true,
+        "use_flash_attn": true,
+        "parameter_dtypes": [
+          "torch.bfloat16",
+          "torch.float32"
+        ],
+        "tf32_matmul_allowed": false
+      },
+      "windows_per_s": 0.6862,
+      "peak_memory_gib": 16.78,
+      "load_s": 41.933,
+      "w0": {
+        "mean_loss": 0.34765625,
+        "mean_accuracy": 0.8624067306518555,
+        "passed": true,
+        "per_sequence_loss": [
+          0.181640625,
+          0.353515625,
+          0.5,
+          0.35546875
+        ]
+      },
+      "subset_auroc": 0.8919712793733682
+    },
+    "FA/fp8off-b1": {
+      "status": "completed",
+      "gpu_name": "NVIDIA L40",
+      "applied": {
+        "variant": "fp8off",
+        "use_fp8_input_projections": false,
+        "use_flash_attn": true,
+        "parameter_dtypes": [
+          "torch.bfloat16",
+          "torch.float32"
+        ],
+        "tf32_matmul_allowed": false
+      },
+      "windows_per_s": 0.6478,
+      "peak_memory_gib": 16.78,
+      "load_s": 24.47,
+      "w0": {
+        "mean_loss": 0.34716796875,
+        "mean_accuracy": 0.8636694699525833,
+        "passed": true,
+        "per_sequence_loss": [
+          0.181640625,
+          0.3515625,
+          0.5,
+          0.35546875
+        ]
+      },
+      "subset_auroc": 0.8902641092588873
+    },
+    "FH/default-b1": {
+      "status": "completed",
+      "gpu_name": "NVIDIA H100 80GB HBM3",
+      "applied": {
+        "variant": "default",
+        "use_fp8_input_projections": true,
+        "use_flash_attn": true,
+        "parameter_dtypes": [
+          "torch.bfloat16",
+          "torch.float32"
+        ],
+        "tf32_matmul_allowed": false
+      },
+      "windows_per_s": 2.919,
+      "peak_memory_gib": 16.83,
+      "load_s": 57.216,
+      "w0": {
+        "mean_loss": 0.34765625,
+        "mean_accuracy": 0.8636132031679153,
+        "passed": true,
+        "per_sequence_loss": [
+          0.181640625,
+          0.353515625,
+          0.5,
+          0.35546875
+        ]
+      },
+      "subset_auroc": 0.8887828881301466
+    },
+    "FH/default-b8": {
+      "status": "completed",
+      "gpu_name": "NVIDIA H100 80GB HBM3",
+      "applied": {
+        "variant": "default",
+        "use_fp8_input_projections": true,
+        "use_flash_attn": true,
+        "parameter_dtypes": [
+          "torch.bfloat16",
+          "torch.float32"
+        ],
+        "tf32_matmul_allowed": false
+      },
+      "windows_per_s": 3.326,
+      "peak_memory_gib": 27.21,
+      "load_s": 16.103,
+      "w0": {
+        "mean_loss": 0.34765625,
+        "mean_accuracy": 0.8636132031679153,
+        "passed": true,
+        "per_sequence_loss": [
+          0.181640625,
+          0.353515625,
+          0.5,
+          0.35546875
+        ]
+      },
+      "subset_auroc": 0.8887828881301466
+    },
+    "FH/fp32-b1": {
+      "status": "completed",
+      "gpu_name": "NVIDIA H100 80GB HBM3",
+      "applied": {
+        "variant": "fp32",
+        "use_fp8_input_projections": false,
+        "use_flash_attn": false,
+        "parameter_dtypes": [
+          "torch.float32"
+        ],
+        "tf32_matmul_allowed": false
+      },
+      "windows_per_s": 0.5049,
+      "peak_memory_gib": 29.6,
+      "load_s": 16.647,
+      "w0": {
+        "mean_loss": 0.3471442498266697,
+        "mean_accuracy": 0.863637700676918,
+        "passed": true,
+        "per_sequence_loss": [
+          0.18146313726902008,
+          0.351655513048172,
+          0.5000554323196411,
+          0.3554029166698456
+        ]
+      },
+      "subset_auroc": 0.8912683269732878
+    },
+    "FH/fp8off-b1": {
+      "status": "completed",
+      "gpu_name": "NVIDIA H100 80GB HBM3",
+      "applied": {
+        "variant": "fp8off",
+        "use_fp8_input_projections": false,
+        "use_flash_attn": true,
+        "parameter_dtypes": [
+          "torch.bfloat16",
+          "torch.float32"
+        ],
+        "tf32_matmul_allowed": false
+      },
+      "windows_per_s": 2.8273,
+      "peak_memory_gib": 16.83,
+      "load_s": 17.055,
+      "w0": {
+        "mean_loss": 0.34716796875,
+        "mean_accuracy": 0.8633581250905991,
+        "passed": true,
+        "per_sequence_loss": [
+          0.181640625,
+          0.3515625,
+          0.5,
+          0.35546875
+        ]
+      },
+      "subset_auroc": 0.8933269732878087
+    },
+    "FL/default-b1": {
+      "status": "completed",
+      "gpu_name": "NVIDIA L40S",
+      "applied": {
+        "variant": "default",
+        "use_fp8_input_projections": true,
+        "use_flash_attn": true,
+        "parameter_dtypes": [
+          "torch.bfloat16",
+          "torch.float32"
+        ],
+        "tf32_matmul_allowed": false
+      },
+      "windows_per_s": 0.9162,
+      "peak_memory_gib": 16.78,
+      "load_s": 31.783,
+      "w0": {
+        "mean_loss": 0.34765625,
+        "mean_accuracy": 0.8626015186309814,
+        "passed": true,
+        "per_sequence_loss": [
+          0.181640625,
+          0.353515625,
+          0.5,
+          0.35546875
+        ]
+      },
+      "subset_auroc": 0.8920214902590882
+    },
+    "FL/fp32-b1": {
+      "status": "completed",
+      "gpu_name": "NVIDIA L40S",
+      "applied": {
+        "variant": "fp32",
+        "use_fp8_input_projections": false,
+        "use_flash_attn": false,
+        "parameter_dtypes": [
+          "torch.float32"
+        ],
+        "tf32_matmul_allowed": false
+      },
+      "windows_per_s": 0.2707,
+      "peak_memory_gib": 29.55,
+      "load_s": 18.47,
+      "w0": {
+        "mean_loss": 0.34714416041970253,
+        "mean_accuracy": 0.863637700676918,
+        "passed": true,
+        "per_sequence_loss": [
+          0.18146522343158722,
+          0.3516545295715332,
+          0.5000553131103516,
+          0.35540157556533813
+        ]
+      },
+      "subset_auroc": 0.8912683269732878
+    },
+    "FL/fp8off-b1": {
+      "status": "completed",
+      "gpu_name": "NVIDIA L40S",
+      "applied": {
+        "variant": "fp8off",
+        "use_fp8_input_projections": false,
+        "use_flash_attn": true,
+        "parameter_dtypes": [
+          "torch.bfloat16",
+          "torch.float32"
+        ],
+        "tf32_matmul_allowed": false
+      },
+      "windows_per_s": 0.8835,
+      "peak_memory_gib": 16.78,
+      "load_s": 18.832,
+      "w0": {
+        "mean_loss": 0.34716796875,
+        "mean_accuracy": 0.8638456165790558,
+        "passed": true,
+        "per_sequence_loss": [
+          0.181640625,
+          0.3515625,
+          0.5,
+          0.35546875
+        ]
+      },
+      "subset_auroc": 0.8918708576019281
+    }
+  },
+  "controls": {
+    "FH/default-b1": 0.0,
+    "FL/default-b1": 0.0
+  },
+  "comparisons": {
+    "default: H100 vs L40S": {
+      "n": 487,
+      "max_abs_difference": 0.0005812644958496007,
+      "median_abs_difference": 0.00011861324310309977,
+      "spearman": 0.9833710776573774,
+      "rank_moves_over_1pct": 327
+    },
+    "fp8off: H100 vs L40S": {
+      "n": 487,
+      "max_abs_difference": 0.00035202503204349953,
+      "median_abs_difference": 8.350610733029993e-05,
+      "spearman": 0.989892824390769,
+      "rank_moves_over_1pct": 295
+    },
+    "fp32: H100 vs L40S": {
+      "n": 487,
+      "max_abs_difference": 2.920627594000212e-06,
+      "median_abs_difference": 4.7683715820008923e-07,
+      "spearman": 0.9999969870339658,
+      "rank_moves_over_1pct": 0
+    },
+    "H100: fp8off vs default": {
+      "n": 487,
+      "max_abs_difference": 0.0013309717178345,
+      "median_abs_difference": 0.00014311075210569988,
+      "spearman": 0.9763096726334647,
+      "rank_moves_over_1pct": 349
+    },
+    "L40S: fp8off vs default": {
+      "n": 487,
+      "max_abs_difference": 0.0016579627990722001,
+      "median_abs_difference": 0.00013667345046988516,
+      "spearman": 0.9767757219163475,
+      "rank_moves_over_1pct": 349
+    },
+    "H100: fp32 vs default": {
+      "n": 487,
+      "max_abs_difference": 0.0013839006423949996,
+      "median_abs_difference": 0.00011891126632689996,
+      "spearman": 0.9813140795814143,
+      "rank_moves_over_1pct": 348
+    },
+    "L40S: fp32 vs default": {
+      "n": 487,
+      "max_abs_difference": 0.0015301108360289998,
+      "median_abs_difference": 0.00011616945266729878,
+      "spearman": 0.9806331472973969,
+      "rank_moves_over_1pct": 331
+    },
+    "same architecture: second Ada GPU vs L40S, default": {
+      "n": 487,
+      "max_abs_difference": 0.0006961822509765,
+      "median_abs_difference": 0.00011318922042850008,
+      "spearman": 0.9798944246255391,
+      "rank_moves_over_1pct": 320
+    },
+    "same architecture: second Ada GPU vs L40S, fp8off": {
+      "n": 487,
+      "max_abs_difference": 0.0004151463508605,
+      "median_abs_difference": 7.593631744380391e-05,
+      "spearman": 0.9896728778870156,
+      "rank_moves_over_1pct": 298
+    },
+    "H100: batch 8 vs batch 1": {
+      "n": 487,
+      "max_abs_difference": 0.0,
+      "median_abs_difference": 0.0,
+      "spearman": 1.0,
+      "rank_moves_over_1pct": 0
+    }
+  },
+  "q1_fp8": {
+    "median_ratio_fp8off_to_default": 0.7040201005018943,
+    "verdict": "a cause"
+  }
+}

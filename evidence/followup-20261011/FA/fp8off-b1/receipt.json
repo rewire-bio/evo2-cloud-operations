@@ -1,0 +1,34 @@
+{
+  "started_utc": "2026-10-11T08:12:53.638404+00:00",
+  "batch_size": 1,
+  "gpu_name": "NVIDIA L40",
+  "status": "completed",
+  "applied": {
+    "variant": "fp8off",
+    "use_fp8_input_projections": false,
+    "use_flash_attn": true,
+    "parameter_dtypes": [
+      "torch.bfloat16",
+      "torch.float32"
+    ],
+    "tf32_matmul_allowed": false
+  },
+  "load_s": 24.47,
+  "w0": {
+    "mean_loss": 0.34716796875,
+    "mean_accuracy": 0.8636694699525833,
+    "passed": true,
+    "per_sequence_loss": [
+      0.181640625,
+      0.3515625,
+      0.5,
+      0.35546875
+    ]
+  },
+  "variants": 487,
+  "windows": 974,
+  "scoring_s": 1503.453,
+  "windows_per_s": 0.6478,
+  "peak_memory_gib": 16.78,
+  "finished_utc": "2026-10-11T08:38:29.157727+00:00"
+}

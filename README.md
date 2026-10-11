@@ -14,6 +14,11 @@ verification stamp was not re-run (amendment 4). AWS is deferred (amendment 2) a
 variants, and every platform reproduced its own scores exactly across four runs on fresh machines.
 An L40S gave different per-variant scores (Spearman 0.983, median difference 1.2e-4) while AUROC
 changed by only 0.002. One forward pass fitted at 32 kb and ran out of memory at 131 kb on both GPUs (lengths in between untested).
+**Follow-up (amendment 5):** computing in FP32 makes the H100 and L40S agree to a median of
+4.8e-7 (identical rankings), at 3 to 6 times the GPU time; turning off FP8 alone only narrows the gap
+by 30%, and two GPUs of the same architecture (L40, L40S) disagree as much as different
+architectures. Batch size does not matter. See [followup/RESULTS.md](followup/RESULTS.md).
+
 Scoring cost USD 0.45 to 0.80 per 1,000 variants at October 2026 list prices; the L40S's cost
 per variant depended on how fast the host it landed on was.
 

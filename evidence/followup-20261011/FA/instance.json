@@ -1,0 +1,15 @@
+{
+  "provider": "runpod",
+  "gpu": {
+    "count": 1,
+    "id": "NVIDIA L40",
+    "memory": 143,
+    "vcpuCount": 18
+  },
+  "region": "EUR-IS-2",
+  "instance_id": "d5h7mpwyw9d73r",
+  "image": "ghcr.io/rewire-bio/evo2-cloud-operations@sha256:22970720ff8bc05a00460a6066a70ed71951001aa52965141591a0ca6dcc968b",
+  "cost_per_hr": 0.82,
+  "disk_gb": 150,
+  "host_cuda": "13.2"
+}

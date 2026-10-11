@@ -62,7 +62,9 @@ ssh_cmd "mkdir -p /work"
 copy_to "$BUNDLE/code.tar.gz" "$BUNDLE/data" /work/
 ssh_cmd "mkdir -p /work/code && tar -xzf /work/code.tar.gz -C /work/code"
 mark workload_start
-ssh_cmd "cd /work && VARIANTS='$VARIANTS' nohup bash /work/code/followup/remote-followup.sh > /work/remote.log 2>&1 < /dev/null &"
+# setsid detaches the job from the SSH session completely; a plain nohup ... & kept the session
+# open in the first follow-up run (the launcher waited on it until the job finished).
+ssh_cmd "cd /work && VARIANTS='$VARIANTS' setsid nohup bash /work/code/followup/remote-followup.sh > /work/remote.log 2>&1 < /dev/null & disown" || true
 
 deadline=$((SECONDS + MAX_HOURS * 3600 - 600))
 until ssh_cmd "test -f /work/out/DONE" 2>/dev/null; do

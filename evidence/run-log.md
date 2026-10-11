@@ -79,3 +79,12 @@ Chronological record of every launch, including failures. Times are UTC.
   documentation corrected afterwards without changing scientific inputs (reviews/, amendment 4).
 - Total cloud spend for the study: USD 21.56 on Runpod (billing API, 9 October) and about USD 27
   on Google Cloud (4.3 billed VM hours at USD 6.29/h Spot list price).
+
+## 2026-10-11, follow-up (amendment 5)
+
+- 07:39 to 09:26. Three Runpod pods (H100 9b5j1l3a2yof1j, L40S 73lz5yfcwi6e4r, L40
+  d5h7mpwyw9d73r) ran all nine planned configurations on their first attempt. Controls reproduced
+  the recorded run exactly. All pods deleted by the launchers; confirmed absent via the Runpod API.
+  Cost USD 4.98 (Runpod billing). Results: followup/RESULTS.md.
+- The SSH call that started each detached job did not return until the job finished; workloads
+  were unaffected. The launcher now uses setsid.

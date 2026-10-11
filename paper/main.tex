@@ -269,6 +269,17 @@ EBS and Compute Engine are covered by their providers' BAAs \cite{awshipaa,gcphi
 HIPAA and GDPR programmes \cite{runpodcompliance}. NVIDIA's hosted Evo 2 API prohibits protected
 health information and production use \cite{nvidiatrial}.
 
+\section{Follow-up: cause and control (amendment 5)}
+A follow-up on 11 October 2026 scored every 8th BRCA1 variant (487) on a Runpod H100, L40S and L40
+under three numerical configurations; controls reproduced the recorded run exactly. Turning off
+the FP8 input projections reduced the median H100 against L40S difference from $1.2\times10^{-4}$
+to $8.4\times10^{-5}$, so FP8 contributes but is not the main cause. Computing in FP32 (TF32
+disabled, PyTorch attention) reduced it to $4.8\times10^{-7}$ (maximum $2.9\times10^{-6}$), with
+identical rankings, at 5.8 times the H100 time and 3.4 times the L40S time and 29.6 GiB of memory.
+An L40 and an L40S, both Ada Lovelace, disagreed as much as the H100 and L40S did, so validation
+must be per GPU product, not per architecture. Scoring in batches of 8 was bit-identical to batch
+size 1 (\code{followup/RESULTS.md}).
+
 \section{Limitations}
 \begin{itemize}
 \item Few runs per platform; timings are receipts, not benchmarks, and throughput varied between
@@ -283,7 +294,8 @@ features were not compared.
 checkpoints; no published 7B reference value was compared.
 \item The BRCA1 comparison is one gene from one assay; the exon task may overlap the classifier's
 training data. Neither says anything about clinical validity, calibration or ancestry.
-\item The cause of the L40S differences was not isolated (for example, by disabling FP8).
+\item The follow-up identified low-precision rounding as the cause in aggregate (FP32 removed the
+difference) but did not isolate which kernels differ between GPU products.
 \item Compliance terms were taken from provider pages, not audited.
 \end{itemize}
 
