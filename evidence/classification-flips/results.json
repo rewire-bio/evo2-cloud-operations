@@ -1,0 +1,1706 @@
+{
+  "thresholds_full_set": {
+    "youden": 0.00169819593429565,
+    "sensitivity_0.90": 0.00099739432334895,
+    "sensitivity_0.95": 0.00069773197174065
+  },
+  "full_set": {
+    "recorded: H100 (P2) vs L40S (P5)": {
+      "youden": {
+        "reference_sensitivity": 0.7934386391251519,
+        "reference_specificity": 0.7824104234527687,
+        "threshold": 0.00169819593429565,
+        "strata": {
+          "all": {
+            "n": 3893,
+            "flips": 72,
+            "proportion": 0.018494734138196762,
+            "ci95": [
+              0.014498411312719936,
+              0.023235039683230117
+            ],
+            "lof_on_reference_only": 41,
+            "lof_on_other_only": 31
+          },
+          "lof": {
+            "n": 823,
+            "flips": 13,
+            "proportion": 0.015795868772782502,
+            "ci95": [
+              0.008436744081812594,
+              0.02685995207389258
+            ],
+            "lof_on_reference_only": 10,
+            "lof_on_other_only": 3
+          },
+          "not_lof": {
+            "n": 3070,
+            "flips": 59,
+            "proportion": 0.019218241042345277,
+            "ci95": [
+              0.01466119778175834,
+              0.024720874074555498
+            ],
+            "lof_on_reference_only": 31,
+            "lof_on_other_only": 28
+          },
+          "coding": {
+            "n": 2768,
+            "flips": 63,
+            "proportion": 0.022760115606936415,
+            "ci95": [
+              0.017532755016979006,
+              0.029027158972632472
+            ],
+            "lof_on_reference_only": 36,
+            "lof_on_other_only": 27
+          },
+          "noncoding": {
+            "n": 1125,
+            "flips": 9,
+            "proportion": 0.008,
+            "ci95": [
+              0.0036644456591349815,
+              0.015131953559058949
+            ],
+            "lof_on_reference_only": 5,
+            "lof_on_other_only": 4
+          }
+        },
+        "median_abs_difference": 0.00011736154556274414,
+        "flipped_distance_in_median_differences": {
+          "median": 0.683341797867465,
+          "max": 5.430675469781598
+        },
+        "reference_within_one_median_difference": 150
+      },
+      "sensitivity_0.90": {
+        "reference_sensitivity": 0.9003645200486027,
+        "reference_specificity": 0.6429967426710098,
+        "threshold": 0.00099739432334895,
+        "strata": {
+          "all": {
+            "n": 3893,
+            "flips": 152,
+            "proportion": 0.03904443873619317,
+            "ci95": [
+              0.03317963535246632,
+              0.0456133497134098
+            ],
+            "lof_on_reference_only": 73,
+            "lof_on_other_only": 79
+          },
+          "lof": {
+            "n": 823,
+            "flips": 18,
+            "proportion": 0.02187120291616039,
+            "ci95": [
+              0.01301254326151578,
+              0.03434632652024466
+            ],
+            "lof_on_reference_only": 7,
+            "lof_on_other_only": 11
+          },
+          "not_lof": {
+            "n": 3070,
+            "flips": 134,
+            "proportion": 0.04364820846905537,
+            "ci95": [
+              0.03669624049286735,
+              0.05148561922958396
+            ],
+            "lof_on_reference_only": 66,
+            "lof_on_other_only": 68
+          },
+          "coding": {
+            "n": 2768,
+            "flips": 125,
+            "proportion": 0.045158959537572256,
+            "ci95": [
+              0.03772732787193335,
+              0.05357033747529835
+            ],
+            "lof_on_reference_only": 61,
+            "lof_on_other_only": 64
+          },
+          "noncoding": {
+            "n": 1125,
+            "flips": 27,
+            "proportion": 0.024,
+            "ci95": [
+              0.015874347326854207,
+              0.03472771039425447
+            ],
+            "lof_on_reference_only": 12,
+            "lof_on_other_only": 15
+          }
+        },
+        "median_abs_difference": 0.00011736154556274414,
+        "flipped_distance_in_median_differences": {
+          "median": 0.6650584052820903,
+          "max": 5.3608430675471
+        },
+        "reference_within_one_median_difference": 235
+      },
+      "sensitivity_0.95": {
+        "reference_sensitivity": 0.9501822600243013,
+        "reference_specificity": 0.539413680781759,
+        "threshold": 0.00069773197174065,
+        "strata": {
+          "all": {
+            "n": 3893,
+            "flips": 189,
+            "proportion": 0.0485486771127665,
+            "ci95": [
+              0.04201005795914314,
+              0.05577507622514305
+            ],
+            "lof_on_reference_only": 102,
+            "lof_on_other_only": 87
+          },
+          "lof": {
+            "n": 823,
+            "flips": 15,
+            "proportion": 0.018226002430133656,
+            "ci95": [
+              0.01023593584522316,
+              0.029883076397083562
+            ],
+            "lof_on_reference_only": 5,
+            "lof_on_other_only": 10
+          },
+          "not_lof": {
+            "n": 3070,
+            "flips": 174,
+            "proportion": 0.05667752442996743,
+            "ci95": [
+              0.04876108558769765,
+              0.06545129432908789
+            ],
+            "lof_on_reference_only": 97,
+            "lof_on_other_only": 77
+          },
+          "coding": {
+            "n": 2768,
+            "flips": 152,
+            "proportion": 0.05491329479768786,
+            "ci95": [
+              0.0467203864543384,
+              0.06406245871271574
+            ],
+            "lof_on_reference_only": 83,
+            "lof_on_other_only": 69
+          },
+          "noncoding": {
+            "n": 1125,
+            "flips": 37,
+            "proportion": 0.03288888888888889,
+            "ci95": [
+              0.02326039917523215,
+              0.045049875233688405
+            ],
+            "lof_on_reference_only": 19,
+            "lof_on_other_only": 18
+          }
+        },
+        "median_abs_difference": 0.00011736154556274414,
+        "flipped_distance_in_median_differences": {
+          "median": 0.6571863890299173,
+          "max": 3.940071102082016
+        },
+        "reference_within_one_median_difference": 334
+      }
+    },
+    "reproduction: H100 (P2, recorded) vs L40S (P5)": {
+      "youden": {
+        "reference_sensitivity": 0.7934386391251519,
+        "reference_specificity": 0.7824104234527687,
+        "threshold": 0.00169819593429565,
+        "strata": {
+          "all": {
+            "n": 3893,
+            "flips": 72,
+            "proportion": 0.018494734138196762,
+            "ci95": [
+              0.014498411312719936,
+              0.023235039683230117
+            ],
+            "lof_on_reference_only": 41,
+            "lof_on_other_only": 31
+          },
+          "lof": {
+            "n": 823,
+            "flips": 13,
+            "proportion": 0.015795868772782502,
+            "ci95": [
+              0.008436744081812594,
+              0.02685995207389258
+            ],
+            "lof_on_reference_only": 10,
+            "lof_on_other_only": 3
+          },
+          "not_lof": {
+            "n": 3070,
+            "flips": 59,
+            "proportion": 0.019218241042345277,
+            "ci95": [
+              0.01466119778175834,
+              0.024720874074555498
+            ],
+            "lof_on_reference_only": 31,
+            "lof_on_other_only": 28
+          },
+          "coding": {
+            "n": 2768,
+            "flips": 63,
+            "proportion": 0.022760115606936415,
+            "ci95": [
+              0.017532755016979006,
+              0.029027158972632472
+            ],
+            "lof_on_reference_only": 36,
+            "lof_on_other_only": 27
+          },
+          "noncoding": {
+            "n": 1125,
+            "flips": 9,
+            "proportion": 0.008,
+            "ci95": [
+              0.0036644456591349815,
+              0.015131953559058949
+            ],
+            "lof_on_reference_only": 5,
+            "lof_on_other_only": 4
+          }
+        },
+        "median_abs_difference": 0.00011736154556274414,
+        "flipped_distance_in_median_differences": {
+          "median": 0.683341797867465,
+          "max": 5.430675469781598
+        },
+        "reference_within_one_median_difference": 150
+      },
+      "sensitivity_0.90": {
+        "reference_sensitivity": 0.9003645200486027,
+        "reference_specificity": 0.6429967426710098,
+        "threshold": 0.00099739432334895,
+        "strata": {
+          "all": {
+            "n": 3893,
+            "flips": 152,
+            "proportion": 0.03904443873619317,
+            "ci95": [
+              0.03317963535246632,
+              0.0456133497134098
+            ],
+            "lof_on_reference_only": 73,
+            "lof_on_other_only": 79
+          },
+          "lof": {
+            "n": 823,
+            "flips": 18,
+            "proportion": 0.02187120291616039,
+            "ci95": [
+              0.01301254326151578,
+              0.03434632652024466
+            ],
+            "lof_on_reference_only": 7,
+            "lof_on_other_only": 11
+          },
+          "not_lof": {
+            "n": 3070,
+            "flips": 134,
+            "proportion": 0.04364820846905537,
+            "ci95": [
+              0.03669624049286735,
+              0.05148561922958396
+            ],
+            "lof_on_reference_only": 66,
+            "lof_on_other_only": 68
+          },
+          "coding": {
+            "n": 2768,
+            "flips": 125,
+            "proportion": 0.045158959537572256,
+            "ci95": [
+              0.03772732787193335,
+              0.05357033747529835
+            ],
+            "lof_on_reference_only": 61,
+            "lof_on_other_only": 64
+          },
+          "noncoding": {
+            "n": 1125,
+            "flips": 27,
+            "proportion": 0.024,
+            "ci95": [
+              0.015874347326854207,
+              0.03472771039425447
+            ],
+            "lof_on_reference_only": 12,
+            "lof_on_other_only": 15
+          }
+        },
+        "median_abs_difference": 0.00011736154556274414,
+        "flipped_distance_in_median_differences": {
+          "median": 0.6650584052820903,
+          "max": 5.3608430675471
+        },
+        "reference_within_one_median_difference": 235
+      },
+      "sensitivity_0.95": {
+        "reference_sensitivity": 0.9501822600243013,
+        "reference_specificity": 0.539413680781759,
+        "threshold": 0.00069773197174065,
+        "strata": {
+          "all": {
+            "n": 3893,
+            "flips": 189,
+            "proportion": 0.0485486771127665,
+            "ci95": [
+              0.04201005795914314,
+              0.05577507622514305
+            ],
+            "lof_on_reference_only": 102,
+            "lof_on_other_only": 87
+          },
+          "lof": {
+            "n": 823,
+            "flips": 15,
+            "proportion": 0.018226002430133656,
+            "ci95": [
+              0.01023593584522316,
+              0.029883076397083562
+            ],
+            "lof_on_reference_only": 5,
+            "lof_on_other_only": 10
+          },
+          "not_lof": {
+            "n": 3070,
+            "flips": 174,
+            "proportion": 0.05667752442996743,
+            "ci95": [
+              0.04876108558769765,
+              0.06545129432908789
+            ],
+            "lof_on_reference_only": 97,
+            "lof_on_other_only": 77
+          },
+          "coding": {
+            "n": 2768,
+            "flips": 152,
+            "proportion": 0.05491329479768786,
+            "ci95": [
+              0.0467203864543384,
+              0.06406245871271574
+            ],
+            "lof_on_reference_only": 83,
+            "lof_on_other_only": 69
+          },
+          "noncoding": {
+            "n": 1125,
+            "flips": 37,
+            "proportion": 0.03288888888888889,
+            "ci95": [
+              0.02326039917523215,
+              0.045049875233688405
+            ],
+            "lof_on_reference_only": 19,
+            "lof_on_other_only": 18
+          }
+        },
+        "median_abs_difference": 0.00011736154556274414,
+        "flipped_distance_in_median_differences": {
+          "median": 0.6571863890299173,
+          "max": 3.940071102082016
+        },
+        "reference_within_one_median_difference": 334
+      }
+    }
+  },
+  "controls": {
+    "recorded: P2 vs P3 (both H100)": 0,
+    "P2: recorded vs reproduction": 0,
+    "P3: recorded vs reproduction": 0,
+    "P5: recorded vs reproduction": 0
+  },
+  "subset": {
+    "default: H100 vs L40S": {
+      "reference": "FH/default-b1",
+      "other": "FL/default-b1",
+      "thresholds": {
+        "youden": 0.0018716156482696499,
+        "sensitivity_0.90": 0.00103241205215445,
+        "sensitivity_0.95": 0.00081768631935115
+      },
+      "flips": {
+        "youden": {
+          "reference_sensitivity": 0.8173076923076923,
+          "reference_specificity": 0.8067885117493473,
+          "threshold": 0.0018716156482696499,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 8,
+              "proportion": 0.01642710472279261,
+              "ci95": [
+                0.007118053231385757,
+                0.032110357589723984
+              ],
+              "lof_on_reference_only": 6,
+              "lof_on_other_only": 2
+            },
+            "lof": {
+              "n": 104,
+              "flips": 2,
+              "proportion": 0.019230769230769232,
+              "ci95": [
+                0.002337479608610797,
+                0.06774489489176475
+              ],
+              "lof_on_reference_only": 2,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 6,
+              "proportion": 0.015665796344647518,
+              "ci95": [
+                0.005770208945299558,
+                0.03378440844368455
+              ],
+              "lof_on_reference_only": 4,
+              "lof_on_other_only": 2
+            },
+            "coding": {
+              "n": 348,
+              "flips": 8,
+              "proportion": 0.022988505747126436,
+              "ci95": [
+                0.009975852299955002,
+                0.04479237169102046
+              ],
+              "lof_on_reference_only": 6,
+              "lof_on_other_only": 2
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.026189644434205586
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            }
+          },
+          "median_abs_difference": 0.00011861324310309977,
+          "flipped_distance_in_median_differences": {
+            "median": 0.7369346733662965,
+            "max": 2.1233668341690275
+          },
+          "reference_within_one_median_difference": 14
+        },
+        "sensitivity_0.90": {
+          "reference_sensitivity": 0.9038461538461539,
+          "reference_specificity": 0.660574412532637,
+          "threshold": 0.00103241205215445,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 13,
+              "proportion": 0.026694045174537988,
+              "ci95": [
+                0.014288343085005276,
+                0.045215075338632504
+              ],
+              "lof_on_reference_only": 8,
+              "lof_on_other_only": 5
+            },
+            "lof": {
+              "n": 104,
+              "flips": 1,
+              "proportion": 0.009615384615384616,
+              "ci95": [
+                0.0002434108321626482,
+                0.05241069970322891
+              ],
+              "lof_on_reference_only": 1,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 12,
+              "proportion": 0.031331592689295036,
+              "ci95": [
+                0.016292201695510343,
+                0.05409000886028524
+              ],
+              "lof_on_reference_only": 7,
+              "lof_on_other_only": 5
+            },
+            "coding": {
+              "n": 348,
+              "flips": 10,
+              "proportion": 0.028735632183908046,
+              "ci95": [
+                0.013864071683084789,
+                0.052209668165392964
+              ],
+              "lof_on_reference_only": 6,
+              "lof_on_other_only": 4
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 3,
+              "proportion": 0.02158273381294964,
+              "ci95": [
+                0.004473187297201827,
+                0.06177716152853606
+              ],
+              "lof_on_reference_only": 2,
+              "lof_on_other_only": 1
+            }
+          },
+          "median_abs_difference": 0.00011861324310309977,
+          "flipped_distance_in_median_differences": {
+            "median": 0.5768844221102133,
+            "max": 1.839698492460723
+          },
+          "reference_within_one_median_difference": 24
+        },
+        "sensitivity_0.95": {
+          "reference_sensitivity": 0.9519230769230769,
+          "reference_specificity": 0.6057441253263708,
+          "threshold": 0.00081768631935115,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 22,
+              "proportion": 0.045174537987679675,
+              "ci95": [
+                0.02852387874491631,
+                0.06759832540109856
+              ],
+              "lof_on_reference_only": 9,
+              "lof_on_other_only": 13
+            },
+            "lof": {
+              "n": 104,
+              "flips": 1,
+              "proportion": 0.009615384615384616,
+              "ci95": [
+                0.0002434108321626482,
+                0.05241069970322891
+              ],
+              "lof_on_reference_only": 1,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 21,
+              "proportion": 0.05483028720626632,
+              "ci95": [
+                0.03425751801872855,
+                0.08259515850775814
+              ],
+              "lof_on_reference_only": 8,
+              "lof_on_other_only": 13
+            },
+            "coding": {
+              "n": 348,
+              "flips": 17,
+              "proportion": 0.04885057471264368,
+              "ci95": [
+                0.02871129853350954,
+                0.07706413069376872
+              ],
+              "lof_on_reference_only": 6,
+              "lof_on_other_only": 11
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 5,
+              "proportion": 0.03597122302158273,
+              "ci95": [
+                0.011781120624334073,
+                0.0819469811500885
+              ],
+              "lof_on_reference_only": 3,
+              "lof_on_other_only": 2
+            }
+          },
+          "median_abs_difference": 0.00011861324310309977,
+          "flipped_distance_in_median_differences": {
+            "median": 0.6223618090446665,
+            "max": 3.0092964824104187
+          },
+          "reference_within_one_median_difference": 37
+        }
+      }
+    },
+    "fp8off: H100 vs L40S": {
+      "reference": "FH/fp8off-b1",
+      "other": "FL/fp8off-b1",
+      "thresholds": {
+        "youden": 0.0016779005527496,
+        "sensitivity_0.90": 0.0011171698570251,
+        "sensitivity_0.95": 0.00095820426940915
+      },
+      "flips": {
+        "youden": {
+          "reference_sensitivity": 0.8461538461538461,
+          "reference_specificity": 0.7963446475195822,
+          "threshold": 0.0016779005527496,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 3,
+              "proportion": 0.006160164271047228,
+              "ci95": [
+                0.0012721800735310007,
+                0.01789629156214355
+              ],
+              "lof_on_reference_only": 2,
+              "lof_on_other_only": 1
+            },
+            "lof": {
+              "n": 104,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.034848306587674044
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 3,
+              "proportion": 0.007832898172323759,
+              "ci95": [
+                0.0016182540155750425,
+                0.022719268879591796
+              ],
+              "lof_on_reference_only": 2,
+              "lof_on_other_only": 1
+            },
+            "coding": {
+              "n": 348,
+              "flips": 2,
+              "proportion": 0.005747126436781609,
+              "ci95": [
+                0.0006967630456795138,
+                0.020605335350546525
+              ],
+              "lof_on_reference_only": 1,
+              "lof_on_other_only": 1
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 1,
+              "proportion": 0.007194244604316547,
+              "ci95": [
+                0.00018212591654538933,
+                0.039430768873722405
+              ],
+              "lof_on_reference_only": 1,
+              "lof_on_other_only": 0
+            }
+          },
+          "median_abs_difference": 8.350610733029993e-05,
+          "flipped_distance_in_median_differences": {
+            "median": 0.6320485367595253,
+            "max": 0.8783012134190032
+          },
+          "reference_within_one_median_difference": 10
+        },
+        "sensitivity_0.90": {
+          "reference_sensitivity": 0.9038461538461539,
+          "reference_specificity": 0.6971279373368147,
+          "threshold": 0.0011171698570251,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 14,
+              "proportion": 0.028747433264887063,
+              "ci95": [
+                0.015803731496404044,
+                0.04776326532294174
+              ],
+              "lof_on_reference_only": 5,
+              "lof_on_other_only": 9
+            },
+            "lof": {
+              "n": 104,
+              "flips": 5,
+              "proportion": 0.04807692307692308,
+              "ci95": [
+                0.015792448153995803,
+                0.10863596001490128
+              ],
+              "lof_on_reference_only": 2,
+              "lof_on_other_only": 3
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 9,
+              "proportion": 0.02349869451697128,
+              "ci95": [
+                0.010800115326121958,
+                0.04413778685151107
+              ],
+              "lof_on_reference_only": 3,
+              "lof_on_other_only": 6
+            },
+            "coding": {
+              "n": 348,
+              "flips": 14,
+              "proportion": 0.040229885057471264,
+              "ci95": [
+                0.022165688439904824,
+                0.06657827457063159
+              ],
+              "lof_on_reference_only": 5,
+              "lof_on_other_only": 9
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.026189644434205586
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            }
+          },
+          "median_abs_difference": 8.350610733029993e-05,
+          "flipped_distance_in_median_differences": {
+            "median": 0.8675945753037386,
+            "max": 1.8793718772310106
+          },
+          "reference_within_one_median_difference": 20
+        },
+        "sensitivity_0.95": {
+          "reference_sensitivity": 0.9519230769230769,
+          "reference_specificity": 0.6527415143603134,
+          "threshold": 0.00095820426940915,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 11,
+              "proportion": 0.022587268993839837,
+              "ci95": [
+                0.011328154035360107,
+                0.04005486684490056
+              ],
+              "lof_on_reference_only": 6,
+              "lof_on_other_only": 5
+            },
+            "lof": {
+              "n": 104,
+              "flips": 1,
+              "proportion": 0.009615384615384616,
+              "ci95": [
+                0.0002434108321626482,
+                0.05241069970322891
+              ],
+              "lof_on_reference_only": 1,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 10,
+              "proportion": 0.02610966057441253,
+              "ci95": [
+                0.012590052541787425,
+                0.04749130917163677
+              ],
+              "lof_on_reference_only": 5,
+              "lof_on_other_only": 5
+            },
+            "coding": {
+              "n": 348,
+              "flips": 11,
+              "proportion": 0.031609195402298854,
+              "ci95": [
+                0.015882723638949298,
+                0.05585275529530853
+              ],
+              "lof_on_reference_only": 6,
+              "lof_on_other_only": 5
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.026189644434205586
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            }
+          },
+          "median_abs_difference": 8.350610733029993e-05,
+          "flipped_distance_in_median_differences": {
+            "median": 1.3211991434693275,
+            "max": 2.760171306210761
+          },
+          "reference_within_one_median_difference": 21
+        }
+      }
+    },
+    "fp32: H100 vs L40S": {
+      "reference": "FH/fp32-b1",
+      "other": "FL/fp32-b1",
+      "thresholds": {
+        "youden": 0.00166103243827815,
+        "sensitivity_0.90": 0.001075267791748,
+        "sensitivity_0.95": 0.0009946525096892998
+      },
+      "flips": {
+        "youden": {
+          "reference_sensitivity": 0.8461538461538461,
+          "reference_specificity": 0.8015665796344648,
+          "threshold": 0.00166103243827815,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.007546085386652515
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "lof": {
+              "n": 104,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.034848306587674044
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.009585304328719908
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "coding": {
+              "n": 348,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.010544243886768959
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.026189644434205586
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            }
+          },
+          "median_abs_difference": 4.7683715820008923e-07,
+          "flipped_distance_in_median_differences": null,
+          "reference_within_one_median_difference": 0
+        },
+        "sensitivity_0.90": {
+          "reference_sensitivity": 0.9038461538461539,
+          "reference_specificity": 0.6840731070496083,
+          "threshold": 0.001075267791748,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.007546085386652515
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "lof": {
+              "n": 104,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.034848306587674044
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.009585304328719908
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "coding": {
+              "n": 348,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.010544243886768959
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.026189644434205586
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            }
+          },
+          "median_abs_difference": 4.7683715820008923e-07,
+          "flipped_distance_in_median_differences": null,
+          "reference_within_one_median_difference": 0
+        },
+        "sensitivity_0.95": {
+          "reference_sensitivity": 0.9519230769230769,
+          "reference_specificity": 0.660574412532637,
+          "threshold": 0.0009946525096892998,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 1,
+              "proportion": 0.002053388090349076,
+              "ci95": [
+                5.1985934073181634e-05,
+                0.011387191193470408
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 1
+            },
+            "lof": {
+              "n": 104,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.034848306587674044
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 1,
+              "proportion": 0.0026109660574412533,
+              "ci95": [
+                6.610175247867485e-05,
+                0.014460846410249147
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 1
+            },
+            "coding": {
+              "n": 348,
+              "flips": 1,
+              "proportion": 0.0028735632183908046,
+              "ci95": [
+                7.274967540795042e-05,
+                0.01590570038764931
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 1
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.026189644434205586
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            }
+          },
+          "median_abs_difference": 4.7683715820008923e-07,
+          "flipped_distance_in_median_differences": {
+            "median": 1.4374999999732267,
+            "max": 1.4374999999732267
+          },
+          "reference_within_one_median_difference": 0
+        }
+      }
+    },
+    "default: L40 vs L40S": {
+      "reference": "FA/default-b1",
+      "other": "FL/default-b1",
+      "thresholds": {
+        "youden": 0.0019127428531646499,
+        "sensitivity_0.90": 0.00112920999526975,
+        "sensitivity_0.95": 0.00087407231330865
+      },
+      "flips": {
+        "youden": {
+          "reference_sensitivity": 0.8173076923076923,
+          "reference_specificity": 0.8172323759791122,
+          "threshold": 0.0019127428531646499,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 8,
+              "proportion": 0.01642710472279261,
+              "ci95": [
+                0.007118053231385757,
+                0.032110357589723984
+              ],
+              "lof_on_reference_only": 6,
+              "lof_on_other_only": 2
+            },
+            "lof": {
+              "n": 104,
+              "flips": 2,
+              "proportion": 0.019230769230769232,
+              "ci95": [
+                0.002337479608610797,
+                0.06774489489176475
+              ],
+              "lof_on_reference_only": 2,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 6,
+              "proportion": 0.015665796344647518,
+              "ci95": [
+                0.005770208945299558,
+                0.03378440844368455
+              ],
+              "lof_on_reference_only": 4,
+              "lof_on_other_only": 2
+            },
+            "coding": {
+              "n": 348,
+              "flips": 7,
+              "proportion": 0.020114942528735632,
+              "ci95": [
+                0.00812457514433726,
+                0.04100358362129003
+              ],
+              "lof_on_reference_only": 5,
+              "lof_on_other_only": 2
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 1,
+              "proportion": 0.007194244604316547,
+              "ci95": [
+                0.00018212591654538933,
+                0.039430768873722405
+              ],
+              "lof_on_reference_only": 1,
+              "lof_on_other_only": 0
+            }
+          },
+          "median_abs_difference": 0.00011318922042850008,
+          "flipped_distance_in_median_differences": {
+            "median": 1.2111637704046931,
+            "max": 2.437335439703989
+          },
+          "reference_within_one_median_difference": 15
+        },
+        "sensitivity_0.90": {
+          "reference_sensitivity": 0.9038461538461539,
+          "reference_specificity": 0.6919060052219321,
+          "threshold": 0.00112920999526975,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 14,
+              "proportion": 0.028747433264887063,
+              "ci95": [
+                0.015803731496404044,
+                0.04776326532294174
+              ],
+              "lof_on_reference_only": 7,
+              "lof_on_other_only": 7
+            },
+            "lof": {
+              "n": 104,
+              "flips": 1,
+              "proportion": 0.009615384615384616,
+              "ci95": [
+                0.0002434108321626482,
+                0.05241069970322891
+              ],
+              "lof_on_reference_only": 1,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 13,
+              "proportion": 0.033942558746736295,
+              "ci95": [
+                0.01819441442421218,
+                0.05734345533224147
+              ],
+              "lof_on_reference_only": 6,
+              "lof_on_other_only": 7
+            },
+            "coding": {
+              "n": 348,
+              "flips": 11,
+              "proportion": 0.031609195402298854,
+              "ci95": [
+                0.015882723638949298,
+                0.05585275529530853
+              ],
+              "lof_on_reference_only": 5,
+              "lof_on_other_only": 6
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 3,
+              "proportion": 0.02158273381294964,
+              "ci95": [
+                0.004473187297201827,
+                0.06177716152853606
+              ],
+              "lof_on_reference_only": 2,
+              "lof_on_other_only": 1
+            }
+          },
+          "median_abs_difference": 0.00011318922042850008,
+          "flipped_distance_in_median_differences": {
+            "median": 0.6845708267506513,
+            "max": 1.8936282253816235
+          },
+          "reference_within_one_median_difference": 21
+        },
+        "sensitivity_0.95": {
+          "reference_sensitivity": 0.9519230769230769,
+          "reference_specificity": 0.6161879895561357,
+          "threshold": 0.00087407231330865,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 25,
+              "proportion": 0.0513347022587269,
+              "ci95": [
+                0.0334930141675291,
+                0.07485007164909852
+              ],
+              "lof_on_reference_only": 14,
+              "lof_on_other_only": 11
+            },
+            "lof": {
+              "n": 104,
+              "flips": 4,
+              "proportion": 0.038461538461538464,
+              "ci95": [
+                0.010577266531086389,
+                0.09555507539167282
+              ],
+              "lof_on_reference_only": 3,
+              "lof_on_other_only": 1
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 21,
+              "proportion": 0.05483028720626632,
+              "ci95": [
+                0.03425751801872855,
+                0.08259515850775814
+              ],
+              "lof_on_reference_only": 11,
+              "lof_on_other_only": 10
+            },
+            "coding": {
+              "n": 348,
+              "flips": 20,
+              "proportion": 0.05747126436781609,
+              "ci95": [
+                0.03545466826829993,
+                0.08736659937199212
+              ],
+              "lof_on_reference_only": 12,
+              "lof_on_other_only": 8
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 5,
+              "proportion": 0.03597122302158273,
+              "ci95": [
+                0.011781120624334073,
+                0.0819469811500885
+              ],
+              "lof_on_reference_only": 2,
+              "lof_on_other_only": 3
+            }
+          },
+          "median_abs_difference": 0.00011318922042850008,
+          "flipped_distance_in_median_differences": {
+            "median": 0.6511321748284847,
+            "max": 3.478409689309204
+          },
+          "reference_within_one_median_difference": 35
+        }
+      }
+    },
+    "fp8off: L40 vs L40S": {
+      "reference": "FA/fp8off-b1",
+      "other": "FL/fp8off-b1",
+      "thresholds": {
+        "youden": 0.00155782699584955,
+        "sensitivity_0.90": 0.00105673074722285,
+        "sensitivity_0.95": 0.0008270144462585
+      },
+      "flips": {
+        "youden": {
+          "reference_sensitivity": 0.8557692307692307,
+          "reference_specificity": 0.7911227154046997,
+          "threshold": 0.00155782699584955,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 7,
+              "proportion": 0.014373716632443531,
+              "ci95": [
+                0.0057979931882003455,
+                0.029390062587322456
+              ],
+              "lof_on_reference_only": 1,
+              "lof_on_other_only": 6
+            },
+            "lof": {
+              "n": 104,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.034848306587674044
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 7,
+              "proportion": 0.018276762402088774,
+              "ci95": [
+                0.007378997750501881,
+                0.03729304479069928
+              ],
+              "lof_on_reference_only": 1,
+              "lof_on_other_only": 6
+            },
+            "coding": {
+              "n": 348,
+              "flips": 6,
+              "proportion": 0.017241379310344827,
+              "ci95": [
+                0.006352902648315652,
+                0.03714766974446715
+              ],
+              "lof_on_reference_only": 1,
+              "lof_on_other_only": 5
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 1,
+              "proportion": 0.007194244604316547,
+              "ci95": [
+                0.00018212591654538933,
+                0.039430768873722405
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 1
+            }
+          },
+          "median_abs_difference": 7.593631744380391e-05,
+          "flipped_distance_in_median_differences": {
+            "median": 1.1946624803775256,
+            "max": 2.346938775511979
+          },
+          "reference_within_one_median_difference": 7
+        },
+        "sensitivity_0.90": {
+          "reference_sensitivity": 0.9038461538461539,
+          "reference_specificity": 0.6736292428198434,
+          "threshold": 0.00105673074722285,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 13,
+              "proportion": 0.026694045174537988,
+              "ci95": [
+                0.014288343085005276,
+                0.045215075338632504
+              ],
+              "lof_on_reference_only": 7,
+              "lof_on_other_only": 6
+            },
+            "lof": {
+              "n": 104,
+              "flips": 6,
+              "proportion": 0.057692307692307696,
+              "ci95": [
+                0.021463878543532322,
+                0.12134988653168441
+              ],
+              "lof_on_reference_only": 2,
+              "lof_on_other_only": 4
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 7,
+              "proportion": 0.018276762402088774,
+              "ci95": [
+                0.007378997750501881,
+                0.03729304479069928
+              ],
+              "lof_on_reference_only": 5,
+              "lof_on_other_only": 2
+            },
+            "coding": {
+              "n": 348,
+              "flips": 12,
+              "proportion": 0.034482758620689655,
+              "ci95": [
+                0.017942312330227993,
+                0.0594592910956393
+              ],
+              "lof_on_reference_only": 7,
+              "lof_on_other_only": 5
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 1,
+              "proportion": 0.007194244604316547,
+              "ci95": [
+                0.00018212591654538933,
+                0.039430768873722405
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 1
+            }
+          },
+          "median_abs_difference": 7.593631744380391e-05,
+          "flipped_distance_in_median_differences": {
+            "median": 0.9207221350085996,
+            "max": 2.9317111459981025
+          },
+          "reference_within_one_median_difference": 15
+        },
+        "sensitivity_0.95": {
+          "reference_sensitivity": 0.9519230769230769,
+          "reference_specificity": 0.6214099216710183,
+          "threshold": 0.0008270144462585,
+          "strata": {
+            "all": {
+              "n": 487,
+              "flips": 12,
+              "proportion": 0.024640657084188913,
+              "ci95": [
+                0.012795543032407212,
+                0.04264640402039602
+              ],
+              "lof_on_reference_only": 4,
+              "lof_on_other_only": 8
+            },
+            "lof": {
+              "n": 104,
+              "flips": 0,
+              "proportion": 0.0,
+              "ci95": [
+                0.0,
+                0.034848306587674044
+              ],
+              "lof_on_reference_only": 0,
+              "lof_on_other_only": 0
+            },
+            "not_lof": {
+              "n": 383,
+              "flips": 12,
+              "proportion": 0.031331592689295036,
+              "ci95": [
+                0.016292201695510343,
+                0.05409000886028524
+              ],
+              "lof_on_reference_only": 4,
+              "lof_on_other_only": 8
+            },
+            "coding": {
+              "n": 348,
+              "flips": 11,
+              "proportion": 0.031609195402298854,
+              "ci95": [
+                0.015882723638949298,
+                0.05585275529530853
+              ],
+              "lof_on_reference_only": 3,
+              "lof_on_other_only": 8
+            },
+            "noncoding": {
+              "n": 139,
+              "flips": 1,
+              "proportion": 0.007194244604316547,
+              "ci95": [
+                0.00018212591654538933,
+                0.039430768873722405
+              ],
+              "lof_on_reference_only": 1,
+              "lof_on_other_only": 0
+            }
+          },
+          "median_abs_difference": 7.593631744380391e-05,
+          "flipped_distance_in_median_differences": {
+            "median": 1.1864207221356522,
+            "max": 2.1915227629527196
+          },
+          "reference_within_one_median_difference": 17
+        }
+      }
+    }
+  },
+  "subset_with_full_set_thresholds": {
+    "default: H100 vs L40S": {
+      "youden": {
+        "reference_sensitivity": 0.8269230769230769,
+        "reference_specificity": 0.7806788511749347,
+        "threshold": 0.00169819593429565,
+        "strata": {
+          "all": {
+            "n": 487,
+            "flips": 8,
+            "proportion": 0.01642710472279261,
+            "ci95": [
+              0.007118053231385757,
+              0.032110357589723984
+            ],
+            "lof_on_reference_only": 6,
+            "lof_on_other_only": 2
+          },
+          "lof": {
+            "n": 104,
+            "flips": 1,
+            "proportion": 0.009615384615384616,
+            "ci95": [
+              0.0002434108321626482,
+              0.05241069970322891
+            ],
+            "lof_on_reference_only": 1,
+            "lof_on_other_only": 0
+          },
+          "not_lof": {
+            "n": 383,
+            "flips": 7,
+            "proportion": 0.018276762402088774,
+            "ci95": [
+              0.007378997750501881,
+              0.03729304479069928
+            ],
+            "lof_on_reference_only": 5,
+            "lof_on_other_only": 2
+          },
+          "coding": {
+            "n": 348,
+            "flips": 8,
+            "proportion": 0.022988505747126436,
+            "ci95": [
+              0.009975852299955002,
+              0.04479237169102046
+            ],
+            "lof_on_reference_only": 6,
+            "lof_on_other_only": 2
+          },
+          "noncoding": {
+            "n": 139,
+            "flips": 0,
+            "proportion": 0.0,
+            "ci95": [
+              0.0,
+              0.026189644434205586
+            ],
+            "lof_on_reference_only": 0,
+            "lof_on_other_only": 0
+          }
+        },
+        "median_abs_difference": 0.00011861324310309977,
+        "flipped_distance_in_median_differences": {
+          "median": 0.6145728643212099,
+          "max": 1.348743718592154
+        },
+        "reference_within_one_median_difference": 14
+      },
+      "sensitivity_0.90": {
+        "reference_sensitivity": 0.9134615384615384,
+        "reference_specificity": 0.6501305483028721,
+        "threshold": 0.00099739432334895,
+        "strata": {
+          "all": {
+            "n": 487,
+            "flips": 18,
+            "proportion": 0.03696098562628337,
+            "ci95": [
+              0.022049861816536398,
+              0.057786712226616896
+            ],
+            "lof_on_reference_only": 10,
+            "lof_on_other_only": 8
+          },
+          "lof": {
+            "n": 104,
+            "flips": 1,
+            "proportion": 0.009615384615384616,
+            "ci95": [
+              0.0002434108321626482,
+              0.05241069970322891
+            ],
+            "lof_on_reference_only": 1,
+            "lof_on_other_only": 0
+          },
+          "not_lof": {
+            "n": 383,
+            "flips": 17,
+            "proportion": 0.044386422976501305,
+            "ci95": [
+              0.026066089629026026,
+              0.0701173995980443
+            ],
+            "lof_on_reference_only": 9,
+            "lof_on_other_only": 8
+          },
+          "coding": {
+            "n": 348,
+            "flips": 15,
+            "proportion": 0.04310344827586207,
+            "ci95": [
+              0.024322243308611102,
+              0.07009686472838478
+            ],
+            "lof_on_reference_only": 9,
+            "lof_on_other_only": 6
+          },
+          "noncoding": {
+            "n": 139,
+            "flips": 3,
+            "proportion": 0.02158273381294964,
+            "ci95": [
+              0.004473187297201827,
+              0.06177716152853606
+            ],
+            "lof_on_reference_only": 1,
+            "lof_on_other_only": 2
+          }
+        },
+        "median_abs_difference": 0.00011861324310309977,
+        "flipped_distance_in_median_differences": {
+          "median": 0.7271356783915981,
+          "max": 3.183165829144106
+        },
+        "reference_within_one_median_difference": 25
+      },
+      "sensitivity_0.95": {
+        "reference_sensitivity": 0.9711538461538461,
+        "reference_specificity": 0.5587467362924282,
+        "threshold": 0.00069773197174065,
+        "strata": {
+          "all": {
+            "n": 487,
+            "flips": 24,
+            "proportion": 0.049281314168377825,
+            "ci95": [
+              0.03182716495658462,
+              0.07244178823947195
+            ],
+            "lof_on_reference_only": 14,
+            "lof_on_other_only": 10
+          },
+          "lof": {
+            "n": 104,
+            "flips": 1,
+            "proportion": 0.009615384615384616,
+            "ci95": [
+              0.0002434108321626482,
+              0.05241069970322891
+            ],
+            "lof_on_reference_only": 1,
+            "lof_on_other_only": 0
+          },
+          "not_lof": {
+            "n": 383,
+            "flips": 23,
+            "proportion": 0.06005221932114883,
+            "ci95": [
+              0.03844512388054211,
+              0.08874778958144369
+            ],
+            "lof_on_reference_only": 13,
+            "lof_on_other_only": 10
+          },
+          "coding": {
+            "n": 348,
+            "flips": 18,
+            "proportion": 0.05172413793103448,
+            "ci95": [
+              0.03093950342533168,
+              0.08051655914272324
+            ],
+            "lof_on_reference_only": 10,
+            "lof_on_other_only": 8
+          },
+          "noncoding": {
+            "n": 139,
+            "flips": 6,
+            "proportion": 0.04316546762589928,
+            "ci95": [
+              0.01600331760677201,
+              0.09158403135394877
+            ],
+            "lof_on_reference_only": 4,
+            "lof_on_other_only": 2
+          }
+        },
+        "median_abs_difference": 0.00011861324310309977,
+        "flipped_distance_in_median_differences": {
+          "median": 0.8756281407028299,
+          "max": 1.9979899497474978
+        },
+        "reference_within_one_median_difference": 38
+      }
+    }
+  }
+}

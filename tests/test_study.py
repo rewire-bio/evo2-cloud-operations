@@ -10,7 +10,8 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from evo2ops.genome import read_first_fasta_record, snv_windows, synthetic_dna  # noqa: E402
-from study.analysis import agreement, auroc, average_ranks, consequence_rule, grouped_bootstrap_auroc  # noqa: E402
+from study.analysis import (agreement, auroc, average_ranks, binomial_ci, call_flips, consequence_rule,  # noqa: E402
+                            grouped_bootstrap_auroc, sensitivity_threshold, youden_threshold)
 
 CHR17 = ROOT / "data/raw/GRCh37.p13_chr17.fna.gz"
 
@@ -87,6 +88,34 @@ class StatisticsTests(unittest.TestCase):
         np.testing.assert_array_equal(
             consequence_rule(["Nonsense", "Canonical splice", "Splice region", "Missense", "Synonymous"]),
             [3, 3, 2, 1, 0])
+
+    def test_binomial_ci_known_values(self):
+        low, high = binomial_ci(0, 10)
+        self.assertEqual(low, 0.0)
+        self.assertAlmostEqual(high, 1 - 0.025 ** (1 / 10), places=6)
+        low, high = binomial_ci(5, 10)
+        self.assertAlmostEqual(low, 0.187086, places=5)
+        self.assertAlmostEqual(high, 0.812914, places=5)
+        self.assertEqual(binomial_ci(10, 10)[1], 1.0)
+
+    def test_thresholds_are_midpoints(self):
+        labels = np.array([0, 0, 1, 0, 1, 1])
+        scores = np.array([0.1, 0.2, 0.3, 0.4, 0.5, 0.6])
+        # Youden is 2/3 at 0.25 (sens 1, spec 2/3) and at 0.45 (sens 2/3, spec 1); ties go low.
+        self.assertAlmostEqual(youden_threshold(labels, scores), 0.25)
+        self.assertAlmostEqual(sensitivity_threshold(labels, scores, 0.9), 0.25)
+        self.assertAlmostEqual(sensitivity_threshold(labels, scores, 0.6), 0.45)
+
+    def test_call_flips_counts_and_direction(self):
+        reference = np.array([0.0, 0.9, 1.1, 2.0])
+        other = np.array([0.0, 1.05, 0.95, 2.0])
+        lof = np.array([False, True, True, True])
+        result = call_flips(reference, other, 1.0, {"all": np.ones(4, bool), "lof": lof, "not_lof": ~lof})
+        self.assertEqual(result["strata"]["all"]["flips"], 2)
+        self.assertEqual(result["strata"]["all"]["lof_on_reference_only"], 1)
+        self.assertEqual(result["strata"]["all"]["lof_on_other_only"], 1)
+        self.assertEqual(result["strata"]["not_lof"]["flips"], 0)
+        self.assertEqual(call_flips(reference, reference, 1.0, {"all": np.ones(4, bool)})["strata"]["all"]["flips"], 0)
 
 
 if __name__ == "__main__":

@@ -18,6 +18,9 @@ changed by only 0.002. One forward pass fitted at 32 kb and ran out of memory at
 4.8e-7 (identical rankings), at 3 to 6 times the GPU time; turning off FP8 alone only narrows the gap
 by 30%, and two GPUs of the same architecture (L40, L40S) disagree as much as different
 architectures. Batch size does not matter. See [followup/RESULTS.md](followup/RESULTS.md).
+**Classification flips (amendment 6):** at a threshold fixed on the H100, 72 of 3,893 variants (1.8%)
+change call on the L40S at the Youden threshold and 3.9% to 4.9% at 90% or 95% sensitivity; with
+FP32, 0 or 1 of 487 subset variants. See [followup/CLASSIFICATION-FLIPS.md](followup/CLASSIFICATION-FLIPS.md).
 
 Scoring cost USD 0.45 to 0.80 per 1,000 variants at October 2026 list prices; the L40S's cost
 per variant depended on how fast the host it landed on was.
