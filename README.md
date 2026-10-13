@@ -21,6 +21,9 @@ architectures. Batch size does not matter. See [followup/RESULTS.md](followup/RE
 **Classification flips (amendment 6):** at a threshold fixed on the H100, 72 of 3,893 variants (1.8%)
 change call on the L40S at the Youden threshold and 3.9% to 4.9% at 90% or 95% sensitivity; with
 FP32, 0 or 1 of 487 subset variants. See [followup/CLASSIFICATION-FLIPS.md](followup/CLASSIFICATION-FLIPS.md).
+**Current predictors (amendment 7):** Evo 2's noncoding advantage holds against CADD v1.3 only. Against
+CADD v1.7 and SpliceAI it is not detected (AUROC 0.953 against 0.932 and 0.963), and on coding and
+missense variants CADD v1.7 and REVEL lead. See [followup/CURRENT-PREDICTORS.md](followup/CURRENT-PREDICTORS.md).
 
 Scoring cost USD 0.45 to 0.80 per 1,000 variants at October 2026 list prices; the L40S's cost
 per variant depended on how fast the host it landed on was.

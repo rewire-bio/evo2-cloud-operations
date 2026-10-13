@@ -1,0 +1,28 @@
+{
+  "region_grch37": "17:41197000-41277000",
+  "tables": {
+    "cadd_v1.7": {
+      "url": "https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh37/whole_genome_SNVs.tsv.gz",
+      "published_md5": "fa3ee79df2f509ead49438f60209566d",
+      "index_published_md5": "6bc06b08fd9a521d05d970a06939e52d",
+      "index_md5_matches": true,
+      "extract": "cadd_v1.7.tsv",
+      "extract_sha256": "3b8d4e83076e8fb1b2dcd0498119dc22cd148ebcf4fa0d16304d7c1cfc7f3168"
+    },
+    "spliceai_via_cadd_v1.7": {
+      "url": "https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh37/whole_genome_SNVs_inclAnno.tsv.gz",
+      "published_md5": "1b89cfd7da4e2a8f336c1ec33a6f44eb",
+      "index_published_md5": "b3f770e0ba669e23c65a109b8221a1b5",
+      "index_md5_matches": true,
+      "extract": "spliceai_via_cadd_v1.7.tsv",
+      "extract_sha256": "7bcddae8f68a3a5cfae08f758cd1232e61a5abaab7b9288c3082e848965585fa"
+    },
+    "revel_v1.3": {
+      "url": "https://rothsj06.dmz.hpc.mssm.edu/revel-v1.3_all_chromosomes.zip",
+      "archive_sha256": "815801d832e4ab76922dddfd901d7f24a755df57078a7138aa14f615da86a8a2",
+      "member": "revel_with_transcript_ids",
+      "extract": "revel_v1.3.tsv",
+      "extract_sha256": "292e35b952023863adb2d3277bc8808f46bdc2bb8966734ba6cfa912686740ce"
+    }
+  }
+}

@@ -11,3 +11,6 @@ scientific input and is hashed). This file corrects and extends them.
 | Evo 2 weights (`arcinstitute/evo2_7b`, `evo2_7b_base`) | Apache-2.0 | Hugging Face model cards |
 | Exon classifier (`schmojo/evo2-exon-classifier`) | Apache-2.0 | Hugging Face model card, revision 3ce7ccd |
 | CADD v1.3 and phyloP values | Used as supplied in the Findlay et al. table | Findlay et al. 2018 Methods |
+| CADD v1.7 GRCh37 scores and annotations (amendment 7) | Free for all non-commercial applications; commercial use needs a licence. Used here as a nonprofit use; per-variant values are not redistributed. | https://cadd.bihealth.org/download |
+| SpliceAI precomputed masked scores (amendment 7, via CADD v1.7 annotations) | Illumina's precomputed scores; per-variant values are not redistributed. | CADD-scripts `config/references_GRCh37_v1.7.cfg` |
+| REVEL v1.3 (amendment 7) | Free for non-commercial use. Used here as a nonprofit use; per-variant values are not redistributed. | https://sites.google.com/site/revelgenomics/ |
