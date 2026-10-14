@@ -44,7 +44,11 @@ at 131,072 bp on both the 48 GB and the 80 GB GPU; lengths in between were not t
 Cloud H100 Spot) per 1,000 variants at list prices. Zero-shot Evo 2 scores separated BRCA1 loss-of-function variants better
 than the CADD v1.3 scores supplied with the BRCA1 table (AUROC \AurocEvoAll{} against
 \AurocCaddAll); the difference was concentrated in noncoding variants, and on coding variants no
-difference was detected. These are operational measurements, not a clinical validation.
+difference was detected. Against current CADD (v1.7) and SpliceAI, looked up for the same variants
+afterwards, no noncoding difference was detected, and current CADD and REVEL were better on coding
+and missense variants. At decision thresholds fixed on the H100, 1.8\% to 4.9\% of variants changed
+call on the L40S; computing in FP32 removed almost all of these changes. These are operational
+measurements, not a clinical validation.
 \end{abstract}
 
 \section{Introduction}
@@ -64,7 +68,8 @@ workflows (BRCA1 zero-shot scoring, which Arc demonstrates with the 1B checkpoin
 classification) with the 7B checkpoints, against labels and simple baselines; no published 7B
 reference value was compared. The design, platforms and budget were approved in a written
 protocol before any GPU run, with four dated amendments (amendment 4 records deviations from the
-original run plan, acknowledged by the study owner).
+original run plan, acknowledged by the study owner). Amendments 5 to 7, each written before its
+analysis, add follow-up analyses (Section~\ref{sec:followup}).
 
 \section{Methods}
 \subsection{Platforms}
@@ -162,7 +167,7 @@ difference was detected (Evo 2 \AurocEvoCoding, CADD \AurocCaddCoding; differenc
 equal. AUROCs for subsets do not add up to the overall AUROC, which also compares variants across
 subsets. The CADD scores are version 1.3, as supplied in the Findlay et al.\ table; later CADD
 releases added splicing predictors, which would be expected to help most on exactly the noncoding
-and splice-region variants where Evo 2 led, and were not compared. Intervals resample positions;
+and splice-region variants where Evo 2 led; Section~\ref{sec:predictors} compares them. Intervals resample positions;
 neighbouring positions share almost all of their 8 kb window, so the intervals may be too narrow. The exon classifier gave AUROC \PTwoAurocExon{} on 122 positions; its training
 data may include these positions, so this is a pipeline check rather than an evaluation.
 
@@ -250,7 +255,7 @@ AUROC. Reference-window log-likelihoods themselves shifted by about $10^{-4}$, w
 flip the sign of small scores. The most damaging variants were more stable: 48 of the 50
 lowest-scoring variants were shared between the GPUs. The 7B checkpoint uses FP8 input projections
 when Transformer Engine is present, and FP8 and bf16 kernels differ between GPU generations, which
-is a plausible cause; we did not isolate it. In practice a validated pipeline must fix the GPU model
+is a plausible cause; the follow-up (Section~\ref{sec:followup}) found it to be a partial one. In practice a validated pipeline must fix the GPU model
 or revalidate when it changes, and Arc's correctness test is not sufficient on its own: the L40S
 passed it.
 
@@ -269,7 +274,8 @@ EBS and Compute Engine are covered by their providers' BAAs \cite{awshipaa,gcphi
 HIPAA and GDPR programmes \cite{runpodcompliance}. NVIDIA's hosted Evo 2 API prohibits protected
 health information and production use \cite{nvidiatrial}.
 
-\section{Follow-up: cause and control (amendment 5)}
+\section{Follow-up analyses}\label{sec:followup}
+\subsection{Cause and control (amendment 5)}
 A follow-up on 11 October 2026 scored every 8th BRCA1 variant (487) on a Runpod H100, L40S and L40
 under three numerical configurations; controls reproduced the recorded run exactly. Turning off
 the FP8 input projections reduced the median H100 against L40S difference from $1.2\times10^{-4}$
@@ -280,6 +286,51 @@ An L40 and an L40S, both Ada Lovelace, disagreed as much as the H100 and L40S di
 must be per GPU product, not per architecture. Scoring in batches of 8 was bit-identical to batch
 size 1 (\code{followup/RESULTS.md}).
 
+\subsection{Changes of call at a fixed threshold (amendment 6)}
+Rank changes do not show how many variants would be classified differently. Using stored scores
+only, we set three thresholds on the Google Cloud H100 scores (Youden, and sensitivity 0.90 and
+0.95 for loss of function; Arc's notebook defines none) and applied them unchanged to the L40S.
+At the Youden threshold 72 of 3,893 variants (1.8\%; exact 95\% interval 1.5\% to 2.3\%) changed
+call; at sensitivity 0.90 and 0.95, 152 (3.9\%) and 189 (4.9\%). Changes ran in both directions in
+similar numbers, and half of the changed variants lay within 0.7 median cross-GPU differences
+(about $8\times10^{-5}$) of the threshold. Controls (H100 against H100, and each platform's recorded
+run against its reproduction) gave no changes. On the 487-variant follow-up subset, with thresholds
+re-derived on the H100, 8, 13 and 22 variants changed call in the default configuration and 0, 0
+and 1 in FP32; an L40 against an L40S gave 8, 14 and 25 (\code{followup/CLASSIFICATION-FLIPS.md}).
+
+\subsection{Current predictors (amendment 7)}\label{sec:predictors}
+We looked up current predictors for the same 3,893 variants from published precomputed tables:
+CADD v1.7 \cite{cadd17}, SpliceAI \cite{spliceai} (Illumina's masked precomputed scores, as
+annotated in the CADD v1.7 release) and, for missense variants, REVEL v1.3 \cite{revel}. Every
+variant had CADD v1.7 and SpliceAI scores and every missense variant a REVEL score. With the W1
+method (Table~\ref{tab:predictors}), Evo 2's advantage over CADD v1.3 on noncoding variants was not
+detected against CADD v1.7 (difference 0.021, 95\% interval $-0.003$ to 0.045) or SpliceAI
+($-0.011$, $-0.025$ to 0.003). On coding variants CADD v1.7 was better than Evo 2 ($-0.052$,
+$-0.073$ to $-0.030$), and on missense variants so were CADD v1.7 ($-0.042$) and REVEL ($-0.081$,
+$-0.114$ to $-0.048$). Of the 239 noncoding loss-of-function variants, 230 are canonical splice or
+splice-region variants, which is where SpliceAI is designed to work. CADD v1.7 uses SpliceAI as a
+feature, so the two are not independent, and REVEL's training data may include BRCA1 missense
+variants (\code{followup/CURRENT-PREDICTORS.md}).
+
+\begin{table}[htbp]
+\centering
+\caption{AUROC for BRCA1 loss-of-function variants, Evo 2 7B (Google Cloud H100) against current
+predictors on the same variants, computed as in Figure~\ref{fig:auroc}. Intervals and paired
+differences are in \code{followup/CURRENT-PREDICTORS.md}.}
+\label{tab:predictors}
+\begin{tabular}{lrrrr}
+\toprule
+ & All (3,893) & Coding (2,768) & Noncoding (1,125) & Missense (2,086) \\
+\midrule
+Evo 2 7B & 0.875 & 0.840 & 0.953 & 0.785 \\
+CADD v1.3 & 0.804 & 0.841 & 0.875 & 0.738 \\
+CADD v1.7 & 0.881 & 0.892 & 0.932 & 0.828 \\
+SpliceAI & 0.694 & 0.588 & 0.963 & -- \\
+REVEL v1.3 & -- & -- & -- & 0.867 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \section{Limitations}
 \begin{itemize}
 \item Few runs per platform; timings are receipts, not benchmarks, and throughput varied between
@@ -288,8 +339,10 @@ hosts with the same GPU model. List prices change.
 losses \cite{arc157}, were not tested.
 \item Only the 7B checkpoints, run with FP8 input projections. The 40B model needs two H100s or one
 H200 \cite{nimprereq}.
-\item The CADD baseline is v1.3, from the BRCA1 table; current CADD releases with splicing
-features were not compared.
+\item The main CADD baseline is v1.3, from the BRCA1 table. Current predictors were compared by
+lookup only (amendment 7); REVEL may be optimistic on BRCA1 missense variants.
+\item The decision thresholds in amendment 6 were set on the same scores they were tested on, so
+they measure how often calls change, not the performance of a validated threshold.
 \item The BRCA1 and exon workflows are re-implementations of Arc's notebooks with the 7B
 checkpoints; no published 7B reference value was compared.
 \item The BRCA1 comparison is one gene from one assay; the exon task may overlap the classifier's
