@@ -47,7 +47,7 @@ default had a median difference of 1.43e-4 (H100) and 1.37e-4 (L40S); FP32 again
 | L40S | 0.92 | 0.27 | 3.4x | 29.6 GiB |
 
 FP32 fits on a 48 GB GPU for 8 kb windows. At the October 2026 list prices used in the study, it
-would raise the cost of scoring from about USD 0.52 to about USD 3 per 1,000 variants on the
+would raise the cost of scoring from about USD 0.51 to about USD 3 per 1,000 variants on the
 Runpod H100, and from about USD 0.45 to 0.68 to about USD 1.5 on an L40S, depending on host speed.
 
 ## What the precision change does to accuracy
